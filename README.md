@@ -1,10 +1,10 @@
 # Hausaufgabe 1
 
-Deadline für Abgabe per Pull Request: 26.04.2023 23:59 Uhr. Außerdem ist zusätzlich eine persönliche Abnahme in der von Ihnen belegten Übungsgruppe notwendig, um zu bestehen. Bei unentschuldigtem Fehlen in der auf die Deadline folgenden Übung, wird die Hausaufgabe als nicht bestanden bewertet. 
+Deadline für Abgabe per Pull Request: 27.10.2023 23:59 Uhr. Außerdem ist zusätzlich eine persönliche Abnahme in der von Ihnen belegten Übungsgruppe notwendig, um zu bestehen. Bei unentschuldigtem Fehlen in der auf die Deadline folgenden Übung, wird die Hausaufgabe als nicht bestanden bewertet. 
 
 ## Aufgabenstellung
 
-- Forken Sie dieses Repository (github.com/prog2-ss23/ha1) in Ihren eigenen GitHub Account.
+- Forken Sie dieses Repository (github.com/prog2-ws23/ha1) in Ihren eigenen GitHub Account.
 - Analysieren Sie das Verhalten der Klasse `Calculator` und finden Sie ein paar Abweichungen im Vergleich zu [www.online-calculator.com](https://www.online-calculator.com/full-screen-calculator/) und/oder zu dem im JavaDoc beschriebenen Verhalten.
 - Teilaufgabe 1: Schreiben Sie einen neuen zusätzlichen Test, der eine bisher nicht getestete Funktionalität abdeckt, die bereits funktioniert und der daher direkt grün wird.
 - Teilaufgabe 2: Schreiben Sie zwei weitere zusätzliche Tests, die zwei unterschiedliche Fehlerkategorien aufdecken (d.h. deren Fehlerursachen in unterschiedlichen Methoden liegen) und somit fehlschlagen.
