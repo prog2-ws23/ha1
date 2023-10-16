@@ -1,5 +1,7 @@
 package htw.berlin.prog2.ha1;
 
+import javax.swing.plaf.synth.SynthTextAreaUI;
+
 /**
  * Eine Klasse, die das Verhalten des Online Taschenrechners imitiert, welcher auf
  * https://www.online-calculator.com/ aufgerufen werden kann (ohne die Memory-Funktionen)
@@ -45,9 +47,11 @@ public class Calculator {
      * im Ursprungszustand ist.
      */
     public void pressClearKey() {
-        screen = "0";
-        latestOperation = "";
-        latestValue = 0.0;
+        if (screen.equals("0")) {
+            latestOperation = "";
+            latestValue = 0.0;
+        }
+        else { screen = "0";}
     }
 
     /**
