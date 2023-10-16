@@ -88,7 +88,19 @@ class CalculatorTest {
         assertEquals(expected, actual);
     }
 
-
     //TODO hier weitere Tests erstellen
+
+    @Test
+    @DisplayName("should display the correct sign after change of sign")
+    void testPressNegativeKey() {
+        Calculator calc = new Calculator();
+        calc.pressDigitKey(1);
+        calc.pressNegativeKey();
+
+        String expected = "-1";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
 }
 
