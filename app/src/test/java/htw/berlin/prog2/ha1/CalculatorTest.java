@@ -91,17 +91,15 @@ class CalculatorTest {
 
     //TODO hier weitere Tests erstellen
     @Test
-    @DisplayName("should clear after pressing CE-Key")
+    @DisplayName("should show result of multiplying 2 positive Numbers")
     void testClearKey() {
         Calculator calc = new Calculator();
 
         calc.pressDigitKey(5);
-        calc.pressBinaryOperationKey("+");
+        calc.pressBinaryOperationKey("x");
         calc.pressDigitKey(4);
-        calc.pressClearKey();
-        calc.pressDigitKey(6);
 
-        String expected = "6";
+        String expected = "20";
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
@@ -116,6 +114,27 @@ class CalculatorTest {
         calc.pressUnaryOperationKey("1/x");
 
         String expected = "Error";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("Should be able to press clear key to reverse your last entry or the whole calculation")
+    void TestClearKey() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(2);
+        calc.pressDigitKey(0);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(0);
+        calc.pressClearKey();
+        calc.pressDigitKey(5);
+        calc.pressDigitKey(2);
+        calc.pressEqualsKey();
+
+        String expected = "72";
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
