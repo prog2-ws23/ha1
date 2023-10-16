@@ -14,6 +14,8 @@ public class Calculator {
 
     private String latestOperation = "";
 
+    private boolean clearPressedOnce = false;
+
     /**
      * @return den aktuellen Bildschirminhalt als String
      */
@@ -41,17 +43,24 @@ public class Calculator {
      * Empfängt den Befehl der C- bzw. CE-Taste (Clear bzw. Clear Entry).
      * Einmaliges Drücken der Taste löscht die zuvor eingegebenen Ziffern auf dem Bildschirm
      * so dass "0" angezeigt wird, jedoch ohne zuvor zwischengespeicherte Werte zu löschen.
+     * Wird daraufhin noch einmal die Taste gedrückt, dann werden auch zwischengespeicherte
+     * Werte sowie der aktuelle Operationsmodus zurückgesetzt, so dass der Rechner wieder
+     * im Ursprungszustand ist.
      */
     public void pressClearKey() {
-        screen = "0";
+        if (clearPressedOnce) {
+            pressClearKeySecondTime();
+            clearPressedOnce = false;
+        } else {
+            screen = "0";
+            clearPressedOnce = true;
+        }
     }
 
     /**
-     * Empfängt den Befehl der C- bzw. CE-Taste (Clear bzw. Clear Entry) ein zweites mal.
-     * nun werden auch zwischengespeicherte Werte sowie der aktuelle Operationsmodus zurückgesetzt,
-     * sodass der Rechner wieder im Urspungszustand ist.
+     * Hilfsmethode für pressClearKey für das zweite mal drücken.
      */
-    public void pressClearKeySecondTime() {
+    private void pressClearKeySecondTime() {
         latestOperation = "";
         latestValue = 0.0;
     }
@@ -61,17 +70,24 @@ public class Calculator {
      * Addition, Substraktion, Division, oder Multiplikation, welche zwei Operanden benötigen.
      * Beim ersten Drücken der Taste wird der Bildschirminhalt nicht verändert, sondern nur der
      * Rechner in den passenden Operationsmodus versetzt.
-     * Beim zweiten Drücken nach Eingabe einer weiteren Zahl wird direkt des aktuelle Zwischenergebnis
+     * Beim zweiten Drücken nach Eingabe einer weiteren Zahl wird direkt das aktuelle Zwischenergebnis
      * auf dem Bildschirm angezeigt. Falls hierbei eine Division durch Null auftritt, wird "Error" angezeigt.
      *
      * @param operation "+" für Addition, "-" für Substraktion, "x" für Multiplikation, "/" für Division
      */
     public void pressBinaryOperationKey(String operation) {
+        if (latestOperation != null && !latestOperation.isEmpty()) {
+            pressBinaryOperationKeySecondTime(operation);
+        }
         latestValue = Double.parseDouble(screen);
         latestOperation = operation;
     }
 
-    public void pressBinaryOperationKeySecondTime(String operation) {
+    /**
+     * Hilfsmethode der Methode pressBinaryOperationKey.
+     * @param operation "+" für Addition, "-" für Substraktion, "x" für Multiplikation, "/" für Division
+     */
+    private void pressBinaryOperationKeySecondTime(String operation) {
         switch (latestOperation) {
             case "+":
                 latestValue += Double.parseDouble(screen);

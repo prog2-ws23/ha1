@@ -127,7 +127,7 @@ class CalculatorTest {
         calc.pressDigitKey(1);
         calc.pressBinaryOperationKey("+");
         calc.pressDigitKey(1);
-        calc.pressBinaryOperationKeySecondTime("+");
+        calc.pressBinaryOperationKey("+");
 
         String expected = "2";
         String actual = calc.readScreen();
