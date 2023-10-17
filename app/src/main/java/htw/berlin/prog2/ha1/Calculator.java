@@ -80,7 +80,11 @@ public class Calculator {
             case "1/x" -> 1 / Double.parseDouble(screen);
             default -> throw new IllegalArgumentException();
         };
-        screen = Double.toString(result);
+        var res = 0;
+        if (result % 1 == 0) {
+            res = (int) Math.round(result);
+        }
+        screen = res != 0 ? Integer.toString(res) : Double.toString(result);
         if(screen.equals("NaN")) screen = "Error";
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
 
@@ -105,7 +109,9 @@ public class Calculator {
      * entfernt und der Inhalt fortan als positiv interpretiert.
      */
     public void pressNegativeKey() {
-        screen = screen.startsWith("-") ? screen.substring(1) : "-" + screen;
+        if(!screen.equals("0")) {
+            screen = screen.startsWith("-") ? screen.substring(1) : "-" + screen;
+        }
     }
 
     /**
