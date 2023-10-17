@@ -92,7 +92,7 @@ class CalculatorTest {
     //TODO hier weitere Tests erstellen
     @Test
     @DisplayName("should show result of multiplying 2 positive Numbers")
-    void testClearKey() {
+    void testMultiplication() {
         Calculator calc = new Calculator();
 
         calc.pressDigitKey(5);
@@ -121,7 +121,7 @@ class CalculatorTest {
 
     @Test
     @DisplayName("Should be able to press clear key to reverse your last entry or the whole calculation")
-    void TestClearKey() {
+    void testClearKey() {
         Calculator calc = new Calculator();
 
         calc.pressDigitKey(2);
@@ -135,6 +135,20 @@ class CalculatorTest {
         calc.pressEqualsKey();
 
         String expected = "72";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("should be able to do factorial")
+    void testFactorial(){
+        Calculator calc =  new Calculator();
+
+        calc.pressDigitKey(5);
+        calc.pressUnaryOperationKey("!");
+
+        String expected = "120";
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);

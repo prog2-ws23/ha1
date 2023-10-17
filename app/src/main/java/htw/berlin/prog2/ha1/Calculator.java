@@ -82,13 +82,25 @@ public class Calculator {
             case "√" -> Math.sqrt(Double.parseDouble(screen));
             case "%" -> Double.parseDouble(screen) / 100;
             case "1/x" -> 1 / Double.parseDouble(screen);
+            case "!" -> factorial(Double.parseDouble(screen));
             default -> throw new IllegalArgumentException();
         };
         screen = Double.toString(result);
         if(screen.equals("NaN")) screen = "Error";
         if(screen.equals("Infinity")) screen = "Error";
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
+        if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2);
 
+    }
+
+    public double factorial(double screen){
+        double result = 1;
+        int länge  = (int) screen;
+        for(int i = 0; i < länge; i++){
+            result *= screen;
+            screen --;
+        }
+        return result;
     }
 
     /**
