@@ -106,6 +106,39 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
     }
+    @Test
+    @DisplayName("should show the result 1 after drawing the square root of 1")
+    void testSquareRootOne(){
+        Calculator calc = new Calculator();
 
+        calc.pressDigitKey(1);
+        calc.pressUnaryOperationKey("√");
+
+
+        String expected = "1";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("should show the result after adding 3 numbers together")
+    void testTrippleAddition() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(1);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(1);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(1);
+
+        calc.pressEqualsKey();
+
+
+        String expected = "3";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
 }
 
