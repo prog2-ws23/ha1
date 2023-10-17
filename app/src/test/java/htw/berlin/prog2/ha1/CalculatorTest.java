@@ -90,5 +90,33 @@ class CalculatorTest {
 
 
     //TODO hier weitere Tests erstellen
+
+    @Test
+    @DisplayName("should subtract positive numbers")
+
+    /**
+     * Methode soll eine negative Zahl von einer anderen negativen Zahl subtrahieren
+     */
+        //neues Objekt wird erstellt = calc (instanziiert)
+        //mit calc.press ... werden die jeweiligen Methoden aufgerugen und es werden die jeweiligen Werte (Argumente) eingesetzt
+        //eine neue Variable String expected mit korrektem, erwartetem Ergebnis wurde erstellt
+        //Variable actual, die das Ergebnis prüft, wurde erstellt
+        //expected und actual argument werden verglichen
+    void testPositiveSubtraction(){
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(4);
+        calc.pressBinaryOperationKey("-");
+        calc.pressDigitKey(6);
+        calc.pressEqualsKey();
+
+        String expected = "-2";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    } //funktioniert = passed
+
+    //Tests fail 1 = testNegativeSubtraction
+    //Tests fail 2 = test
 }
 
