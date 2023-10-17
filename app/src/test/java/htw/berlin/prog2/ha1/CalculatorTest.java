@@ -95,7 +95,7 @@ class CalculatorTest {
     @DisplayName("should subtract positive numbers")
 
     /**
-     * Methode soll eine negative Zahl von einer anderen negativen Zahl subtrahieren
+     * Methode soll eine positive Zahl von einer anderen positiven Zahl subtrahieren
      */
         //neues Objekt wird erstellt = calc (instanziiert)
         //mit calc.press ... werden die jeweiligen Methoden aufgerugen und es werden die jeweiligen Werte (Argumente) eingesetzt
