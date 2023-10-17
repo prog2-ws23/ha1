@@ -60,6 +60,22 @@ public class Calculator {
      * @param operation "+" für Addition, "-" für Substraktion, "x" für Multiplikation, "/" für Division
      */
     public void pressBinaryOperationKey(String operation)  {
+        if(!screen.equals("0") && !latestOperation.isEmpty()){
+            double currentOperant = Double.parseDouble(screen);
+            switch (latestOperation) {
+                case "+" -> latestValue += currentOperant;
+                case "-" -> latestValue -= currentOperant;
+                case "x" -> latestValue *= currentOperant;
+                case "/" -> {
+                    if (currentOperant == 0 || latestValue == 0) {
+                        screen = "Error";
+                    }
+                    latestValue /= currentOperant;
+                }
+            }
+            screen = Double.toString(latestValue);
+            if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2);
+        }
         latestValue = Double.parseDouble(screen);
         latestOperation = operation;
     }
