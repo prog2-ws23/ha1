@@ -81,7 +81,10 @@ public class Calculator {
             default -> throw new IllegalArgumentException();
         };
 
-        screen = Double.toString(result);
+        //CHANGED
+        if (result == (int) result) screen = Integer.toString((int) result);
+        else screen = Double.toString(result);
+        // BEFORE: screen = Double.toString(result);
 
         if(screen.equals("NaN")) screen = "Error";
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
