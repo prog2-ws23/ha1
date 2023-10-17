@@ -105,16 +105,17 @@ class CalculatorTest {
     }
 
     @Test
-    @DisplayName("should display result after adding three positive multi-digit numbers")
-    void testPositiveAdditionOfThreeNumbers() {
+    @DisplayName("should display result after adding two positive multi-digit numbers, without pressing clear after a result is shown")
+    void testNewCalculationWithoutClear() {
         Calculator calc = new Calculator();
 
         calc.pressDigitKey(2);
         calc.pressBinaryOperationKey("+");
         calc.pressDigitKey(2);
-        calc.pressBinaryOperationKey("+");
-        calc.pressDigitKey(2);
         calc.pressEqualsKey();
+        calc.pressDigitKey(5);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(1);
 
         String expected = "6";
         String actual = calc.readScreen();
