@@ -73,7 +73,7 @@ public class Calculator {
      * Quadratwurzel, Prozent, Inversion, welche nur einen Operanden benötigen.
      * Beim Drücken der Taste wird direkt die Operation auf den aktuellen Zahlenwert angewendet und
      * der Bildschirminhalt mit dem Ergebnis aktualisiert.
-     * @param operation "√" für Quadratwurzel, "%" für Prozent, "1/x" für Inversion
+     * @param operation "√" für Quadratwurzel, "%" für Prozent, "1/x" für Inversion, "!" für Faktor
      */
     public void pressUnaryOperationKey(String operation) {
         latestValue = Double.parseDouble(screen);
@@ -93,12 +93,12 @@ public class Calculator {
 
     }
 
-    public double factorial(double screen){
+    private double factorial(double faktor){
         double result = 1;
-        int länge  = (int) screen;
+        int länge  = (int) faktor;
         for(int i = 0; i < länge; i++){
-            result *= screen;
-            screen --;
+            result *= faktor;
+            faktor --;
         }
         return result;
     }

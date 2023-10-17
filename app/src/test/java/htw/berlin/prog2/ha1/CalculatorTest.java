@@ -95,11 +95,14 @@ class CalculatorTest {
     void testMultiplication() {
         Calculator calc = new Calculator();
 
-        calc.pressDigitKey(5);
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(0);
         calc.pressBinaryOperationKey("x");
-        calc.pressDigitKey(4);
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(0);
+        calc.pressEqualsKey();
 
-        String expected = "20";
+        String expected = "100";
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
