@@ -107,19 +107,17 @@ class CalculatorTest {
     }
 
     @Test
-    @DisplayName("should display result when dividing one negative and one positive multi-digit number")
-    void testPositiveDivision(){
+    @DisplayName("should display 0 when getting the percent of a negative number")
+    void testNegativePercent(){
         Calculator calc = new Calculator();
 
-        calc.pressNegativeKey();
         calc.pressDigitKey(1);
         calc.pressDigitKey(5);
-        calc.pressBinaryOperationKey("/");
-        calc.pressDigitKey(2);
-        calc.pressDigitKey(0);
+        calc.pressNegativeKey();
+        calc.pressUnaryOperationKey("%");
         calc.pressEqualsKey();
 
-        String expected = "-0.75";
+        String expected = "0";
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
