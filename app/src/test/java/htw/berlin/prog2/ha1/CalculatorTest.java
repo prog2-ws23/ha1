@@ -115,7 +115,6 @@ class CalculatorTest {
         calc.pressDigitKey(5);
         calc.pressNegativeKey();
         calc.pressUnaryOperationKey("%");
-        calc.pressEqualsKey();
 
         String expected = "0";
         String actual = calc.readScreen();
