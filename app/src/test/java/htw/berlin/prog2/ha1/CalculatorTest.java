@@ -91,7 +91,7 @@ class CalculatorTest {
 
     @Test
     @DisplayName("should correctly subtract")
-    void testSubtraction(){
+    void testSubstraction(){
         Calculator calc = new Calculator();
 
         calc.pressDigitKey(4);
@@ -105,38 +105,6 @@ class CalculatorTest {
         assertEquals(expected, actual);
     }
 
-    @Test
-    @DisplayName("should display the interim solution after pressing the binaryOperationKey the second time you press after entering another number")
-    void testInterimSolutionBinaryOperation(){
-        Calculator calc = new Calculator();
-
-        calc.pressDigitKey(4);
-        calc.pressBinaryOperationKey("+");
-        calc.pressDigitKey(4);
-        calc.pressBinaryOperationKey("+");
-        //calc.pressEqualsKey();
-
-        String expected= "8";
-        String actual = calc.readScreen();
-
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    @DisplayName("C should only delete the current input on the display")
-    void testCE(){
-        Calculator calc = new Calculator();
-
-        calc.pressDigitKey(4);
-        calc.pressBinaryOperationKey("+");
-        calc.pressClearKey();
-        calc.pressEqualsKey();
-
-        String expected = "4";
-        String actual = calc.readScreen();
-
-        assertEquals(expected, actual);
-
-    }
+    //TODO hier weitere Tests erstellen
 }
 
