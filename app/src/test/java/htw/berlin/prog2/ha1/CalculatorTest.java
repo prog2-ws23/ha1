@@ -92,8 +92,8 @@ class CalculatorTest {
     //TODO hier weitere Tests erstellen
 
     @Test
-    @DisplayName("should divide the number by a hundred")
-    void testDivide100() {
+    @DisplayName("should show one percent of the input number")
+    void testOnePercent() {
         Calculator calc = new Calculator();
 
         calc.pressDigitKey(1);

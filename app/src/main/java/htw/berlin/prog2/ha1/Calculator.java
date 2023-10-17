@@ -60,8 +60,14 @@ public class Calculator {
      * @param operation "+" für Addition, "-" für Substraktion, "x" für Multiplikation, "/" für Division
      */
     public void pressBinaryOperationKey(String operation)  {
-        latestValue = Double.parseDouble(screen);
-        latestOperation = operation;
+        if (latestOperation.equals(operation)) {  //Geht hier rein wenn eine Operation bereits ausgeführt wurde
+            pressEqualsKey();   //das aktuelle Zwischenergebnis auf dem Bildschirm zeigen
+            latestOperation = operation;
+            latestValue = Double.parseDouble(screen);
+        } else {
+            latestOperation = operation;
+            latestValue = Double.parseDouble(screen);
+        }
     }
 
     /**
@@ -123,13 +129,11 @@ public class Calculator {
             case "-" -> latestValue - Double.parseDouble(screen);
             case "x" -> latestValue * Double.parseDouble(screen);
             case "/" -> latestValue / Double.parseDouble(screen);
-            default -> Double.parseDouble(screen);
+            default -> Double.parseDouble(screen); //Geändert, sodass keine Exception mehr der Default ist
         };
         screen = Double.toString(result);
         if(screen.equals("Infinity")) screen = "Error";
         if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2);
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
     }
-
-
 }
