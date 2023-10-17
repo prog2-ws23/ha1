@@ -10,7 +10,6 @@ public class Calculator {
 
     private String screen = "0";
 
-    //TODO Fehler 2 -> nur eine Nachkommastelle
     private double latestValue;
 
     private String latestOperation = "";
@@ -38,7 +37,6 @@ public class Calculator {
     }
 
     /**
-     * Fehler1 -> Clear sofort alles, auch das zwischengespeicherte
      * Empfängt den Befehl der C- bzw. CE-Taste (Clear bzw. Clear Entry).
      * Einmaliges Drücken der Taste löscht die zuvor eingegebenen Ziffern auf dem Bildschirm
      * so dass "0" angezeigt wird, jedoch ohne zuvor zwischengespeicherte Werte zu löschen.
@@ -51,7 +49,6 @@ public class Calculator {
         latestOperation = "";
         latestValue = 0.0;
     }
-    //TODO Das zählen des mehrmaligen Anwendens hinzufügen -> vlt hochzählen und alle anderen Operationen setzen das auf 0?
 
     /**
      * Empfängt den Wert einer gedrückten binären Operationstaste, also eine der vier Operationen
@@ -133,5 +130,4 @@ public class Calculator {
         if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2);
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
     }
-    //TODO Hier auf 2 Nachkommastellen ändern
 }
