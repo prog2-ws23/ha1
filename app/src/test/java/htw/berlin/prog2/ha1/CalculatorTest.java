@@ -103,5 +103,23 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
     }
+
+    @Test
+    @DisplayName("should display the interim solution after pressing the binaryOperationKey the second time you press after entering another number")
+    void testInterimSolutionBinaryOperation(){
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(4);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(4);
+        calc.pressBinaryOperationKey("+");
+        //calc.pressEqualsKey();
+
+        String expected= "8";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
 }
 
