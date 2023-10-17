@@ -63,7 +63,7 @@ public class Calculator {
         latestValue = Double.parseDouble(screen);
         latestOperation = operation;
     }
-
+    // sieht clean aus bis hier hin
     /**
      * Empfängt den Wert einer gedrückten unären Operationstaste, also eine der drei Operationen
      * Quadratwurzel, Prozent, Inversion, welche nur einen Operanden benötigen.
@@ -82,7 +82,7 @@ public class Calculator {
         };
         screen = Double.toString(result);
         if(screen.equals("NaN")) screen = "Error";
-        if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
+        if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10); //evtl
 
     }
 
