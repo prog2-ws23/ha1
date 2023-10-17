@@ -1,5 +1,7 @@
 package htw.berlin.prog2.ha1;
 
+import javax.swing.plaf.synth.SynthTextAreaUI;
+
 /**
  * Eine Klasse, die das Verhalten des Online Taschenrechners imitiert, welcher auf
  * https://www.online-calculator.com/ aufgerufen werden kann (ohne die Memory-Funktionen)
@@ -45,9 +47,11 @@ public class Calculator {
      * im Ursprungszustand ist.
      */
     public void pressClearKey() {
-        screen = "0";
-        latestOperation = "";
-        latestValue = 0.0;
+        if (screen.equals("0")) {
+            latestOperation = "";
+            latestValue = 0.0;
+        }
+        else { screen = "0";}
     }
 
     /**
@@ -69,7 +73,7 @@ public class Calculator {
      * Quadratwurzel, Prozent, Inversion, welche nur einen Operanden benötigen.
      * Beim Drücken der Taste wird direkt die Operation auf den aktuellen Zahlenwert angewendet und
      * der Bildschirminhalt mit dem Ergebnis aktualisiert.
-     * @param operation "√" für Quadratwurzel, "%" für Prozent, "1/x" für Inversion
+     * @param operation "√" für Quadratwurzel, "%" für Prozent, "1/x" für Inversion, "!" für Faktor
      */
     public void pressUnaryOperationKey(String operation) {
         latestValue = Double.parseDouble(screen);
@@ -78,12 +82,25 @@ public class Calculator {
             case "√" -> Math.sqrt(Double.parseDouble(screen));
             case "%" -> Double.parseDouble(screen) / 100;
             case "1/x" -> 1 / Double.parseDouble(screen);
+            case "!" -> factorial(Double.parseDouble(screen));
             default -> throw new IllegalArgumentException();
         };
         screen = Double.toString(result);
         if(screen.equals("NaN")) screen = "Error";
+        if(screen.equals("Infinity")) screen = "Error";
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
+        if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2);
 
+    }
+
+    private double factorial(double faktor){
+        double result = 1;
+        int länge  = (int) faktor;
+        for(int i = 0; i < länge; i++){
+            result *= faktor;
+            faktor --;
+        }
+        return result;
     }
 
     /**
