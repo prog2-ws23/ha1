@@ -5,8 +5,8 @@ Deadline für Abgabe per Pull Request: 27.10.2023 23:59 Uhr. Außerdem ist zusä
 ## Aufgabenstellung
 
 - Forken Sie dieses Repository (github.com/prog2-ws23/ha1) in Ihren eigenen GitHub Account.✓
-- Analysieren Sie das Verhalten der Klasse `Calculator` und finden Sie ein paar Abweichungen im Vergleich zu [www.online-calculator.com](https://www.online-calculator.com/full-screen-calculator/) und/oder zu dem im JavaDoc beschriebenen Verhalten.
-- Teilaufgabe 1: Schreiben Sie einen neuen zusätzlichen Test, der eine bisher nicht getestete Funktionalität abdeckt, die bereits funktioniert und der daher direkt grün wird.
+- Analysieren Sie das Verhalten der Klasse `Calculator` und finden Sie ein paar Abweichungen im Vergleich zu [www.online-calculator.com](https://www.online-calculator.com/full-screen-calculator/) und/oder zu dem im JavaDoc beschriebenen Verhalten.✓
+- Teilaufgabe 1: Schreiben Sie einen neuen zusätzlichen Test, der eine bisher nicht getestete Funktionalität abdeckt, die bereits funktioniert und der daher direkt grün wird.✓
 - Teilaufgabe 2: Schreiben Sie zwei weitere zusätzliche Tests, die zwei unterschiedliche Fehlerkategorien aufdecken (d.h. deren Fehlerursachen in unterschiedlichen Methoden liegen) und somit fehlschlagen.
 - Teilaufgabe 3: Schreiben Sie zwei Bugfixes (also Änderungen der Implementierungsklasse `Calculator`), so dass die zwei zuvor hinzugefügten Tests erfolgreich durchlaufen. Falls Sie dabei das Verhalten so erweitern, dass es über das im JavaDoc spezifizierte hinausgeht (aber zum Verhalten des Online Calculator passt), dann erweitern Sie bitte auch das JavaDoc entsprechend.
 - Pushen Sie Ihre Tests & Änderungen auf Ihr eigenes, geforktes Repository, und zwar strukturiert in mindestens drei Commits: z.B. 1. Commit für neuer grüner Test, 2. Commit für neuer roter Test, 3. Commit für den Fix zu diesem Test, 4. Commit für weiteren neuen roter Test, 5. Commit für Fix zu diesem Test.
