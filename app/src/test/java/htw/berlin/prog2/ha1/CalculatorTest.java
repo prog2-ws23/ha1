@@ -118,7 +118,7 @@ class CalculatorTest {
         calc.pressDigitKey(2);
         calc.pressDigitKey(0);
         calc.pressBinaryOperationKey("-");
-        calc.pressDigitKey(2)                 //kein";"
+        calc.pressDigitKey(2);                 //";" fehlt nicht mehr
         calc.pressDigitKey(0);
         calc.pressEqualsKey();
 
@@ -139,7 +139,7 @@ class CalculatorTest {
         calc.pressDigitKey(0);
         calc.pressEqualsKey();
 
-        String expected = "40";                         //falsches Ergebnis
+        String expected = "0";                         //jetzt richtiges Ergebnis
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
