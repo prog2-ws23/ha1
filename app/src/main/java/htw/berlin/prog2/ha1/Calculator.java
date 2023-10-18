@@ -14,6 +14,9 @@ public class Calculator {
 
     private String latestOperation = "";
 
+    private int cCounter = 0;
+
+
     /**
      * @return den aktuellen Bildschirminhalt als String
      */
@@ -25,7 +28,7 @@ public class Calculator {
      * Empfängt den Wert einer gedrückten Zifferntaste. Da man nur eine Taste auf einmal
      * drücken kann muss der Wert positiv und einstellig sein und zwischen 0 und 9 liegen.
      * Führt in jedem Fall dazu, dass die gerade gedrückte Ziffer auf dem Bildschirm angezeigt
-     * oder rechts an die zuvor gedrückte Ziffer angehängt angezeigt wird.
+     * oder rechts an die zuvor gedrückte Ziffer angehängt angezeigt wird. Setzt auch den C Counter auf 0.
      * @param digit Die Ziffer, deren Taste gedrückt wurde
      */
     public void pressDigitKey(int digit) {
@@ -34,6 +37,7 @@ public class Calculator {
         if(screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = "";
 
         screen = screen + digit;
+        cCounter = 0;
     }
 
     /**
@@ -45,9 +49,14 @@ public class Calculator {
      * im Ursprungszustand ist.
      */
     public void pressClearKey() {
-        screen = "0";
-        latestOperation = "";
-        latestValue = 0.0;
+        if (cCounter == 0){
+            screen = "0";
+            cCounter++;
+        }
+        else if (cCounter > 0){
+            latestOperation = "";
+            latestValue = 0.0;
+        }
     }
 
     /**
@@ -57,11 +66,29 @@ public class Calculator {
      * Rechner in den passenden Operationsmodus versetzt.
      * Beim zweiten Drücken nach Eingabe einer weiteren Zahl wird direkt des aktuelle Zwischenergebnis
      * auf dem Bildschirm angezeigt. Falls hierbei eine Division durch Null auftritt, wird "Error" angezeigt.
+     * Setzt den cCounter auf 0.
      * @param operation "+" für Addition, "-" für Substraktion, "x" für Multiplikation, "/" für Division
      */
     public void pressBinaryOperationKey(String operation)  {
+        if(!screen.equals("0") && !latestOperation.isEmpty()){
+            double currentOperant = Double.parseDouble(screen);
+            switch (latestOperation) {
+                case "+" -> latestValue += currentOperant;
+                case "-" -> latestValue -= currentOperant;
+                case "x" -> latestValue *= currentOperant;
+                case "/" -> {
+                    if (currentOperant == 0 || latestValue == 0) {
+                        screen = "Error";
+                    }
+                    latestValue /= currentOperant;
+                }
+            }
+            screen = Double.toString(latestValue);
+            if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2);
+        }
         latestValue = Double.parseDouble(screen);
         latestOperation = operation;
+        cCounter=0;
     }
 
     /**
@@ -92,9 +119,11 @@ public class Calculator {
      * Seite hinzu und aktualisiert den Bildschirm. Daraufhin eingegebene Zahlen werden rechts vom
      * Trennzeichen angegeben und daher als Dezimalziffern interpretiert.
      * Beim zweimaligem Drücken, oder wenn bereits ein Trennzeichen angezeigt wird, passiert nichts.
+     * Setzt auch den C Counter auf 0.
      */
     public void pressDotKey() {
         if(!screen.contains(".")) screen = screen + ".";
+        cCounter = 0;
     }
 
     /**
@@ -102,10 +131,11 @@ public class Calculator {
      * Zeigt der Bildschirm einen positiven Wert an, so wird ein "-" links angehängt, der Bildschirm
      * aktualisiert und die Inhalt fortan als negativ interpretiert.
      * Zeigt der Bildschirm bereits einen negativen Wert mit führendem Minus an, dann wird dieses
-     * entfernt und der Inhalt fortan als positiv interpretiert.
+     * entfernt und der Inhalt fortan als positiv interpretiert. Setzt auch den C Counter auf 0.
      */
     public void pressNegativeKey() {
         screen = screen.startsWith("-") ? screen.substring(1) : "-" + screen;
+        cCounter = 0;
     }
 
     /**
