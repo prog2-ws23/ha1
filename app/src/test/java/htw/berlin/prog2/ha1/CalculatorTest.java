@@ -136,4 +136,40 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
     }
+
+    /*
+     * @Test
+     * 
+     * @DisplayName("should use the current screen value when using root function")
+     * void testRootFunction() {
+     * Calculator calc = new Calculator();
+     * 
+     * calc.pressDigitKey(2);
+     * calc.pressDigitKey(5);
+     * calc.pressUnaryOperationKey("√");
+     * 
+     * String expected = "5.0";
+     * String actual = calc.readScreen();
+     * 
+     * assertEquals(expected, actual);
+     * }
+     */
+
+    @Test
+    @DisplayName("should display result 27 after pressing 9 + 9 + 9")
+    void testMultipleEqualsKey() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(9);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(9);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(9);
+        calc.pressEqualsKey();
+
+        String expected = "27";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
 }
