@@ -89,8 +89,9 @@ class CalculatorTest {
     }
 
     //TODO hier weitere Tests erstellen
+    //Teilaufgabe1
     @Test
-    @DisplayName("should display result after adding two positive multi-digit numbers")
+    @DisplayName("should display result after adding two negative multi-digit numbers")
     void testPositiveSubtraction() {
         Calculator calc = new Calculator();
 
@@ -106,5 +107,6 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
     }
+    //Teilaufgabe2
 }
 
