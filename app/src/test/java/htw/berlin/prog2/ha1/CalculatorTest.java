@@ -98,7 +98,6 @@ class CalculatorTest {
         calc.pressDigitKey(2);
         calc.pressEqualsKey();
 
-
         assertEquals("2", calc.readScreen());
     }
 
@@ -111,14 +110,12 @@ class CalculatorTest {
         calc.pressBinaryOperationKey("+");
         calc.pressDigitKey(4);
         calc.pressBinaryOperationKey("+");
-        //calc.pressEqualsKey();
-
 
         assertEquals("8", calc.readScreen());
     }
 
     @Test
-    @DisplayName("C should only delete the current input on the display")
+    @DisplayName("C should only delete the current current input on the display")
     void testCE(){
         Calculator calc = new Calculator();
 
@@ -129,7 +126,6 @@ class CalculatorTest {
         calc.pressEqualsKey();
 
         assertEquals("4", calc.readScreen());
-
     }
 
 }
