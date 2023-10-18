@@ -47,10 +47,8 @@ public class Calculator {
     }
 
     /**
-     * Empfängt den Befehl der C- bzw. CE-Taste (Clear bzw. Clear Entry).
-     * Einmaliges Drücken der Taste löscht die zuvor eingegebenen Ziffern auf dem Bildschirm
-     * so dass "0" angezeigt wird, jedoch ohne zuvor zwischengespeicherte Werte zu löschen.
-     * Wird daraufhin noch einmal die Taste gedrückt, dann werden auch zwischengespeicherte
+     * Empfängt den Befehl der C-Taste (Clear).
+     * Bei Drücken der Taste werden auch zwischengespeicherte
      * Werte sowie der aktuelle Operationsmodus zurückgesetzt, so dass der Rechner wieder
      * im Ursprungszustand ist.
      */
@@ -58,6 +56,15 @@ public class Calculator {
         screen = "0";
         latestOperation = "";
         latestValue = 0.0;
+    }
+
+    /**
+     * Empfängt den Befehl der CE-Taste (Clear Entry).
+     * Einmaliges Drücken der Taste löscht die zuvor eingegebenen Ziffern auf dem Bildschirm
+     * so dass "0" angezeigt wird, jedoch ohne zuvor zwischengespeicherte Werte zu löschen.
+     */
+    public void pressClearEntryKey() {
+        screen = "0";
     }
 
     /**
@@ -143,22 +150,5 @@ public class Calculator {
         if (screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
 
         isResult = true;
-    }
-
-    public static void main (String[] args){
-        Calculator calc = new Calculator();
-
-        calc.pressDigitKey(2);
-        calc.pressBinaryOperationKey("+");
-        calc.pressDigitKey(2);
-        System.out.println(calc.readScreen());
-        calc.pressEqualsKey();
-        System.out.println(calc.readScreen());
-        calc.pressDigitKey(5);
-        System.out.println(calc.readScreen());
-        calc.pressBinaryOperationKey("+");
-        calc.pressDigitKey(1);
-
-        System.out.println(calc.readScreen());
     }
 }
