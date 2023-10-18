@@ -109,6 +109,7 @@ class CalculatorTest {
 
     //Aufagebe 2
     @Test
+    @DisplayName("should calculate Inversion with 0")
     void testInversionWith0(){
         Calculator calc = new Calculator();
 
