@@ -107,16 +107,14 @@ class CalculatorTest {
     }
 
     @Test
-    @DisplayName("should display 0 when getting the percent of a negative number")
+    @DisplayName("should display the number after only writing a number and pressing equals key")
     void testNegativePercent(){
         Calculator calc = new Calculator();
 
-        calc.pressDigitKey(1);
         calc.pressDigitKey(5);
-        calc.pressNegativeKey();
-        calc.pressUnaryOperationKey("%");
+        calc.pressEqualsKey();
 
-        String expected = "0";
+        String expected = "5";
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);

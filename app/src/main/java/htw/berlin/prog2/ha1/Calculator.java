@@ -60,7 +60,7 @@ public class Calculator {
      * @param operation "+" für Addition, "-" für Substraktion, "x" für Multiplikation, "/" für Division
      */
     public void pressBinaryOperationKey(String operation)  {
-        if(latestOperation != "") pressEqualsKey();//zwischenergebnis wird angezeigt falls es schon eine Operation gab
+        if(!"".equals(latestOperation)) pressEqualsKey();//zwischenergebnis wird angezeigt falls es schon eine Operation gab
         latestValue = Double.parseDouble(screen);
         latestOperation = operation;
     }
@@ -77,7 +77,7 @@ public class Calculator {
         latestOperation = operation;
         var result = switch(operation) {
             case "√" -> Math.sqrt(Double.parseDouble(screen));
-            case "%" -> Double.parseDouble(screen) / 100 < 0 ? 0 : Double.parseDouble(screen) / 100;//wenn % negativ ist wird 0 gesetzt
+            case "%" -> Double.parseDouble(screen) / 100;
             case "1/x" -> 1 / Double.parseDouble(screen);
             default -> throw new IllegalArgumentException();
         };
@@ -125,6 +125,7 @@ public class Calculator {
             case "-" -> latestValue - Double.parseDouble(screen);
             case "x" -> latestValue * Double.parseDouble(screen);
             case "/" -> latestValue / Double.parseDouble(screen);
+            case "" -> Double.parseDouble(screen);
             default -> throw new IllegalArgumentException();
         };
         screen = Double.toString(result);
