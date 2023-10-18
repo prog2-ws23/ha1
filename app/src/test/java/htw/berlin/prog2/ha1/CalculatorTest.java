@@ -122,7 +122,7 @@ class CalculatorTest {
         assertEquals(expected, actual);
     }
 
-    //Aufgabe 2 code 2
+    //Aufgabe 2 code 2 (gleiche Methode)
     @Test
     @DisplayName("should calculate Prozent with 0 ")
 
@@ -139,7 +139,28 @@ class CalculatorTest {
         assertEquals(expected, actual);
     }
 
+    //Aufgabe 2 code 2
+    @Test
+    @DisplayName("should delete a key and calculate it correctly")
+
+    void testDeleteKey(){
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(8);
+        calc.pressBinaryOperationKey("x");
+        calc.pressDigitKey(8);
+        calc.pressClearKey();
+        calc.pressDigitKey(7);
+        calc.pressEqualsKey();
+
+        String expected = "56";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
 
 
 }
+
 

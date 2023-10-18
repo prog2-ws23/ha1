@@ -48,6 +48,7 @@ public class Calculator {
         screen = "0";
         latestOperation = "";
         latestValue = 0.0;
+
     }
 
     /**
@@ -83,6 +84,7 @@ public class Calculator {
         screen = Double.toString(result);
         if(screen.equals("NaN")) screen = "Error";
         if(screen.equals("Infinity")) screen = "Error";
+        if(screen.equals("-0.0")) screen = "0";
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
 
     }
