@@ -112,7 +112,7 @@ class CalculatorTest {
 
     @Test
     @DisplayName("should be displayed after adding two positive multi-digit numbers")
-    void testNegativeSubtrationWithoutSemicolon() {
+    void testPositivPercentWrongExpected() {
         Calculator calc = new Calculator();
 
         calc.pressDigitKey(5);
@@ -128,7 +128,7 @@ class CalculatorTest {
     }
     @Test
     @DisplayName("should be displayed after inverting a positive number")
-    void testNegativeSubtrationWithWrongExpected() {
+    void testTwoInvertWrongExpected() {
         Calculator calc = new Calculator();
 
         calc.pressDigitKey(2);
