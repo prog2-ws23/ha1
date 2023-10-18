@@ -48,31 +48,23 @@ public class Calculator {
     }
 
     /**
-     * Empfängt den Befehl der C-Taste (Clear).
-     * Bei Drücken der Taste werden auch zwischengespeicherte
+     * Empfängt den Befehl der C- bzw. CE-Taste (Clear bzw. Clear Entry).
+     * Einmaliges Drücken der Taste löscht die zuvor eingegebenen Ziffern auf dem Bildschirm
+     * so dass "0" angezeigt wird, jedoch ohne zuvor zwischengespeicherte Werte zu löschen.
+     * Wird daraufhin noch einmal die Taste gedrückt, dann werden auch zwischengespeicherte
      * Werte sowie der aktuelle Operationsmodus zurückgesetzt, so dass der Rechner wieder
      * im Ursprungszustand ist.
      */
     public void pressClearKey() {
-        //if (!pressedClearEntryKey){
-        //    screen = "0";
-         //   pressedClearEntryKey = true;
-       // }
-        //if (pressedClearEntryKey) {
+        if (!pressedClearEntryKey) {
+            screen = "0";
+            pressedClearEntryKey = true;
+        } else if (pressedClearEntryKey) {
             screen = "0";
             latestOperation = "";
             latestValue = 0.0;
-           // pressedClearEntryKey = false;
-        //}
-    }
-
-    /**
-     * Empfängt den Befehl der CE-Taste (Clear Entry).
-     * Einmaliges Drücken der Taste löscht die zuvor eingegebenen Ziffern auf dem Bildschirm
-     * so dass "0" angezeigt wird, jedoch ohne zuvor zwischengespeicherte Werte zu löschen.
-     */
-    public void pressClearEntryKey() {
-        screen = "0";
+            pressedClearEntryKey = false;
+        }
     }
 
     /**
