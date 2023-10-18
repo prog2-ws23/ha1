@@ -88,6 +88,7 @@ public class Calculator {
             screen = Integer.toString((int) Math.round(result));
         } else {
             screen = Double.toString(result);
+
         }
     }
 
