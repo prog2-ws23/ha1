@@ -14,6 +14,7 @@ public class Calculator {
 
     private String latestOperation = "";
     private boolean isResult = false;
+    private boolean pressedClearEntryKey = false;
 
     /**
      * @return den aktuellen Bildschirminhalt als String
@@ -53,9 +54,16 @@ public class Calculator {
      * im Ursprungszustand ist.
      */
     public void pressClearKey() {
-        screen = "0";
-        latestOperation = "";
-        latestValue = 0.0;
+        //if (!pressedClearEntryKey){
+        //    screen = "0";
+         //   pressedClearEntryKey = true;
+       // }
+        //if (pressedClearEntryKey) {
+            screen = "0";
+            latestOperation = "";
+            latestValue = 0.0;
+           // pressedClearEntryKey = false;
+        //}
     }
 
     /**

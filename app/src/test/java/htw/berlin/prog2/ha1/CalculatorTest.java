@@ -125,14 +125,14 @@ class CalculatorTest {
     }
 
     @Test
-    @DisplayName("should only clear the last entry, when pressing clearEntry")
-    void testClearEntry() {
+    @DisplayName("should only clear the last entry, when pressing clearKey once")
+    void testClearKey() {
         Calculator calc = new Calculator();
 
         calc.pressDigitKey(5);
         calc.pressBinaryOperationKey("+");
         calc.pressDigitKey(7);
-        calc.pressClearEntryKey();
+        calc.pressClearKey();
         calc.pressDigitKey(5);
         calc.pressEqualsKey();
 
