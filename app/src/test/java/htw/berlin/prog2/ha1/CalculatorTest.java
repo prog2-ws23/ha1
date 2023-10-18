@@ -111,18 +111,17 @@ class CalculatorTest {
     }
 
     @Test
-    @DisplayName("should display result after pull of two positiv multi-digit number")
+    @DisplayName("should display result after ")
     void testNegativeSubtrationWithoutSemicolon() {
         Calculator calc = new Calculator();
 
-        calc.pressDigitKey(2);
-        calc.pressDigitKey(0);
-        calc.pressBinaryOperationKey("-");
-        calc.pressDigitKey(2);                 //";" fehlt nicht mehr
-        calc.pressDigitKey(0);
-        calc.pressEqualsKey();
+        calc.pressDigitKey(5);
+        calc.pressBinaryOperationKey("%");
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(6);
+        calc.pressBinaryOperationKey("%");
 
-        String expected = "0";
+        String expected = "0.053";                 //es wird 6 erwartet
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
@@ -133,13 +132,9 @@ class CalculatorTest {
         Calculator calc = new Calculator();
 
         calc.pressDigitKey(2);
-        calc.pressDigitKey(0);
-        calc.pressBinaryOperationKey("-");
-        calc.pressDigitKey(2);
-        calc.pressDigitKey(0);
-        calc.pressEqualsKey();
+        calc.pressBinaryOperationKey("1/x");
 
-        String expected = "0";                         //jetzt richtiges Ergebnis
+        String expected = "0.5";             //es wird 2 erwartet
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
