@@ -45,9 +45,12 @@ public class Calculator {
      * im Ursprungszustand ist.
      */
     public void pressClearKey() {
+        if(latestOperation.equals("")) {
+            latestOperation = "";
+            latestValue = 0.0;
+        }
         screen = "0";
-        latestOperation = "";
-        latestValue = 0.0;
+        
     }
 
     /**
@@ -105,8 +108,10 @@ public class Calculator {
      * entfernt und der Inhalt fortan als positiv interpretiert.
      */
     public void pressNegativeKey() {
-        screen = screen.startsWith("-") ? screen.substring(1) : "-" + screen;
+                screen = screen.startsWith("-") ? screen.substring(1) : "-" + screen;
     }
+        
+    
 
     /**
      * Empfängt den Befehl der gedrückten "="-Taste.
