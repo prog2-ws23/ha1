@@ -15,7 +15,7 @@ public class Calculator {
     private String latestOperation = "";
 
     /**
-     * @return den aktuellen Bildschirminhalt als String
+     * @return den aktuellen Bi ldschirminhalt als String
      */
     public String readScreen() {
         return screen;
