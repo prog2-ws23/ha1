@@ -113,7 +113,7 @@ class CalculatorTest {
 
 
     @Test
-    @DisplayName("should be displayed after adding two positive multi-digit numbers")
+    @DisplayName("should be displayed after the percentage numbers")
     void testPositivPercentWrongExpected() {
         Calculator calc = new Calculator();
 
