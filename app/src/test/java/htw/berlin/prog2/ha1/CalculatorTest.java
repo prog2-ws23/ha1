@@ -131,10 +131,9 @@ class CalculatorTest {
         Calculator calc = new Calculator();
 
         calc.pressDigitKey(2);
-        calc.pressBinaryOperationKey("/");
-        calc.pressDigitKey(0);
+        calc.pressBinaryOperationKey("1/x");
 
-        String expected = "Error";             //es wird 0 erwartet
+        String expected = "0.5";             //es wird 2 erwartet
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
