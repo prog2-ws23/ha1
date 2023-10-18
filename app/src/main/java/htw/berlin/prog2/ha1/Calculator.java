@@ -14,6 +14,8 @@ public class Calculator {
 
     private String latestOperation = "";
 
+    private int zähler = 0;
+
     /**
      * @return den aktuellen Bildschirminhalt als String
      */
@@ -46,12 +48,15 @@ public class Calculator {
      */
     public void pressClearKey() {
 
-        if(latestOperation.equals("")) {
+        this.zähler++;
+        if(this.zähler == 1) screen = "0";
+        else if(this.zähler == 2)
+        {
+            screen = "0";
             latestOperation = "";
             latestValue = 0.0;
+            this.zähler = 0;
         }
-        else
-            screen = "0";
 
 
     }

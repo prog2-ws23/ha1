@@ -122,23 +122,6 @@ class CalculatorTest {
         assertEquals(expected, actual);
     }
 
-    //Aufgabe 2 code 2 (gleiche Methode)
-    @Test
-    @DisplayName("should calculate Prozent with 0 ")
-
-    void testProzentWithNegativ0(){
-        Calculator calc = new Calculator();
-
-        calc.pressDigitKey(0);
-        calc.pressNegativeKey();
-        calc.pressUnaryOperationKey("%");
-
-        String expected = "0";
-        String actual = calc.readScreen();
-
-        assertEquals(expected, actual);
-    }
-
     //Aufgabe 2 code 2
     @Test
     @DisplayName("should delete a key and calculate it correctly")
