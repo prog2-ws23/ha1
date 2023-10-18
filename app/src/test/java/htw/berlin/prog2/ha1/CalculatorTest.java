@@ -111,7 +111,7 @@ class CalculatorTest {
     }
 
     @Test
-    @DisplayName("should display result after ")
+    @DisplayName("The result should be displayed after adding two positive multi-digit numbers")
     void testNegativeSubtrationWithoutSemicolon() {
         Calculator calc = new Calculator();
 
@@ -127,7 +127,7 @@ class CalculatorTest {
         assertEquals(expected, actual);
     }
     @Test
-    @DisplayName("should display result after pull of two positiv multi-digit number")
+    @DisplayName("The result should be displayed after inverting a positive number")
     void testNegativeSubtrationWithWrongExpected() {
         Calculator calc = new Calculator();
 
