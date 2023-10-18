@@ -102,7 +102,7 @@ class CalculatorTest {
         //eine neue Variable String expected mit korrektem, erwartetem Ergebnis wurde erstellt
         //Variable actual, die das Ergebnis prüft, wurde erstellt
         //expected und actual argument werden verglichen
-    void testPositiveSubtraction(){
+    void testPositiveSubtraction() {
         Calculator calc = new Calculator();
 
         calc.pressDigitKey(4);
@@ -116,7 +116,43 @@ class CalculatorTest {
         assertEquals(expected, actual);
     } //funktioniert = passed
 
-    //Tests fail 1 = testNegativeSubtraction
-    //Tests fail 2 = test
+    @Test
+    @DisplayName("should multiply three numbers")
+
+    void testThreeNumbersMultiplied() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(4);
+        calc.pressBinaryOperationKey("x");
+        calc.pressDigitKey(4);
+        calc.pressBinaryOperationKey("x");
+        calc.pressDigitKey(4);
+        calc.pressEqualsKey();
+
+        String expected = "64";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+
+        //Tests fail 1 = test Multiplikation von 3
+
+    }
+
+   // @Test
+    //@DisplayName("should square root two times")
+    void testSquareRootOfThree() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(4);
+        calc.pressUnaryOperationKey("√");
+        calc.pressEqualsKey();
+        calc.pressUnaryOperationKey("√");
+
+        String expected = "1.41421356";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
 }
 
+//Tests fail 2 = test two sqaure Roots
