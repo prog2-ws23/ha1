@@ -107,7 +107,7 @@ class CalculatorTest {
         assertEquals(expected, actual);
     }
 
-    //Aufagebe 2
+    //Aufagebe 2 code 1
     @Test
     @DisplayName("should calculate Inversion with 0")
     void testInversionWith0(){
@@ -122,6 +122,22 @@ class CalculatorTest {
         assertEquals(expected, actual);
     }
 
+    //Aufgabe 2 code 2
+    @Test
+    @DisplayName("should calculate Prozent with 0 ")
+
+    void testProzentWithNegativ0(){
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(0);
+        calc.pressNegativeKey();
+        calc.pressUnaryOperationKey("%");
+
+        String expected = "0";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
 
 
 
