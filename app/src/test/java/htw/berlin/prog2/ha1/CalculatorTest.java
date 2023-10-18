@@ -80,6 +80,7 @@ class CalculatorTest {
         calc.pressDotKey();
         calc.pressDigitKey(7);
         calc.pressDotKey();
+        calc.pressDotKey();
         calc.pressDigitKey(8);
 
         String expected = "1.78";
@@ -113,6 +114,26 @@ class CalculatorTest {
         assertEquals(expected, actual);
     }
 
-    
+    @Test
+    @DisplayName("should delete one key and calc correctly")
+    void testDeletKeyAndCalc(){
+        Calculator calc = new Calculator();
+        calc.pressDigitKey(2);
+        calc.pressBinaryOperationKey("-");
+        calc.pressDigitKey(2);
+        calc.pressClearKey();
+        calc.pressDigitKey(2);
+        calc.pressEqualsKey();
+
+        String expected = "0";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+  
+
+
+
 }
 
