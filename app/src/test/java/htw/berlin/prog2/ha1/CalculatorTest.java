@@ -110,6 +110,8 @@ class CalculatorTest {
         assertEquals(expected, actual);
     }
 
+
+
     @Test
     @DisplayName("should be displayed after adding two positive multi-digit numbers")
     void testPositivPercentWrongExpected() {
@@ -117,24 +119,22 @@ class CalculatorTest {
 
         calc.pressDigitKey(5);
         calc.pressBinaryOperationKey("%");
-        calc.pressBinaryOperationKey("+");
-        calc.pressDigitKey(6);
-        calc.pressBinaryOperationKey("%");
 
-        String expected = "0.053";                 //es wird 6 erwartet
+        String expected = "0.05";                 //es wird 5 erwartet
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
     }
     @Test
     @DisplayName("should be displayed after inverting a positive number")
-    void testTwoInvertWrongExpected() {
+    void testTwoDividZeroWrongExpected() {
         Calculator calc = new Calculator();
 
         calc.pressDigitKey(2);
-        calc.pressBinaryOperationKey("1/x");
+        calc.pressBinaryOperationKey("/");
+        calc.pressDigitKey(0);
 
-        String expected = "0.5";             //es wird 2 erwartet
+        String expected = "Error";             //es wird 0 erwartet
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
