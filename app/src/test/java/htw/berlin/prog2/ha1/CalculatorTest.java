@@ -92,7 +92,7 @@ class CalculatorTest {
     //TODO hier weitere Tests erstellen
     @Test
     @DisplayName("should display sub between two numbers")
-    void testPositiveAddition() {
+    void testSubtraction() {
         Calculator calc = new Calculator();
 
         calc.pressDigitKey(2);
