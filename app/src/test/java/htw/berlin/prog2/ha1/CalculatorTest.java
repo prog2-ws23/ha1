@@ -90,6 +90,7 @@ class CalculatorTest {
 
 
     //TODO hier weitere Tests erstellen
+    //Aufgabe 1
     @Test
     @DisplayName("should display sub between two numbers")
     void testSubtraction() {
@@ -105,6 +106,21 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
     }
+
+    //Aufagebe 2
+    @Test
+    void testInversionWith0(){
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(0);
+        calc.pressUnaryOperationKey("1/x");
+
+        String expected = "Error";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
 
 
 
