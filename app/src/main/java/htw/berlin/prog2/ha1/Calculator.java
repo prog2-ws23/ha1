@@ -44,7 +44,7 @@ public class Calculator {
      * Werte sowie der aktuelle Operationsmodus zurückgesetzt, so dass der Rechner wieder
      * im Ursprungszustand ist.
      */
-    public void pressClearKey() {
+    public void pressClearKey() { //einmal drücken funktioniert nicht
         screen = "0";
         latestOperation = "";
         latestValue = 0.0;
@@ -59,11 +59,11 @@ public class Calculator {
      * auf dem Bildschirm angezeigt. Falls hierbei eine Division durch Null auftritt, wird "Error" angezeigt.
      * @param operation "+" für Addition, "-" für Substraktion, "x" für Multiplikation, "/" für Division
      */
-    public void pressBinaryOperationKey(String operation)  {
+    public void pressBinaryOperationKey(String operation)  { //kein zwischenergebnis, wenn 2tes mal drücken
         latestValue = Double.parseDouble(screen);
         latestOperation = operation;
     }
-    // sieht clean aus bis hier hin
+
     /**
      * Empfängt den Wert einer gedrückten unären Operationstaste, also eine der drei Operationen
      * Quadratwurzel, Prozent, Inversion, welche nur einen Operanden benötigen.
@@ -94,8 +94,7 @@ public class Calculator {
      * Beim zweimaligem Drücken, oder wenn bereits ein Trennzeichen angezeigt wird, passiert nichts.
      */
     public void pressDotKey() {
-        if(!screen.contains(".")) screen = screen + ".";
-    }
+        if(!screen.contains(".")) screen = screen + ".";}  //wenn screen voll (9 Zeichen) dann kein punkt
 
     /**
      * Empfängt den Befehl der gedrückten Vorzeichenumkehrstaste ("+/-").
