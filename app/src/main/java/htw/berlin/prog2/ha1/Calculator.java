@@ -44,7 +44,9 @@ public class Calculator {
      * Werte sowie der aktuelle Operationsmodus zurückgesetzt, so dass der Rechner wieder
      * im Ursprungszustand ist.
      */
-    public void pressClearKey() // Hat Bug siehe Test 2.
+    // Hat Bug siehe Test 7.
+    // Gewolltes Verhalten: Multi-Digit sollte nach der Betätigung der C-Taste nicht gelöscht, sondern zwischengepeichert werden
+    public void pressClearKey()
     {
         screen = "0";
         latestOperation = "";
@@ -94,9 +96,16 @@ public class Calculator {
      * Trennzeichen angegeben und daher als Dezimalziffern interpretiert.
      * Beim zweimaligem Drücken, oder wenn bereits ein Trennzeichen angezeigt wird, passiert nichts.
      */
+    //Hier Bug siehe Test 8.
+    //Gewolltes Verhalten: Sollte die pressDotKey Methode als erstes Aufgerufen werden sollte eine 0 links vor dem Komma stehen
+    // Die Methode sollte demnach nicht ignoriert werden
+
     public void pressDotKey() {
+
         if(!screen.contains(".")) screen = screen + ".";
     }
+
+
 
     /**
      * Empfängt den Befehl der gedrückten Vorzeichenumkehrstaste ("+/-").
