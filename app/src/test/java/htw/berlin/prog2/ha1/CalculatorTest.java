@@ -2,8 +2,9 @@ package htw.berlin.prog2.ha1;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("Retro calculator")
 class CalculatorTest {
@@ -90,5 +91,15 @@ class CalculatorTest {
 
 
     //TODO hier weitere Tests erstellen
+
+    @Test
+    @DisplayName("Should throw Exception if Press digit is Higher then 9")
+    void testPressClearKeyTwoTimes() {
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            Calculator calculator = new Calculator();
+            calculator.pressDigitKey(15);
+        });
+    }
 }
 
