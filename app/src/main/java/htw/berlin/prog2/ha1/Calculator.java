@@ -28,10 +28,13 @@ public class Calculator {
      * oder rechts an die zuvor gedrückte Ziffer angehängt angezeigt wird.
      * @param digit Die Ziffer, deren Taste gedrückt wurde
      */
-    public void pressDigitKey(int digit) {
-        if(digit > 9 || digit < 0) throw new IllegalArgumentException();
 
-        if(screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = "";
+    // Fehler: Warum sollte ein Wert auf 0 gesetzt werden nur weil er latestValue entspricht?
+
+    public void pressDigitKey(int digit) {
+        if(digit > 9 || digit < 0) throw new IllegalArgumentException(); // wenn nicht zwischen 0-9 dann illegal argument
+
+        if(screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = ""; // Wenn einer der beiden Bedingungen wahr ist, dann wird screen = "" durchgeführt
 
         screen = screen + digit;
     }
@@ -44,6 +47,10 @@ public class Calculator {
      * Werte sowie der aktuelle Operationsmodus zurückgesetzt, so dass der Rechner wieder
      * im Ursprungszustand ist.
      */
+
+    // Entry wird nicht gelöscht wenn der Button zweimal gedrückt wird.
+    // Eigentlich sollten zwischengespeicherte Werte in diesem Fall gelöscht werden.
+
     public void pressClearKey() {
         screen = "0";
         latestOperation = "";
@@ -59,6 +66,10 @@ public class Calculator {
      * auf dem Bildschirm angezeigt. Falls hierbei eine Division durch Null auftritt, wird "Error" angezeigt.
      * @param operation "+" für Addition, "-" für Substraktion, "x" für Multiplikation, "/" für Division
      */
+
+    // Wo wird beim zweifachen Drücken das aktuelle Zwischenergebnis ausgegeben?
+    // Wo wird beim Dividieren durch 0 Error ausgegeben? if(screen.equals("NaN")) screen = "Error";
+
     public void pressBinaryOperationKey(String operation)  {
         latestValue = Double.parseDouble(screen);
         latestOperation = operation;
@@ -72,13 +83,13 @@ public class Calculator {
      * @param operation "√" für Quadratwurzel, "%" für Prozent, "1/x" für Inversion
      */
     public void pressUnaryOperationKey(String operation) {
-        latestValue = Double.parseDouble(screen);
+        latestValue = Double.parseDouble(screen); // was macht "Double.parseDouble(screen)"?
         latestOperation = operation;
         var result = switch(operation) {
             case "√" -> Math.sqrt(Double.parseDouble(screen));
             case "%" -> Double.parseDouble(screen) / 100;
             case "1/x" -> 1 / Double.parseDouble(screen);
-            default -> throw new IllegalArgumentException();
+            default -> throw new IllegalArgumentException(); // was macht dieser Teil?
         };
         screen = Double.toString(result);
         if(screen.equals("NaN")) screen = "Error";
@@ -93,6 +104,8 @@ public class Calculator {
      * Trennzeichen angegeben und daher als Dezimalziffern interpretiert.
      * Beim zweimaligem Drücken, oder wenn bereits ein Trennzeichen angezeigt wird, passiert nichts.
      */
+
+    // Hier wird nichts als Dezimalziffer interpretiert?
     public void pressDotKey() {
         if(!screen.contains(".")) screen = screen + ".";
     }
@@ -104,19 +117,28 @@ public class Calculator {
      * Zeigt der Bildschirm bereits einen negativen Wert mit führendem Minus an, dann wird dieses
      * entfernt und der Inhalt fortan als positiv interpretiert.
      */
+
+    // screen.substring(1) ???
+
     public void pressNegativeKey() {
-        screen = screen.startsWith("-") ? screen.substring(1) : "-" + screen;
+        screen = screen.startsWith("-") ? screen.substring(1) : "-" + screen; // Syntax wiederholen
     }
 
     /**
      * Empfängt den Befehl der gedrückten "="-Taste.
      * Wurde zuvor keine Operationstaste gedrückt, passiert nichts.
      * Wurde zuvor eine binäre Operationstaste gedrückt und zwei Operanden eingegeben, wird das
-     * Ergebnis der Operation angezeigt. Falls hierbei eine Division durch Null auftritt, wird "Error" angezeigt.
+     * Ergebnis der Operation angezeigt.
+     *
+     * Falls hierbei eine Division durch Null auftritt, wird "Error" angezeigt.
+     *
      * Wird die Taste weitere Male gedrückt (ohne andere Tasten dazwischen), so wird die letzte
      * Operation (ggf. inklusive letztem Operand) erneut auf den aktuellen Bildschirminhalt angewandt
      * und das Ergebnis direkt angezeigt.
      */
+
+    // ....equals("Infinity") ???
+
     public void pressEqualsKey() {
         var result = switch(latestOperation) {
             case "+" -> latestValue + Double.parseDouble(screen);
@@ -127,7 +149,7 @@ public class Calculator {
         };
         screen = Double.toString(result);
         if(screen.equals("Infinity")) screen = "Error";
-        if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2);
-        if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
+        if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2); // ??
+        if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10); // ??
     }
 }
