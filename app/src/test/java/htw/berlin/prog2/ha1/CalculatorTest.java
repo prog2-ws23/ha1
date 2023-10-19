@@ -89,6 +89,20 @@ class CalculatorTest {
     }
 
 
+    @Test
+    @DisplayName("should display the pressed digits correctly")
+    void testPressDigit() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(2);
+        calc.pressDigitKey(3);
+
+        String expected ="123";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
     //TODO hier weitere Tests erstellen
 }
 
