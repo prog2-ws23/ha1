@@ -110,8 +110,7 @@ public class Calculator {
      * entfernt und der Inhalt fortan als positiv interpretiert.
      */
     public void pressNegativeKey() {
-        screen = screen.startsWith("-") ? screen.substring(1) : "-" + screen;
-    }
+    screen = screen.startsWith("-") ? screen.substring(1) : "-" + screen;}
 
     /**
      * Empfängt den Befehl der gedrückten "="-Taste.
@@ -125,7 +124,15 @@ public class Calculator {
     public void pressEqualsKey() {
         var result = switch(latestOperation) {
             case "+" -> latestValue + Double.parseDouble(screen);
-            case "-" -> latestValue - Double.parseDouble(screen);
+            case "-" -> {
+                if (latestValue < 0 && Double.parseDouble(screen) < 0) {
+                    //yield um wert an result variable zurück geben
+                    //Math.abs aboluten wert, also abstand von 0 bis zahl, so wird nicht doppelt negiert
+                    yield latestValue - Math.abs(Double.parseDouble(screen));
+                } else {
+                    yield latestValue - Double.parseDouble(screen);
+                }
+            }
             case "x" -> latestValue * Double.parseDouble(screen);
             case "/" -> latestValue / Double.parseDouble(screen);
             default -> throw new IllegalArgumentException();

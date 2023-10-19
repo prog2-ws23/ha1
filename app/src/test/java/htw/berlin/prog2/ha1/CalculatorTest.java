@@ -122,7 +122,7 @@ class CalculatorTest {
     }
 
     @Test
-    @DisplayName("should show after subtracting 2 negative numbers")
+    @DisplayName("should show result after subtracting 2 negative numbers")
     void testNegativeAddition() {
         Calculator calc = new Calculator();
 
