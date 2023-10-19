@@ -122,8 +122,8 @@ class CalculatorTest {
     }
 
     @Test
-    @DisplayName("should show the result after adding 3 numbers together")
-    void test() {
+    @DisplayName("should show after subtracting 2 negative numbers")
+    void testNegativeAddition() {
         Calculator calc = new Calculator();
 
         calc.pressDigitKey(1);
