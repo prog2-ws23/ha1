@@ -149,7 +149,6 @@ class CalculatorTest {
         expectedLV = 0.0;
         actualLV = calc.getLatestValue();
         assertEquals(expectedLV, actualLV);
-        //Fehler! actual = 0.0 statt expected = 3.0
 
         expectedLO = "";
         actualLO = calc.getLatestOperation();

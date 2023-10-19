@@ -12,7 +12,14 @@ public class Calculator {
 
     private double latestValue;
 
+    private double slatestValue;
+
     private String latestOperation = "";
+
+    /**
+     * Signal für ClearKey ob C oder CE
+     */
+    private String clatestOperation = "";
 
     /**
      * @return das letzte gespeicherte Value
@@ -48,6 +55,7 @@ public class Calculator {
         if(screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = "";
 
         screen = screen + digit;
+        clatestOperation = "";
     }
 
     /**
@@ -59,9 +67,16 @@ public class Calculator {
      * im Ursprungszustand ist.
      */ //einmal drücken funktioniert nicht
     public void pressClearKey() {
-        screen = "0";
-        latestOperation = "";
-        latestValue = 0.0;
+        if(clatestOperation.equals("pressClearKey")) {
+            screen = "0";
+            latestOperation = "";
+            latestValue = 0.0;
+        }
+        else {
+            screen = "0";
+            clatestOperation = "pressClearKey";
+            //wird resettet, wenn digitKey gedrückt wird
+        }
     }
 
     /**
