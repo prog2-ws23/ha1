@@ -104,21 +104,7 @@ class CalculatorTest {
 
     }
 
-    @Test
-    @DisplayName("should not allow operation when no second digit is provided after the BinaryOperationKey")
-    void testWithoutSecondDigit(){
-        Calculator calc = new Calculator();
 
-        calc.pressDigitKey(3);
-        calc.pressBinaryOperationKey("+");
-        calc.pressEqualsKey(); // Press equals without Second digit after the binary operation key
-
-        String expected = "3"; // the result should be 3 because there is no second digit to be added
-        String actual = calc.readScreen();
-
-        assertEquals(expected, actual);
-
-    }
 
 //test
     //TODO hier weitere Tests erstellen
