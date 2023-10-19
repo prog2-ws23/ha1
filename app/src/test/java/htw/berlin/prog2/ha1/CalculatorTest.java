@@ -93,11 +93,11 @@ class CalculatorTest {
     void testPositiveSubtraction() {
         Calculator calc = new Calculator();
 
-        calc.pressDigitKey(2);
-        calc.pressDigitKey(0);
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(5);
         calc.pressBinaryOperationKey("-");
-        calc.pressDigitKey(2);
-        calc.pressDigitKey(0);
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(5);
         calc.pressEqualsKey();
 
         String expected = "0";
@@ -105,6 +105,40 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
     }
+
+    @Test
+    @DisplayName("should display correct result after repeatedly pressing equals key")
+    void testRepeatedEquals() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(2);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(3);
+        calc.pressEqualsKey();
+        calc.pressEqualsKey();
+        calc.pressEqualsKey();
+
+        String expected = "11";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("should correctly calculate percentage of negative number")
+    void testPercentageOfNegativeNumber() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(9);
+        calc.pressNegativeKey();
+        calc.pressBinaryOperationKey("%");
+
+        String expected = "-0.09";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
     //TODO hier weitere Tests erstellen
 }
 
