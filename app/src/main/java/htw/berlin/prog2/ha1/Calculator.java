@@ -15,6 +15,20 @@ public class Calculator {
     private String latestOperation = "";
 
     /**
+     * @return das letzte gespeicherte Value
+     */
+    public double getLatestValue() {
+        return this.latestValue;
+    }
+
+    /**
+     * @return die letzte gespeicherte Operation
+     */
+    public String getLatestOperation() {
+        return this.latestOperation;
+    }
+
+    /**
      * @return den aktuellen Bildschirminhalt als String
      */
     public String readScreen() {
@@ -43,8 +57,8 @@ public class Calculator {
      * Wird daraufhin noch einmal die Taste gedrückt, dann werden auch zwischengespeicherte
      * Werte sowie der aktuelle Operationsmodus zurückgesetzt, so dass der Rechner wieder
      * im Ursprungszustand ist.
-     */
-    public void pressClearKey() { //einmal drücken funktioniert nicht
+     */ //einmal drücken funktioniert nicht
+    public void pressClearKey() {
         screen = "0";
         latestOperation = "";
         latestValue = 0.0;
@@ -58,8 +72,8 @@ public class Calculator {
      * Beim zweiten Drücken nach Eingabe einer weiteren Zahl wird direkt des aktuelle Zwischenergebnis
      * auf dem Bildschirm angezeigt. Falls hierbei eine Division durch Null auftritt, wird "Error" angezeigt.
      * @param operation "+" für Addition, "-" für Substraktion, "x" für Multiplikation, "/" für Division
-     */
-    public void pressBinaryOperationKey(String operation)  { //kein zwischenergebnis, wenn 2tes mal drücken
+     */ //kein zwischenergebnis, wenn 2tes mal drücken
+    public void pressBinaryOperationKey(String operation)  {
         latestValue = Double.parseDouble(screen);
         latestOperation = operation;
     }
@@ -92,9 +106,9 @@ public class Calculator {
      * Seite hinzu und aktualisiert den Bildschirm. Daraufhin eingegebene Zahlen werden rechts vom
      * Trennzeichen angegeben und daher als Dezimalziffern interpretiert.
      * Beim zweimaligem Drücken, oder wenn bereits ein Trennzeichen angezeigt wird, passiert nichts.
-     */
+     */ //wenn screen voll (9 Zeichen) dann kein punkt
     public void pressDotKey() {
-        if(!screen.contains(".")) screen = screen + ".";}  //wenn screen voll (9 Zeichen) dann kein punkt
+        if(!screen.contains(".")) screen = screen + ".";}
 
     /**
      * Empfängt den Befehl der gedrückten Vorzeichenumkehrstaste ("+/-").

@@ -1,5 +1,6 @@
 package htw.berlin.prog2.ha1;
 
+import org.checkerframework.checker.units.qual.C;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -91,7 +92,7 @@ class CalculatorTest {
 
     //TODO hier weitere Tests erstellen
     @Test
-    @DisplayName("sign of whole number should be switched")
+    @DisplayName("sign of number on screen should be negative")
     void testPressNegativeKey() {
         Calculator calc = new Calculator();
 
@@ -105,6 +106,71 @@ class CalculatorTest {
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
+    }
+
+     // Dafür getter angelegt
+    @Test
+    @DisplayName("pressing one time should just clear screen, two times clear latestOperation & latestValues as well")
+    void testPressClearKey() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(3);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(5);
+
+        /**
+         * first press with Values and Operation C
+         */
+        calc.pressClearKey();
+
+        String expectedScreen = "0";
+        String actualScreen = calc.readScreen();
+        assertEquals(expectedScreen, actualScreen);
+
+        double expectedLV = 3.0;
+        double actualLV = calc.getLatestValue();
+        assertEquals(expectedLV, actualLV);
+        //Fehler! actual = 0.0 statt expected = 3.0
+
+        String expectedLO = "+";
+        String actualLO = calc.getLatestOperation();
+        assertEquals(expectedLO, actualLO);
+        //Fehler! actual = "" statt expected = "+"
+
+        /**
+         * second press CE
+         */
+        calc.pressClearKey();
+
+        expectedScreen = "0";
+        actualScreen = calc.readScreen();
+        assertEquals(expectedScreen, actualScreen);
+
+        expectedLV = 0.0;
+        actualLV = calc.getLatestValue();
+        assertEquals(expectedLV, actualLV);
+        //Fehler! actual = 0.0 statt expected = 3.0
+
+        expectedLO = "";
+        actualLO = calc.getLatestOperation();
+        assertEquals(expectedLO, actualLO);
+    }
+
+    @Test
+    @DisplayName("should put interim result on screen after pressing second time after second digit")
+    void testInterimResultBinaryOperationKey() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(3);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(4);
+        calc.pressBinaryOperationKey("+");
+
+        String expected = "7";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+        //Fehler! actual = "4" statt expected "7"
     }
 
 }
