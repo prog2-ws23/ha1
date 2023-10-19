@@ -118,7 +118,7 @@ class CalculatorTest {
         Calculator calc = new Calculator();
 
         calc.pressDigitKey(5);
-        calc.pressBinaryOperationKey("%");
+        calc.pressUnaryOperationKey("%");           //geändert von pressBinaryOperationKey
 
         String expected = "0.05";                 //es wird 5 erwartet
         String actual = calc.readScreen();
@@ -131,9 +131,9 @@ class CalculatorTest {
         Calculator calc = new Calculator();
 
         calc.pressDigitKey(2);
-        calc.pressBinaryOperationKey("1/x");
+        calc.pressUnaryOperationKey("1/x");    // geändert von pressBinaryOperationKey
 
-        String expected = "0.5";             //es wird 2 erwartet
+        String expected = "0.5";             //es wird 0.02 erwartet
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
