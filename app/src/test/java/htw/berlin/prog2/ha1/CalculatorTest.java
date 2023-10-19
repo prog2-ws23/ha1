@@ -105,8 +105,96 @@ class CalculatorTest {
     }
 
 
+    @Test
+    @DisplayName("should not allow operation when no second digit is provided after the BinaryOperationKey")
+    void testWithoutSecondDigit(){
+        Calculator calc = new Calculator();
 
-//test
+        calc.pressDigitKey(3);
+        calc.pressBinaryOperationKey("+");
+        calc.pressEqualsKey(); // Press equals without Second digit after the binary operation key
+
+        String expected = "3"; // the result should be 3 because there is no second digit to be added
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+
+    }
+
+    @Test
+    @DisplayName("should handle more than one decimal places ")
+    void testDecimalPlaces() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(2);
+        calc.pressDotKey();
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(3);
+        calc.pressDigitKey(2);
+        calc.pressDigitKey(3);
+        calc.pressDigitKey(9);
+        calc.pressDigitKey(7);
+        calc.pressDigitKey(6);
+        calc.pressDigitKey(7);
+        calc.pressDigitKey(6);
+        calc.pressDigitKey(5);
+        calc.pressDigitKey(4);
+
+        String expected = "2.13239767654";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("should ")
+    void testpercent(){
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(5);
+        calc.pressDigitKey(0);
+        calc.pressUnaryOperationKey("%");
+
+        String expected = "0.5";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+
+
+    }
+
+    @Test
+    @DisplayName("should display error when pressing equals key without a binary operation")
+    void testEqualsWithoutOperation() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(3);
+        calc.pressEqualsKey();
+
+        String expected = "Error";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("")
+    void testDots() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(3);
+        calc.pressDotKey();
+        calc.pressDotKey();
+
+        String expected = "Error";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+
+
+
     //TODO hier weitere Tests erstellen
 }
 
