@@ -88,6 +88,38 @@ class CalculatorTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    @DisplayName("should display 0 after pressing Clear key")
+    void testClearKey(){
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(3);
+        calc.pressDigitKey(2);
+        calc.pressClearKey();
+
+        String expected = "0";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+
+    }
+
+    @Test
+    @DisplayName("should not allow operation when no second digit is provided after the BinaryOperationKey")
+    void testWithoutSecondDigit(){
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(3);
+        calc.pressBinaryOperationKey("+");
+        calc.pressEqualsKey(); // Press equals without Second digit after the binary operation key
+
+        String expected = "3"; // the result should be 3 because there is no second digit to be added
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+
+    }
+
 
     //TODO hier weitere Tests erstellen
 }
