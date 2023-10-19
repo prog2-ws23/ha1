@@ -123,19 +123,19 @@ class CalculatorTest {
 
     @Test
     @DisplayName("should show the result after adding 3 numbers together")
-    void testTrippleAddition() {
+    void test() {
         Calculator calc = new Calculator();
 
         calc.pressDigitKey(1);
-        calc.pressBinaryOperationKey("+");
+        calc.pressNegativeKey();
+        calc.pressBinaryOperationKey("-");
         calc.pressDigitKey(1);
-        calc.pressBinaryOperationKey("+");
-        calc.pressDigitKey(1);
+        calc.pressNegativeKey();
 
         calc.pressEqualsKey();
 
 
-        String expected = "3";
+        String expected = "-2";
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
