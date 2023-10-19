@@ -89,6 +89,10 @@ class CalculatorTest {
     }
 
     //TODO hier weitere Tests erstellen
+
+    /**
+     * Regression Test
+     */
     @Test
     @DisplayName("should display result after subtraction two positive multi-digit numbers")
     void testPositiveSubtraction() {
@@ -106,6 +110,34 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
     }
+    @Test
+    @DisplayName("should only clear the screen when pressed but should still save the pressed Digit and should be able to calculate with it")
+    void testClearAfterOperation() {
+        Calculator calc = new Calculator();
 
+        calc.pressDigitKey(2);
+        calc.pressBinaryOperationKey("+");
+        calc.pressClearKey();
+        calc.pressDigitKey(2);
+        String expected = "4";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+
+    @Test
+    @DisplayName("should only allow one decimal point per Multi-Digit. If the decimal dot key is operated more than once nothing happens.")
+    void testOperationOfDotKeyFirst() {
+        Calculator calc = new Calculator();
+
+        calc.pressDotKey();
+        calc.pressDigitKey(2);
+        calc.pressDigitKey(3);
+        String expected = "0.23";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
 }
 
