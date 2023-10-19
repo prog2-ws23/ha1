@@ -12,7 +12,7 @@ public class Calculator {
 
     private double latestValue;
 
-    private double slatestValue;
+    private int digitGotPressed;
 
     private String latestOperation = "";
 
@@ -56,6 +56,7 @@ public class Calculator {
 
         screen = screen + digit;
         clatestOperation = "";
+        digitGotPressed = 1;
     }
 
     /**
@@ -75,7 +76,7 @@ public class Calculator {
         else {
             screen = "0";
             clatestOperation = "pressClearKey";
-            //wird resettet, wenn digitKey gedrückt wird
+            //wird resettet, wenn digitKey gedrückt wird wie im Online Calc
         }
     }
 
@@ -89,8 +90,12 @@ public class Calculator {
      * @param operation "+" für Addition, "-" für Substraktion, "x" für Multiplikation, "/" für Division
      */ //kein zwischenergebnis, wenn 2tes mal drücken
     public void pressBinaryOperationKey(String operation)  {
-        latestValue = Double.parseDouble(screen);
-        latestOperation = operation;
+            if(!latestOperation.isEmpty() && digitGotPressed == 1) {
+                pressEqualsKey();
+            }
+            latestValue = Double.parseDouble(screen);
+            latestOperation = operation;
+            digitGotPressed = -1;
     }
 
     /**

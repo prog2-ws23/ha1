@@ -118,9 +118,8 @@ class CalculatorTest {
         calc.pressBinaryOperationKey("+");
         calc.pressDigitKey(5);
 
-        /**
-         * first press with Values and Operation C
-         */
+
+        //first press with Values and Operation C
         calc.pressClearKey();
 
         String expectedScreen = "0";
@@ -137,9 +136,8 @@ class CalculatorTest {
         assertEquals(expectedLO, actualLO);
         //Fehler! actual = "" statt expected = "+"
 
-        /**
-         * second press CE
-         */
+
+        //second press CE
         calc.pressClearKey();
 
         expectedScreen = "0";
@@ -160,16 +158,30 @@ class CalculatorTest {
     void testInterimResultBinaryOperationKey() {
         Calculator calc = new Calculator();
 
-        calc.pressDigitKey(3);
+        calc.pressDigitKey(8);
         calc.pressBinaryOperationKey("+");
         calc.pressDigitKey(4);
         calc.pressBinaryOperationKey("+");
 
-        String expected = "7";
+        String expected = "12";
         String actual = calc.readScreen();
-
         assertEquals(expected, actual);
-        //Fehler! actual = "4" statt expected "7"
+        //Fehler! actual = "4" statt expected "12"
+
+        calc.pressDigitKey(4);
+        calc.pressBinaryOperationKey("+");
+        calc.pressBinaryOperationKey("+");
+        expected = "16";
+        actual = calc.readScreen();
+        assertEquals(expected, actual);
+
+        //tests if it stops when no digit is pressed before
+        calc.pressBinaryOperationKey("+");
+        calc.pressBinaryOperationKey("+");
+        expected = "16";
+        actual = calc.readScreen();
+        assertEquals(expected, actual);
+
     }
 
 }
