@@ -14,10 +14,13 @@ public class Calculator {
 
     private String latestOperation = "";
 
+    private String latestPressedKey;
+
     /**
      * @return den aktuellen Bildschirminhalt als String
      */
     public String readScreen() {
+        latestPressedKey = "ReadScreen";
         return screen;
     }
 
@@ -34,6 +37,7 @@ public class Calculator {
         if(screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = "";
 
         screen = screen + digit;
+        latestPressedKey = "DigitKey";
     }
 
     /**
@@ -45,9 +49,15 @@ public class Calculator {
      * im Ursprungszustand ist.
      */
     public void pressClearKey() {
-        screen = "0";
-        latestOperation = "";
-        latestValue = 0.0;
+
+        if (latestOperation.isEmpty())  {
+            screen = "0";
+            latestValue = 0.0;
+
+        } else {
+            screen = "0";
+        }
+        latestPressedKey = "ClearKey";
     }
 
     /**
@@ -62,6 +72,7 @@ public class Calculator {
     public void pressBinaryOperationKey(String operation)  {
         latestValue = Double.parseDouble(screen);
         latestOperation = operation;
+        latestPressedKey = "BinaryOperationKey";
     }
 
     /**
@@ -83,6 +94,7 @@ public class Calculator {
         screen = Double.toString(result);
         if(screen.equals("NaN")) screen = "Error";
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
+        latestPressedKey = "UnaryOperationKey";
 
     }
 
@@ -95,6 +107,7 @@ public class Calculator {
      */
     public void pressDotKey() {
         if(!screen.contains(".")) screen = screen + ".";
+        latestPressedKey = "DotKey";
     }
 
     /**
@@ -106,6 +119,7 @@ public class Calculator {
      */
     public void pressNegativeKey() {
         screen = screen.startsWith("-") ? screen.substring(1) : "-" + screen;
+        latestPressedKey = "NegativKey";
     }
 
     /**
@@ -118,7 +132,11 @@ public class Calculator {
      * und das Ergebnis direkt angezeigt.
      */
     public void pressEqualsKey() {
-        var result = switch(latestOperation) {
+
+        if(latestPressedKey == "EqualsKey") {
+                latestValue = Double.parseDouble(screen);
+        }
+         var result = switch(latestOperation) {
             case "+" -> latestValue + Double.parseDouble(screen);
             case "-" -> latestValue - Double.parseDouble(screen);
             case "x" -> latestValue * Double.parseDouble(screen);
@@ -129,5 +147,7 @@ public class Calculator {
         if(screen.equals("Infinity")) screen = "Error";
         if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2);
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
+        latestPressedKey = "EqualsKey";
+
     }
 }

@@ -103,7 +103,7 @@ class CalculatorTest {
     }
 
     @Test
-    @DisplayName("Should use the latest Operation and latest Operand if EqualsKey is press two times")
+    @DisplayName("Should use the latest Operation on the actual screen if EqualsKey is pressed twice ")
     void testTwoTimesEqualsKey()  {
 
         Calculator calculator = new Calculator();
@@ -113,7 +113,7 @@ class CalculatorTest {
         calculator.pressEqualsKey();
         calculator.pressEqualsKey();
 
-        String expected = "23";
+        String expected = "28";
         String actual = calculator.readScreen();
 
         assertEquals(expected, actual);
