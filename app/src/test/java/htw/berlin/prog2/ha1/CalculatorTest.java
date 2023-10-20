@@ -143,6 +143,26 @@ class CalculatorTest {
     assertEquals(expected, actual);
     }
 
+    @Test
+    @DisplayName("test press equals two times")
+    void pressTwoEquals() {
+
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(4);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(4);
+        calc.pressEqualsKey();
+        calc.pressEqualsKey();
+
+        double expected = 12;
+        double actual = Double.parseDouble(calc.readScreen());
+
+        assertEquals(expected, actual);
+    }
+
+    
+
 
 
 }
