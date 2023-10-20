@@ -14,6 +14,8 @@ public class Calculator {
 
     private String latestOperation = "";
 
+    private int counter = 0;
+
     /**
      * @return den aktuellen Bildschirminhalt als String
      */
@@ -31,7 +33,7 @@ public class Calculator {
      * @param digit Die Ziffer, deren Taste gedrückt wurde
      */
 
-    //Fehler: Es wird nicht überprüft, ob User andere Werte angibt
+
     public void pressDigitKey(int digit) {
         if(digit > 9 || digit < 0) throw new IllegalArgumentException();
 
@@ -55,9 +57,15 @@ public class Calculator {
     // Hier wird Entry, also latest Value schon beim ersten Drücken gelöscht
 
     public void pressClearKey() {
+
+        if (counter == 1) {
+            latestOperation = "";
+            latestValue = 0.0;
+            counter=0;
+        }
+
         screen = "0";
-        latestOperation = "";
-        latestValue = 0.0;
+        counter++;
     }
 
     /**

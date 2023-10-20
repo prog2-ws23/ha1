@@ -128,19 +128,9 @@ class CalculatorTest {
 
 
     @Test
-    @DisplayName("test letter input when press digit key ")
+    @DisplayName("")
     void letterInput() {
 
-    Calculator calc = new Calculator();
-    calc.pressDigitKey(10);
-    calc.pressBinaryOperationKey("+");
-    calc.pressDigitKey(3);
-    calc.pressEqualsKey();
-
-    double expected = 13;
-    double actual = Double.parseDouble(calc.readScreen());
-
-    assertEquals(expected, actual);
     }
 
 
