@@ -54,15 +54,22 @@ public class Calculator {
      * Empfängt den Wert einer gedrückten binären Operationstaste, also eine der vier Operationen
      * Addition, Substraktion, Division, oder Multiplikation, welche zwei Operanden benötigen.
      * Beim ersten Drücken der Taste wird der Bildschirminhalt nicht verändert, sondern nur der
-     * Rechner in den passenden Operationsmodus versetzt.
-     * Beim zweiten Drücken nach Eingabe einer weiteren Zahl wird direkt des aktuelle Zwischenergebnis
-     * auf dem Bildschirm angezeigt. Falls hierbei eine Division durch Null auftritt, wird "Error" angezeigt.
+     * Rechner in den passenden Operationsmodus versetzt. Beim zweiten Drücken nach Eingabe einer
+     * weiteren Zahl wird direkt das aktuelle Zwischenergebnis auf dem Bildschirm angezeigt.
+     * Falls hierbei eine Division durch Null auftritt, wird "Error" angezeigt.
+     * 
      * @param operation "+" für Addition, "-" für Substraktion, "x" für Multiplikation, "/" für Division
      */
     public void pressBinaryOperationKey(String operation)  {
         latestValue = Double.parseDouble(screen);
         latestOperation = operation;
+        
+        if (operation.equals("%")) {
+            var result = Double.parseDouble(screen) / 100;
+            screen = String.format("%.2f", result);
+        }
     }
+
 
     /**
      * Empfängt den Wert einer gedrückten unären Operationstaste, also eine der drei Operationen
@@ -115,9 +122,12 @@ public class Calculator {
      * Ergebnis der Operation angezeigt. Falls hierbei eine Division durch Null auftritt, wird "Error" angezeigt.
      * Wird die Taste weitere Male gedrückt (ohne andere Tasten dazwischen), so wird die letzte
      * Operation (ggf. inklusive letztem Operand) erneut auf den aktuellen Bildschirminhalt angewandt
-     * und das Ergebnis direkt angezeigt.
+     * und das Ergebnis direkt angezeigt. Wenn keine Operation stattgefunden hat, wird der aktuelle
+     * Bildschirminhalt unverändert beibehalten.
      */
     public void pressEqualsKey() {
+        if (latestOperation.equals("")) return;
+
         var result = switch(latestOperation) {
             case "+" -> latestValue + Double.parseDouble(screen);
             case "-" -> latestValue - Double.parseDouble(screen);
@@ -127,7 +137,8 @@ public class Calculator {
         };
         screen = Double.toString(result);
         if(screen.equals("Infinity")) screen = "Error";
-        if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2);
+        if(screen.endsWith(".0")) screen = screen.substring(0, screen.length() - 2);
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
     }
+
 }

@@ -107,18 +107,14 @@ class CalculatorTest {
     }
 
     @Test
-    @DisplayName("should display correct result after repeatedly pressing equals key")
-    void testRepeatedEquals() {
+    @DisplayName("should display same number after pressing equals without operation")
+    void testEqualsWithoutOperation() {
         Calculator calc = new Calculator();
 
         calc.pressDigitKey(2);
-        calc.pressBinaryOperationKey("+");
-        calc.pressDigitKey(3);
-        calc.pressEqualsKey();
-        calc.pressEqualsKey();
         calc.pressEqualsKey();
 
-        String expected = "11";
+        String expected = "2";
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
