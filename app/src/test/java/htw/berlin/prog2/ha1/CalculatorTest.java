@@ -109,4 +109,40 @@ class CalculatorTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    @DisplayName("test press clear key one time")
+    void testClearKeyOneTimes() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(1);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(7);
+        calc.pressClearKey();
+
+        double expected = 1;
+        double actual = calc.readLatestValue();
+
+        assertEquals(expected, actual);
+
+    }
+
+
+    @Test
+    @DisplayName("test letter input when press digit key ")
+    void letterInput() {
+
+    Calculator calc = new Calculator();
+    calc.pressDigitKey(10);
+    calc.pressBinaryOperationKey("+");
+    calc.pressDigitKey(3);
+    calc.pressEqualsKey();
+
+    double expected = 13;
+    double actual = Double.parseDouble(calc.readScreen());
+
+    assertEquals(expected, actual);
+    }
+
+
+
 }

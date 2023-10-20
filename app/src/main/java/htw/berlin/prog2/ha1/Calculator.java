@@ -21,6 +21,8 @@ public class Calculator {
         return screen;
     }
 
+    public double readLatestValue() { return latestValue;} // Neue Methode für bessere Testbarkeit
+
     /**
      * Empfängt den Wert einer gedrückten Zifferntaste. Da man nur eine Taste auf einmal
      * drücken kann muss der Wert positiv und einstellig sein und zwischen 0 und 9 liegen.
@@ -29,27 +31,28 @@ public class Calculator {
      * @param digit Die Ziffer, deren Taste gedrückt wurde
      */
 
-    // Fehler: Warum sollte ein Wert auf 0 gesetzt werden nur weil er latestValue entspricht?
-
+    //Fehler: Es wird nicht überprüft, ob User andere Werte angibt
     public void pressDigitKey(int digit) {
-        if(digit > 9 || digit < 0) throw new IllegalArgumentException(); // wenn nicht zwischen 0-9 dann illegal argument
+        if(digit > 9 || digit < 0) throw new IllegalArgumentException();
 
-        if(screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = ""; // Wenn einer der beiden Bedingungen wahr ist, dann wird screen = "" durchgeführt
+        if(screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = "";
 
         screen = screen + digit;
     }
 
     /**
      * Empfängt den Befehl der C- bzw. CE-Taste (Clear bzw. Clear Entry).
+     *
      * Einmaliges Drücken der Taste löscht die zuvor eingegebenen Ziffern auf dem Bildschirm
      * so dass "0" angezeigt wird, jedoch ohne zuvor zwischengespeicherte Werte zu löschen.
+     *
      * Wird daraufhin noch einmal die Taste gedrückt, dann werden auch zwischengespeicherte
      * Werte sowie der aktuelle Operationsmodus zurückgesetzt, so dass der Rechner wieder
      * im Ursprungszustand ist.
      */
 
-    // Entry wird nicht gelöscht wenn der Button zweimal gedrückt wird.
-    // Eigentlich sollten zwischengespeicherte Werte in diesem Fall gelöscht werden.
+    // Entry wird nicht gelöscht wenn der Button nur einmal gedrückt wird.
+    // Hier wird Entry, also latest Value schon beim ersten Drücken gelöscht
 
     public void pressClearKey() {
         screen = "0";
@@ -66,9 +69,6 @@ public class Calculator {
      * auf dem Bildschirm angezeigt. Falls hierbei eine Division durch Null auftritt, wird "Error" angezeigt.
      * @param operation "+" für Addition, "-" für Substraktion, "x" für Multiplikation, "/" für Division
      */
-
-    // Wo wird beim zweifachen Drücken das aktuelle Zwischenergebnis ausgegeben?
-    // Wo wird beim Dividieren durch 0 Error ausgegeben? if(screen.equals("NaN")) screen = "Error";
 
     public void pressBinaryOperationKey(String operation)  {
         latestValue = Double.parseDouble(screen);
@@ -118,10 +118,9 @@ public class Calculator {
      * entfernt und der Inhalt fortan als positiv interpretiert.
      */
 
-    // screen.substring(1) ???
 
     public void pressNegativeKey() {
-        screen = screen.startsWith("-") ? screen.substring(1) : "-" + screen; // Syntax wiederholen
+        screen = screen.startsWith("-") ? screen.substring(1) : "-" + screen;
     }
 
     /**
@@ -149,7 +148,7 @@ public class Calculator {
         };
         screen = Double.toString(result);
         if(screen.equals("Infinity")) screen = "Error";
-        if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2); // ??
-        if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10); // ??
+        if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2);
+        if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
     }
 }
