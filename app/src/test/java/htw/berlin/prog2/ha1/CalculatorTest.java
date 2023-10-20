@@ -120,6 +120,25 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
     }
+    
+    @Test
+    @DisplayName("minus")
+    void testerror2() {
+        Calculator calc = new Calculator();
+
+
+        calc.pressDigitKey(4);
+        calc.pressBinaryOperationKey("*");
+        calc.pressDigitKey(5);
+        calc.pressBinaryOperationKey("-");
+
+        String expected = "20.0";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+
+    }
+
 
 }
 
