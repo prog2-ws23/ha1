@@ -161,7 +161,27 @@ class CalculatorTest {
         assertEquals(expected, actual);
     }
 
-    
+    @Test
+    @DisplayName("test press equals several times and begin with binary operation")
+    void pressBinarySevTimes() {
+
+        Calculator calc = new Calculator();
+
+
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(7);
+        calc.pressEqualsKey();
+        calc.pressEqualsKey();
+        calc.pressEqualsKey();
+
+        double expected = 21;
+        double actual = Double.parseDouble(calc.readScreen());
+
+        assertEquals(expected, actual);
+
+    }
+
+
 
 
 

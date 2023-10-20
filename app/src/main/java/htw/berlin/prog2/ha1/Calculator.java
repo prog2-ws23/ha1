@@ -117,7 +117,6 @@ public class Calculator {
      * Beim zweimaligem Drücken, oder wenn bereits ein Trennzeichen angezeigt wird, passiert nichts.
      */
 
-    // Hier wird nichts als Dezimalziffer interpretiert?
     public void pressDotKey() {
         if(!screen.contains(".")) screen = screen + ".";
     }
@@ -148,7 +147,6 @@ public class Calculator {
      * und das Ergebnis direkt angezeigt.
      */
 
-    // ....equals("Infinity") ???
 
     public void pressEqualsKey() {
         var result = switch(latestOperation) {
