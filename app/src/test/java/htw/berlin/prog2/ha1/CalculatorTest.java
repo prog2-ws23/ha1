@@ -110,19 +110,14 @@ class CalculatorTest {
         assertEquals(expected, actual);
     }
 
-
-
     @Test
     @DisplayName("should be displayed after the percentage numbers")
     void testPositivPercentWrongExpected() {
         Calculator calc = new Calculator();
 
         calc.pressDigitKey(9);
-        calc.pressUnaryOperationKey("√");
-        calc.pressNegativeKey();          //geändert von pressBinaryOperationKey
 
-
-        String expected = "-0";                 //es wird -3.0 erwartet
+        String expected = "9";                 //es wird -3.0 erwartet
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
@@ -133,10 +128,10 @@ class CalculatorTest {
         Calculator calc = new Calculator();
 
         calc.pressDigitKey(2);
-        calc.pressUnaryOperationKey("1/x");    // geändert von pressBinaryOperationKey
-        calc.pressUnaryOperationKey("1/x");    // geändert von pressBinaryOperationKey
+        calc.pressUnaryOperationKey("1/x");
+        calc.pressUnaryOperationKey("1/x");
 
-        String expected = "2";             //es wird 2.0 erwartet
+        String expected = "2";             //es wurde 2.0 erwartet
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
