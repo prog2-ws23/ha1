@@ -60,6 +60,17 @@ public class Calculator {
      * @param operation "+" für Addition, "-" für Substraktion, "x" für Multiplikation, "/" für Division
      */
     public void pressBinaryOperationKey(String operation)  {
+        if(latestOperation.equals ("+"))
+        screen = String.valueOf(latestValue+Double.parseDouble(screen));
+
+    if(latestOperation.equals ("-"))
+        screen = String.valueOf(latestValue-Double.parseDouble(screen));
+
+    if(latestOperation.equals ("*"))
+        screen = String.valueOf(latestValue*Double.parseDouble(screen));
+
+    if(latestOperation.equals ("/"))
+        screen = String.valueOf(latestValue/Double.parseDouble(screen));
         latestValue = Double.parseDouble(screen);
         latestOperation = operation;
     }
@@ -123,7 +134,7 @@ public class Calculator {
             case "-" -> latestValue - Double.parseDouble(screen);
             case "x" -> latestValue * Double.parseDouble(screen);
             case "/" -> latestValue / Double.parseDouble(screen);
-            default -> throw new IllegalArgumentException();
+            default -> Double.parseDouble(screen);
         };
         screen = Double.toString(result);
         if(screen.equals("Infinity")) screen = "Error";
