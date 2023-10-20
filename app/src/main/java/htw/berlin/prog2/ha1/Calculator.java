@@ -78,6 +78,8 @@ public class Calculator {
             case "√" -> Math.sqrt(Double.parseDouble(screen));
             case "%" -> Double.parseDouble(screen) / 100;
             case "1/x" -> 1 / Double.parseDouble(screen);
+            case "x" -> Math.multiplyExact((int) latestValue, (int) Double.parseDouble(screen)); //mal mit ganzen Zahlen
+            case "/" -> Math.floorDiv((int) latestValue, (int) Double.parseDouble(screen)); //durch mit ganzen Zahlen
             default -> throw new IllegalArgumentException();
         };
         if (screen.contains(".") && screen.length() > 11) {
