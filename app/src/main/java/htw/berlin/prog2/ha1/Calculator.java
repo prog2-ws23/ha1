@@ -78,19 +78,8 @@ public class Calculator {
             case "√" -> Math.sqrt(Double.parseDouble(screen));
             case "%" -> Double.parseDouble(screen) / 100;
             case "1/x" -> 1 / Double.parseDouble(screen);
-
             default -> throw new IllegalArgumentException();
         };
-        if (Double.isFinite(result)) {
-            // Überprüft, ob das Ergebnis eine ganze Zahl ist und wird dementsprechend formatieren ohne x.0
-            if (result == (int) result) {
-                screen = Integer.toString((int) result);
-            } else {
-                screen = Double.toString(result);
-            }
-        } else {
-            screen = "Error";
-        }
         if (screen.contains(".") && screen.length() > 11) {
             screen = screen.substring(0, 10);
         }

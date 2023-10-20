@@ -115,9 +115,16 @@ class CalculatorTest {
     void testPositivPercentWrongExpected() {
         Calculator calc = new Calculator();
 
-        calc.pressDigitKey(9);
+        calc.pressNegativeKey();
+        calc.pressDigitKey(2);
+        calc.pressDotKey();
+        calc.pressDigitKey(2);
+        calc.pressUnaryOperationKey("x");
+        calc.pressNegativeKey();
+        calc.pressDigitKey(3);
+        calc.pressEqualsKey();
 
-        String expected = "9";                 //es wird -3.0 erwartet
+        String expected = "6.6";                 //es wird -3.0 erwartet
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
@@ -128,10 +135,27 @@ class CalculatorTest {
         Calculator calc = new Calculator();
 
         calc.pressDigitKey(2);
-        calc.pressUnaryOperationKey("1/x");
-        calc.pressUnaryOperationKey("1/x");
+        calc.pressUnaryOperationKey("/");
+        calc.pressDigitKey(2);
 
-        String expected = "2";             //es wurde 2.0 erwartet
+        String expected = "1";       // kann nicht / gerechnet werden
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+    @Test
+    @DisplayName("should be displayed after the percentage numbers")
+    void test2PositivPercentWrongExpected() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(2);
+        calc.pressNegativeKey();
+        calc.pressUnaryOperationKey("x");
+        calc.pressDigitKey(3);
+        calc.pressNegativeKey();
+        calc.pressEqualsKey();
+
+        String expected = "6";                 //es kann nicht x gerechnet werden
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
