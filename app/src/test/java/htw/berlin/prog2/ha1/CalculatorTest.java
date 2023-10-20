@@ -133,7 +133,7 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
 
-        //Tests fail 1 = test Multiplikation von 3
+        //Tests fail 1 = test Multiplikation von 3 Zahlen
 
     }
 }
