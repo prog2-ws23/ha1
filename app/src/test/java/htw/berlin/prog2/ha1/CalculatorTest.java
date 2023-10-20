@@ -128,9 +128,19 @@ class CalculatorTest {
 
 
     @Test
-    @DisplayName("")
-    void letterInput() {
+    @DisplayName("test press two same digits")
+    void pressTwoDigits() {
 
+    Calculator calc = new Calculator();
+    calc.pressDigitKey(9);
+    calc.pressDotKey();
+    calc.pressDigitKey(9);
+    calc.pressDigitKey(9);
+
+    double expected = 9.99;
+    double actual = Double.parseDouble(calc.readScreen());
+
+    assertEquals(expected, actual);
     }
 
 
