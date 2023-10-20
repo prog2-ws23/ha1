@@ -116,9 +116,26 @@ class CalculatorTest {
         assertEquals(expected, actual);
     } //funktioniert = passed
 
+    @Test
+    @DisplayName("should multiply three numbers")
+    void testThreeNumbersMultiplied() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(4);
+        calc.pressBinaryOperationKey("x");
+        calc.pressDigitKey(4);
+        calc.pressBinaryOperationKey("x");
+        calc.pressDigitKey(4);
+        calc.pressEqualsKey();
+
+        String expected = "64";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+
+        //Tests fail 1 = test Multiplikation von 3
 
     }
+}
 
 //Tests fail 2 = test two sqaure Roots
-
-// Test 181023
