@@ -104,20 +104,30 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
     }
-
     @Test
-    @DisplayName("Test")
-    void test() {
+    @DisplayName("Sollte Error anzeigen wenn 1/x")
+    void testDividieren0() {
         Calculator calc = new Calculator();
 
-        calc.pressDigitKey(9);
-        calc.pressBinaryOperationKey("-");
-        calc.pressDigitKey(1);
-        calc.pressClearKey();
+        calc.pressDigitKey(0);
+        calc.pressUnaryOperationKey("1/x");
+
+        String expected = "Error";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+    @Test
+    @DisplayName("Wenn eine oder mehrere Zahlen eingegeben werden und dann auf EqualsKey gedrückt wird muss die Zahl auftauchen")
+    void testEqualNumber() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(4);
+        calc.pressDotKey();
         calc.pressDigitKey(2);
         calc.pressEqualsKey();
 
-        String expected = "8";
+        String expected = "4.2";
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
@@ -126,8 +136,6 @@ class CalculatorTest {
         /** @ParameterizedTest
         @DisplayName("Test")
         void paramTest(int hp, int dmg, int expected) {
-
-
 
         }
         */
