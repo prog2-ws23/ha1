@@ -111,8 +111,8 @@ class CalculatorTest {
         assertEquals(expected, actual);
     }
     @Test
-    @DisplayName("should only clear the screen when pressed but should still save the pressed Digit and should be able to calculate with it")
-    void testClearAfterOperation() {
+    @DisplayName("should clear the screen when the clear key is only pressed once without deleting the latest Digit input.")
+    void testClearKeyAfterFirstOperation() {
         Calculator calc = new Calculator();
 
         calc.pressDigitKey(2);
@@ -127,7 +127,7 @@ class CalculatorTest {
 
 
     @Test
-    @DisplayName("should only allow one decimal point per Multi-Digit. If the decimal dot key is operated more than once nothing happens.")
+    @DisplayName("should display a Zero before the decimal point if the decimal key is operated before a digit key.")
     void testOperationOfDotKeyFirst() {
         Calculator calc = new Calculator();
 

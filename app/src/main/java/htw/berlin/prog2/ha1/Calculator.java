@@ -11,6 +11,7 @@ public class Calculator {
     private String screen = "0";
 
     private double latestValue;
+    private int digit;
 
     private String latestOperation = "";
 
@@ -20,21 +21,40 @@ public class Calculator {
     public String readScreen() {
         return screen;
     }
+    public int getDigit() {
+        return digit;
+    }
 
     /**
      * Empfängt den Wert einer gedrückten Zifferntaste. Da man nur eine Taste auf einmal
      * drücken kann muss der Wert positiv und einstellig sein und zwischen 0 und 9 liegen.
      * Führt in jedem Fall dazu, dass die gerade gedrückte Ziffer auf dem Bildschirm angezeigt
      * oder rechts an die zuvor gedrückte Ziffer angehängt angezeigt wird.
-     * @param digit Die Ziffer, deren Taste gedrückt wurde
+     * @param digit Die Ziffer, deren Taste gedrückt wurde.
+     * Danach wird überprüft, ob der ggf. zuletzt zwischengespeicherte Wert gleich dem angezeigten Wert des Bildschirms ist und
+     * ob der Bildschirm nicht schon eine Dezimalzahltrennung mit 0 anzeigt.
+     * Sollte das der Fall sein wird der Bildschirm entleert und der eingegebene Wert angezeigt
      */
-    public void pressDigitKey(int digit) {
-        if(digit > 9 || digit < 0) throw new IllegalArgumentException();
 
-        if(screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = "";
+    public void pressDigitKey(int digit) {
+        if (digit > 9 || digit < 0) throw new IllegalArgumentException();
+
+        if (latestValue == Double.parseDouble(screen) && !screen.equals("0.")) {
+            screen = "";
+        }
 
         screen = screen + digit;
+
+        this.digit = digit;
     }
+    // public void pressDigitKey(int digit) {
+    //        if(digit > 9 || digit < 0) throw new IllegalArgumentException();
+    //
+    //        if(screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = "";
+    //
+    //        screen = screen + digit;
+    //    }
+
 
     /**
      * Empfängt den Befehl der C- bzw. CE-Taste (Clear bzw. Clear Entry).
@@ -46,12 +66,25 @@ public class Calculator {
      */
     // Hat Bug siehe Test 7.
     // Gewolltes Verhalten: Multi-Digit sollte nach der Betätigung der C-Taste nicht gelöscht, sondern zwischengepeichert werden
-    public void pressClearKey()
+
+    public void pressClearKey() {
+        screen = "0";
+        latestValue = 0.0;
+        latestOperation = "";
+    }
+
+
+
+
+
+  /* public void pressClearKey()
     {
         screen = "0";
         latestOperation = "";
         latestValue = 0.0;
     }
+
+   */
 
     /**
      * Empfängt den Wert einer gedrückten binären Operationstaste, also eine der vier Operationen
@@ -62,10 +95,13 @@ public class Calculator {
      * auf dem Bildschirm angezeigt. Falls hierbei eine Division durch Null auftritt, wird "Error" angezeigt.
      * @param operation "+" für Addition, "-" für Substraktion, "x" für Multiplikation, "/" für Division
      */
+
     public void pressBinaryOperationKey(String operation)  {
         latestValue = Double.parseDouble(screen);
         latestOperation = operation;
     }
+
+
 
     /**
      * Empfängt den Wert einer gedrückten unären Operationstaste, also eine der drei Operationen
@@ -91,19 +127,27 @@ public class Calculator {
 
     /**
      * Empfängt den Befehl der gedrückten Dezimaltrennzeichentaste, im Englischen üblicherweise "."
-     * Fügt beim ersten Mal Drücken dem aktuellen Bildschirminhalt das Trennzeichen auf der rechten
-     * Seite hinzu und aktualisiert den Bildschirm. Daraufhin eingegebene Zahlen werden rechts vom
-     * Trennzeichen angegeben und daher als Dezimalziffern interpretiert.
+     * Zuerst wird geprüft, ob der Bildschirm sich im Ausgangszustand befindet und,ob noch kein Trennzeichen angezeigt wird.
+     * Sollte das der Fall sein wird beim ersten Drücken dem aktuellen Bildschirminhalt eine 0 und ein Trennzeichen auf der rechten
+     * Seite hinzugefügt und der Bildschirm aktualisiert.
+     * Sollte sich der Screen nicht im Ausgangszustand befinden aber trotzdem noch kein Trennzeichen angezeigt sein wird die erste
+     * daraufhin eingegebene Zahl links vom Trennzeichen angeben und die restlichen Zahl(en) rechts vom Trennzeichen angegeben und daher als Dezimalziffer(n) interpretiert.
      * Beim zweimaligem Drücken, oder wenn bereits ein Trennzeichen angezeigt wird, passiert nichts.
      */
-    //Hier Bug siehe Test 8.
-    //Gewolltes Verhalten: Sollte die pressDotKey Methode als erstes Aufgerufen werden sollte eine 0 links vor dem Komma stehen
-    // Die Methode sollte demnach nicht ignoriert werden
+
 
     public void pressDotKey() {
-
-        if(!screen.contains(".")) screen = screen + ".";
+        if (screen.equals("0") && !screen.contains(".")) {
+            screen = "0.";
+        } else if (!screen.contains(".")) {
+            screen = screen + ".";
+        }
     }
+
+    // public void pressDotKey() {
+    // if(!screen.contains(".")) screen = screen + ".";
+    //    }
+
 
 
 
