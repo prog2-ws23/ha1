@@ -85,7 +85,7 @@ public class Calculator {
      */
 
     public void pressBinaryOperationKey(String operation)  {
-        latestValue = Double.parseDouble(screen); //latestValue=0
+        latestValue = Double.parseDouble(screen);
         latestOperation = operation;
     }
 
@@ -159,21 +159,17 @@ public class Calculator {
      * Operation (ggf. inklusive letztem Operand) erneut auf den aktuellen Bildschirminhalt angewandt
      * und das Ergebnis direkt angezeigt.
      */
-
-
-    //Fehler: das Problem ist, dass die methode calc.pressEquals einfach wiederholt wird ohne das ergebnis der vorhergien
-    // Berchnung gespeichert zu haben
     public void pressEqualsKey() {
 
 
         var result = switch(latestOperation) {
-            case "+" -> latestValue + Double.parseDouble(screen); // 1: latestValue=7 2: latestValue = 7 // screen = 0
+            case "+" -> latestValue + Double.parseDouble(screen);
             case "-" -> latestValue - Double.parseDouble(screen);
             case "x" -> latestValue * Double.parseDouble(screen);
             case "/" -> latestValue / Double.parseDouble(screen);
             default -> throw new IllegalArgumentException();
         };
-        // double currentValue = Double.parseDouble(screen);
+
         total += result;
         screen = Double.toString(total);
 
