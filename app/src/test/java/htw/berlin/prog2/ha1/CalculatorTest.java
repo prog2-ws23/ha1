@@ -92,14 +92,12 @@ class CalculatorTest {
 
     //TODO hier weitere Tests erstellen
     @Test
-    @DisplayName("Sollte das Ergebniss von 0 ergeben")
-    void testminusRechnen() {
+    @DisplayName("Sollte 0 anzeigen wenn Taste Clear gedrückt wird")
+    void testPressClearKey() {
         Calculator calc = new Calculator();
 
-        calc.pressDigitKey(1);
-        calc.pressBinaryOperationKey("-");
-        calc.pressDigitKey(1);
-        calc.pressEqualsKey();
+        calc.pressDigitKey(2);
+        calc.pressClearKey();
 
         String expected = "0";
         String actual = calc.readScreen();
