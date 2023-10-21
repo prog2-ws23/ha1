@@ -90,5 +90,98 @@ class CalculatorTest {
 
 
     //TODO hier weitere Tests erstellen
-}
 
+    // Green test
+
+    @Test
+    @DisplayName("test positive multiplication")
+    void testPositiveMultiplication() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(3);
+        calc.pressBinaryOperationKey("x");
+        calc.pressDigitKey(4);
+        calc.pressEqualsKey();
+
+        String expected = "12";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("test press clear key one time")
+    void testClearKeyOneTimes() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(1);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(7);
+        calc.pressClearKey();
+
+        double expected = 1;
+        double actual = calc.readLatestValue();
+
+        assertEquals(expected, actual);
+
+    }
+
+
+    @Test
+    @DisplayName("test press two same digits")
+    void pressTwoDigits() {
+
+    Calculator calc = new Calculator();
+    calc.pressDigitKey(9);
+    calc.pressDotKey();
+    calc.pressDigitKey(9);
+    calc.pressDigitKey(9);
+
+    double expected = 9.99;
+    double actual = Double.parseDouble(calc.readScreen());
+
+    assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("test press equals two times")
+    void pressTwoEquals() {
+
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(4);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(4);
+        calc.pressEqualsKey();
+        calc.pressEqualsKey();
+
+        double expected = 12;
+        double actual = Double.parseDouble(calc.readScreen());
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("test press equals several times and begin with binary operation")
+    void pressEqSevTimes() {
+
+        Calculator calc = new Calculator();
+
+
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(7);
+        calc.pressEqualsKey();
+        calc.pressEqualsKey();
+
+        double expected = 14;
+        double actual = Double.parseDouble(calc.readScreen());
+
+        assertEquals(expected, actual);
+
+    }
+
+
+
+
+
+}
