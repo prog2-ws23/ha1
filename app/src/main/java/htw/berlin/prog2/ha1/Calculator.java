@@ -81,7 +81,11 @@ public class Calculator {
             default -> throw new IllegalArgumentException();
         };
         screen = Double.toString(result);
-        if(screen.equals("NaN")) screen = "Error";
+        // vorher if(screen.equals("NaN")) screen = "Error";
+        // Ohne den Check auf Infinity hätte der Taschenrechner möglicherweise auf dem Bildschirm
+        // nicht Error angezeigt, sondern etwas anderes. Jetzt wird sichergestellt das Error bei Division durch 0 angezeigt wird.
+        // || logische ODER-Operator
+        if(screen.equals("NaN") || screen.equals("Infinity")) screen = "Error";
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
 
     }
