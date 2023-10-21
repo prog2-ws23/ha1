@@ -122,6 +122,12 @@ public class Calculator {
      * und das Ergebnis direkt angezeigt.
      */
     public void pressEqualsKey() {
+        // Das erwartete Verhalten ist, dass die eingegebene Zahl direkt angezeigt wird, weil noch keine Operation ausgewählt wurde.
+        // Da latestOperation beim Start einen leeren String als Wert hat (da noch keine Operation gewählt wurde), wirft der Code in der switch-Anweisung eine IllegalArgumentException
+        // Neu: die Methode wird frühzeitig beendet, wenn keine Operation gesetzt ist, und verhindert so den Fehler
+        if (latestOperation.isEmpty()) {
+            return;
+        }
         var result = switch(latestOperation) {
             case "+" -> latestValue + Double.parseDouble(screen);
             case "-" -> latestValue - Double.parseDouble(screen);
