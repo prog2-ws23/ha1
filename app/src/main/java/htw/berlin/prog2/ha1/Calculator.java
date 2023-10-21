@@ -16,6 +16,8 @@ public class Calculator {
 
     private int counter = 0;
 
+    private double total;
+
     /**
      * @return den aktuellen Bildschirminhalt als String
      */
@@ -43,7 +45,7 @@ public class Calculator {
 
         if(screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = "";
 
-        screen = screen + digit;
+        screen = screen + digit; // latestValue=7
     }
 
     /**
@@ -83,7 +85,7 @@ public class Calculator {
      */
 
     public void pressBinaryOperationKey(String operation)  {
-        latestValue = Double.parseDouble(screen);
+        latestValue = Double.parseDouble(screen); //latestValue=0
         latestOperation = operation;
     }
 
@@ -135,6 +137,15 @@ public class Calculator {
     }
 
     /**
+     * Methode die das Testing vereinfachen soll
+     * @return screen
+     */
+
+    public String showResult() {
+        return screen ;
+    }
+
+    /**
      * Empfängt den Befehl der gedrückten "="-Taste.
      * Wurde zuvor keine Operationstaste gedrückt, passiert nichts.
      * Wurde zuvor eine binäre Operationstaste gedrückt und zwei Operanden eingegeben, wird das
@@ -142,21 +153,30 @@ public class Calculator {
      *
      * Falls hierbei eine Division durch Null auftritt, wird "Error" angezeigt.
      *
+     * Total speichert das Ergebnis der Berechnung falls darauffolgend erneut eine Berechnung ausgeführt werden soll.
+     *
      * Wird die Taste weitere Male gedrückt (ohne andere Tasten dazwischen), so wird die letzte
      * Operation (ggf. inklusive letztem Operand) erneut auf den aktuellen Bildschirminhalt angewandt
      * und das Ergebnis direkt angezeigt.
      */
 
 
+    //Fehler: das Problem ist, dass die methode calc.pressEquals einfach wiederholt wird ohne das ergebnis der vorhergien
+    // Berchnung gespeichert zu haben
     public void pressEqualsKey() {
+
+
         var result = switch(latestOperation) {
-            case "+" -> latestValue + Double.parseDouble(screen);
+            case "+" -> latestValue + Double.parseDouble(screen); // 1: latestValue=7 2: latestValue = 7 // screen = 0
             case "-" -> latestValue - Double.parseDouble(screen);
             case "x" -> latestValue * Double.parseDouble(screen);
             case "/" -> latestValue / Double.parseDouble(screen);
             default -> throw new IllegalArgumentException();
         };
-        screen = Double.toString(result);
+        // double currentValue = Double.parseDouble(screen);
+        total += result;
+        screen = Double.toString(total);
+
         if(screen.equals("Infinity")) screen = "Error";
         if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2);
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
