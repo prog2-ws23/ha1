@@ -90,5 +90,27 @@ class CalculatorTest {
 
 
     //TODO hier weitere Tests erstellen
+
+    @Test //Erste Aufgabe
+    @DisplayName("Should display result from subtracting of two positive Numbers")
+    void testSubtraction() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(9);
+        calc.pressBinaryOperationKey("-");
+        calc.pressDigitKey(2);
+        calc.pressEqualsKey();
+
+        String expected = "7";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
 }
+
+
+
+
+
+
 
