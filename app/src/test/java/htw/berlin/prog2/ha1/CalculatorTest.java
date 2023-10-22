@@ -92,7 +92,7 @@ class CalculatorTest {
     //TODO hier weitere Tests erstellen
     @Test
     @DisplayName("should display result after subtracting two positive multi-digit numbers")
-    void testPositiveSubtraction() {
+    void testSubtraction() {
         Calculator calc = new Calculator();
 
         calc.pressDigitKey(2);
@@ -109,7 +109,7 @@ class CalculatorTest {
     }
     @Test
     @DisplayName("should display result after multiplying two positive multi-digit numbers")
-    void testPositiveMultiplying() {
+    void testMultiplying() {
         Calculator calc = new Calculator();
 
         calc.pressDigitKey(2);
@@ -126,7 +126,7 @@ class CalculatorTest {
     }
     @Test
     @DisplayName("should display result after dividing two positive multi-digit numbers")
-    void testPositiveDivision() {
+    void testDivision() {
         Calculator calc = new Calculator();
 
         calc.pressDigitKey(2);
