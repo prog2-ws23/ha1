@@ -109,7 +109,7 @@ class CalculatorTest {
     void testMultiplication(){;
     Calculator calc = new Calculator();
     calc.pressDigitKey(4);
-    calc.pressBinaryOperationKey("/");
+    calc.pressBinaryOperationKey("*");
     calc.pressDigitKey(4);
     calc.pressEqualsKey();
 
