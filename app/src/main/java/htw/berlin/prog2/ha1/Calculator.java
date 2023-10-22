@@ -46,8 +46,14 @@ public class Calculator {
      */
     public void pressClearKey() {
         screen = "0";
-        latestOperation = "";
-        latestValue = 0.0;
+
+        if (screen.equals("0") && !latestOperation.isEmpty())
+            screen = "0";
+
+        if (screen.equals("0") && latestOperation.isEmpty()) {
+            latestOperation = "";
+            latestValue = 0.0;
+        }
     }
 
     /**
