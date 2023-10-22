@@ -88,7 +88,27 @@ class CalculatorTest {
         assertEquals(expected, actual);
     }
 
-
     //TODO hier weitere Tests erstellen
+    @Test
+    @DisplayName("should display zero when pressing the C/clearkey")
+
+    //die davor eingetippte Nummer wird "gelöscht" (nicht die ganze Rechnung)
+
+    void testTheCButton(){
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(5);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(4);
+        calc.pressClearKey();
+
+        String expected = "0";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+
+    }
+
+
 }
 
