@@ -94,9 +94,7 @@ class CalculatorTest {
     @Test
     @DisplayName("should subtract positive numbers")
 
-    /**
-     * Methode soll eine positive Zahl von einer anderen positiven Zahl subtrahieren
-     */
+
         //neues Objekt wird erstellt = calc (instanziiert)
         //mit calc.press ... werden die jeweiligen Methoden aufgerugen und es werden die jeweiligen Werte (Argumente) eingesetzt
         //eine neue Variable String expected mit korrektem, erwartetem Ergebnis wurde erstellt
@@ -116,26 +114,39 @@ class CalculatorTest {
         assertEquals(expected, actual);
     } //funktioniert = passed
 
+
     @Test
     @DisplayName("should multiply three numbers")
     void testThreeNumbersMultiplied() {
         Calculator calc = new Calculator();
 
-        calc.pressDigitKey(4);
+        calc.pressDigitKey(3);
         calc.pressBinaryOperationKey("x");
-        calc.pressDigitKey(4);
+        calc.pressDigitKey(2);
+        calc.pressEqualsKey();
         calc.pressBinaryOperationKey("x");
-        calc.pressDigitKey(4);
+        calc.pressDigitKey(6);
         calc.pressEqualsKey();
 
-        String expected = "64";
+        String expected = "36";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+  @Test
+  @DisplayName("should allow a zero before a decimal dot")
+    void testPressPositiveKey() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(0);
+        calc.pressDotKey();
+        calc.pressDigitKey(3);
+
+        String expected = "0.3";
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
 
-        //Tests fail 1 = test Multiplikation von 3 Zahlen
-
     }
 }
-
-//Tests fail 2 = test two sqaure Roots
