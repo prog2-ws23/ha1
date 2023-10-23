@@ -105,20 +105,18 @@ class CalculatorTest {
 
     }
     @Test
-    @DisplayName("should display result after multiplying two positive numbers")
-    void testMultiplication(){;
-    Calculator calc = new Calculator();
-    calc.pressDigitKey(4);
-    calc.pressBinaryOperationKey("*");
-    calc.pressDigitKey(4);
-    calc.pressEqualsKey();
+    @DisplayName("should display add last pressed digit")
+    void testAddLast(){
+        Calculator calc = new Calculator();
+        calc.pressDigitKey(2);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(3);
+        calc.pressEqualsKey();
+        calc.pressEqualsKey();
+        String expected="8";
+        String actual = calc.readScreen();
 
-    String expected= "16";
-    String actual = calc.readScreen();
-
-    assertEquals(expected, actual);
-
-
+        assertEquals(expected,actual);
     }
 
 
