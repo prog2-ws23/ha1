@@ -11,9 +11,11 @@ public class Calculator {
     private String screen = "0";
 
     private double latestValue;
-    private int digit;
 
     private String latestOperation = "";
+
+
+
 
     /**
      * @return den aktuellen Bildschirminhalt als String
@@ -21,9 +23,7 @@ public class Calculator {
     public String readScreen() {
         return screen;
     }
-    public int getDigit() {
-        return digit;
-    }
+
 
     /**
      * Empfängt den Wert einer gedrückten Zifferntaste. Da man nur eine Taste auf einmal
@@ -45,46 +45,35 @@ public class Calculator {
 
         screen = screen + digit;
 
-        this.digit = digit;
+
+
     }
-    // public void pressDigitKey(int digit) {
-    //        if(digit > 9 || digit < 0) throw new IllegalArgumentException();
-    //
-    //        if(screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = "";
-    //
-    //        screen = screen + digit;
-    //    }
+
 
 
     /**
      * Empfängt den Befehl der C- bzw. CE-Taste (Clear bzw. Clear Entry).
-     * Einmaliges Drücken der Taste löscht die zuvor eingegebenen Ziffern auf dem Bildschirm
-     * so dass "0" angezeigt wird, jedoch ohne zuvor zwischengespeicherte Werte zu löschen. // implementierung nicht ganz ersichtlich
+     * Einmaliges Drücken der Taste (counter)
+     * löscht die zuvor eingegebenen Ziffern auf dem Bildschirm
+     * so dass "0" angezeigt wird, jedoch ohne zuvor zwischengespeicherte Werte zu löschen.
      * Wird daraufhin noch einmal die Taste gedrückt, dann werden auch zwischengespeicherte
      * Werte sowie der aktuelle Operationsmodus zurückgesetzt, so dass der Rechner wieder
      * im Ursprungszustand ist.
+     * @param counter Zählt wie oft die Clear Taste gedrückt wurde.
      */
     // Hat Bug siehe Test 7.
     // Gewolltes Verhalten: Multi-Digit sollte nach der Betätigung der C-Taste nicht gelöscht, sondern zwischengepeichert werden
 
-    public void pressClearKey() {
-        screen = "0";
-        latestValue = 0.0;
-        latestOperation = "";
+
+    public void pressClearKey(int counter) {
+        if (counter == 1) {
+           screen= "0";
+        } else if (counter == 2) {
+            screen = "0";
+            latestOperation = "";
+            latestValue = 0.0;
+        }
     }
-
-
-
-
-
-  /* public void pressClearKey()
-    {
-        screen = "0";
-        latestOperation = "";
-        latestValue = 0.0;
-    }
-
-   */
 
     /**
      * Empfängt den Wert einer gedrückten binären Operationstaste, also eine der vier Operationen
@@ -98,7 +87,8 @@ public class Calculator {
 
     public void pressBinaryOperationKey(String operation)  {
         latestValue = Double.parseDouble(screen);
-        latestOperation = operation;
+        this.latestOperation = operation;
+
     }
 
 
@@ -139,16 +129,10 @@ public class Calculator {
     public void pressDotKey() {
         if (screen.equals("0") && !screen.contains(".")) {
             screen = "0.";
-        } else if (!screen.contains(".")) {
+        } else if (!screen.equals("0")&&!screen.contains(".")) {
             screen = screen + ".";
         }
     }
-
-    // public void pressDotKey() {
-    // if(!screen.contains(".")) screen = screen + ".";
-    //    }
-
-
 
 
     /**

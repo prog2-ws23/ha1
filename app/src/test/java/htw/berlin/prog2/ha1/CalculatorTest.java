@@ -110,21 +110,58 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
     }
+    /** Test-Driven 1
+     *
+     */
     @Test
-    @DisplayName("should clear the screen when the clear key is only pressed once without deleting the latest Digit input.")
-    void testClearKeyAfterFirstOperation() {
+    @DisplayName("should only clear and delete latest Calculations if the clear key is twice, if not it should just clear the screen and continue with the calculation.")
+    void testClearKeyOperatedOnce() {
         Calculator calc = new Calculator();
 
         calc.pressDigitKey(2);
         calc.pressBinaryOperationKey("+");
-        calc.pressClearKey();
-        calc.pressDigitKey(2);
-        String expected = "4";
+        calc.pressClearKey(1);
+
+        String expected = "0";
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
+
+        calc.pressDigitKey(2);
+        calc.pressEqualsKey();
+
+        String secondExpected = "4";
+        String secondActual = calc.readScreen();
+
+        assertEquals(secondExpected, secondActual);
+    }
+    @Test
+    @DisplayName("should only clear and delete latest Calculations if the clear key is twice, if not it should just clear the screen and continue with the calculation.")
+    void testClearKeyOperatedTwice() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(2);
+        calc.pressBinaryOperationKey("+");
+        calc.pressClearKey(2);
+
+        String expected = "0";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+
+        calc.pressDigitKey(2);
+
+        String secondExpected = "2";
+        String secondActual = calc.readScreen();
+
+        assertEquals(secondExpected, secondActual);
     }
 
+
+
+    /** Test-Driven 2
+     *
+     */
 
     @Test
     @DisplayName("should display a Zero before the decimal point if the decimal key is operated before a digit key.")
