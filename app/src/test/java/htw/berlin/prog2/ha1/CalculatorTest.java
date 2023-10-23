@@ -108,5 +108,36 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
     }
+
+    @Test
+    @DisplayName("should display Error if inversion is coupled with 0")
+    void testZeroInversion() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(0);
+        calc.pressUnaryOperationKey("1/x");
+
+        String expected = "Error";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("should truncate numbers longer than 10 digits")
+    void testLongNumbers() {
+        Calculator calc = new Calculator();
+
+        for (int i = 0; i < 12; i++) {
+            calc.pressDigitKey(1);
+        }
+
+        String expected = "1111111111";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+
 }
 
