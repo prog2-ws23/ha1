@@ -107,6 +107,19 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
     }
+    //Teilaufgabe2 roter Test1
+    @Test
+    @DisplayName("should display Error for Insufficient operands after unary operation")
+        void insufficientOperandsAfterunaryoperation(){
+            Calculator calculator = new Calculator();
+            calculator.pressDigitKey(0);
+            calculator.pressUnaryOperationKey("1/x");
+            String expected = "Error";
+            String actual = calculator.readScreen();
+            assertEquals(expected, actual);
+
+
+        }
 
 }
 
