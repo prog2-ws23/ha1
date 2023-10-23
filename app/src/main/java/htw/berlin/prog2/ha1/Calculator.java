@@ -1,5 +1,8 @@
 package htw.berlin.prog2.ha1;
 
+import java.sql.SQLOutput;
+import java.util.InputMismatchException;
+
 /**
  * Eine Klasse, die das Verhalten des Online Taschenrechners imitiert, welcher auf
  * https://www.online-calculator.com/ aufgerufen werden kann (ohne die Memory-Funktionen)
@@ -13,6 +16,7 @@ public class Calculator {
     private double latestValue;
 
     private String latestOperation = "";
+
 
     /**
      * @return den aktuellen Bildschirminhalt als String
@@ -65,26 +69,46 @@ public class Calculator {
     }
 
     /**
-     * Empfängt den Wert einer gedrückten unären Operationstaste, also eine der drei Operationen
-     * Quadratwurzel, Prozent, Inversion, welche nur einen Operanden benötigen.
-     * Beim Drücken der Taste wird direkt die Operation auf den aktuellen Zahlenwert angewendet und
-     * der Bildschirminhalt mit dem Ergebnis aktualisiert.
-     * @param operation "√" für Quadratwurzel, "%" für Prozent, "1/x" für Inversion
+     *  Performs a unary mathematical operation on the current value displayed on the screen.
+     *
+     * @param operation "√" for Square Root, "%" for Percentage, "1/x" for Reciprocal
      */
     public void pressUnaryOperationKey(String operation) {
         latestValue = Double.parseDouble(screen);
         latestOperation = operation;
-        var result = switch(operation) {
-            case "√" -> Math.sqrt(Double.parseDouble(screen));
-            case "%" -> Double.parseDouble(screen) / 100;
-            case "1/x" -> 1 / Double.parseDouble(screen);
-            default -> throw new IllegalArgumentException();
-        };
-        screen = Double.toString(result);
+        double result = 0.0;
+
+        switch (operation) {
+            case "√":
+                if (latestValue < 0) {
+                    screen = "Error";
+                    return;
+                }
+                result = Math.sqrt(latestValue);
+                break;
+            case "%":
+                result = latestValue / 100;
+                break;
+            case "1/x":
+                if (latestValue == 0) {
+                    screen = "Error";
+                    return;
+                }
+                result = 1 / latestValue;
+                break;
+            default:
+                throw new IllegalArgumentException();
+        }
+
+        screen = Double.toString((Double) result);
         if(screen.equals("NaN")) screen = "Error";
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
-
     }
+
+
+
+
+
 
     /**
      * Empfängt den Befehl der gedrückten Dezimaltrennzeichentaste, im Englischen üblicherweise "."
@@ -105,17 +129,19 @@ public class Calculator {
      * entfernt und der Inhalt fortan als positiv interpretiert.
      */
     public void pressNegativeKey() {
-        screen = screen.startsWith("-") ? screen.substring(1) : "-" + screen;
-    }
 
+        screen = screen.startsWith("-") ? screen.substring(1) : "-" + screen;
+
+    }
     /**
      * Empfängt den Befehl der gedrückten "="-Taste.
-     * Wurde zuvor keine Operationstaste gedrückt, passiert nichts.
+     * Wurde zuvor keine Operationstaste gedrückt, wird die eingegebene Zahl angezeigt.
      * Wurde zuvor eine binäre Operationstaste gedrückt und zwei Operanden eingegeben, wird das
      * Ergebnis der Operation angezeigt. Falls hierbei eine Division durch Null auftritt, wird "Error" angezeigt.
      * Wird die Taste weitere Male gedrückt (ohne andere Tasten dazwischen), so wird die letzte
      * Operation (ggf. inklusive letztem Operand) erneut auf den aktuellen Bildschirminhalt angewandt
      * und das Ergebnis direkt angezeigt.
+     *
      */
     public void pressEqualsKey() {
         var result = switch(latestOperation) {
@@ -123,6 +149,7 @@ public class Calculator {
             case "-" -> latestValue - Double.parseDouble(screen);
             case "x" -> latestValue * Double.parseDouble(screen);
             case "/" -> latestValue / Double.parseDouble(screen);
+            case "" -> Double.parseDouble(screen);
             default -> throw new IllegalArgumentException();
         };
         screen = Double.toString(result);
@@ -130,4 +157,5 @@ public class Calculator {
         if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2);
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
     }
+
 }
