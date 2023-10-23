@@ -120,6 +120,19 @@ class CalculatorTest {
 
 
         }
+        @Test
+    @DisplayName("schould calculate Binary plus Unary and Display Result")
+    void testResultCalculateOfBinaryplusUnary(){
+            Calculator calculator = new Calculator();
+            calculator.pressDigitKey(5);
+            calculator.pressBinaryOperationKey("+");
+            calculator.pressDigitKey(4);
+            calculator.pressUnaryOperationKey("√");
+            calculator.pressEqualsKey();
+            String expected = "7";
+            String actual = calculator.readScreen();
+            assertEquals(expected, actual);
+        }
 
 }
 
