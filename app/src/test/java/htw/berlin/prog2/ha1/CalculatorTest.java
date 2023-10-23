@@ -90,5 +90,23 @@ class CalculatorTest {
 
 
     //TODO hier weitere Tests erstellen
+    //Teilaufgabe1 ha 1   grüner Test minus 2 positive nummer
+    @Test
+    @DisplayName("should display result after minus two positive multi-digit numbers")
+    void testPositiveMinus() {
+        Calculator calc = new Calculator();
+        calc.pressDigitKey(5);
+        calc.pressDigitKey(0);
+        calc.pressBinaryOperationKey("-");
+        calc.pressDigitKey(4);
+        calc.pressDigitKey(0);
+        calc.pressEqualsKey();
+
+        String expected = "10";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
 }
 
