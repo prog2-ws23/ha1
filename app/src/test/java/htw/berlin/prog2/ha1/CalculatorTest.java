@@ -88,4 +88,22 @@ class CalculatorTest {
         assertEquals(expected, actual);
     }
     //TODO hier weitere Tests erstellen
+    //Teilaufgabe1
+    @Test
+    @DisplayName("should display result after subtract two numbers")
+    void testPositiveSubtraction() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(2);
+        calc.pressDigitKey(0);
+        calc.pressBinaryOperationKey("-");
+        calc.pressDigitKey(2);
+        calc.pressDigitKey(0);
+        calc.pressEqualsKey();
+
+        String expected = "0";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
 }
