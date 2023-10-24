@@ -147,9 +147,6 @@ class CalculatorTest {
         calc.pressDigitKey(3);
         calc.pressNegativeKey();
         calc.pressBinaryOperationKey("1/x");
-        //calc.pressDigitKey(3);
-        //calc.pressNegativeKey();
-        //calc.pressEqualsKey();
 
         String expected = "-0.33333333";
         String actual = calc.readScreen();
