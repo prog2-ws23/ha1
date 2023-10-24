@@ -104,7 +104,40 @@ class CalculatorTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    @DisplayName("should remember the digit typed in before the binary operation key")
+    void addTwoNumbersAndThenPressC() {
+        Calculator calc = new Calculator();
 
-    //TODO hier weitere Tests erstellen
+        calc.pressDigitKey(5);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(7);
+        calc.pressClearKey();
+        calc.pressEqualsKey();
+
+        String expected = "5";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("should be able to add more than two numbers")
+    void calculatingMoreThan2Numbers() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(1);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(9);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(4);
+        calc.pressEqualsKey();
+
+        String expected = "14";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
 }
+
 
