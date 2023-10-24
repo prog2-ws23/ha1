@@ -90,5 +90,49 @@ class CalculatorTest {
 
 
     //TODO hier weitere Tests erstellen
+    //Teilaufgabe1 ha 1   grüner Test minus 2 positive nummer
+    @Test
+    @DisplayName("should display result after minus two positive multi-digit numbers")
+    void testPositiveMinus() {
+        Calculator calc = new Calculator();
+        calc.pressDigitKey(5);
+        calc.pressDigitKey(0);
+        calc.pressBinaryOperationKey("-");
+        calc.pressDigitKey(4);
+        calc.pressDigitKey(0);
+        calc.pressEqualsKey();
+
+        String expected = "10";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+    //Teilaufgabe2 roter Test1
+    @Test
+    @DisplayName("should display Error when trying to calculate 1/0")
+        void testInvertofZero(){
+            Calculator calculator = new Calculator();
+            calculator.pressDigitKey(0);
+            calculator.pressUnaryOperationKey("1/x");
+            String expected = "Error";
+            String actual = calculator.readScreen();
+            assertEquals(expected, actual);
+
+
+        }
+        @Test
+    @DisplayName("schould display result when calculate Binary plus Unary ")
+    void testResultCalculateOfBinaryplusUnary(){
+            Calculator calculator = new Calculator();
+            calculator.pressDigitKey(5);
+            calculator.pressBinaryOperationKey("+");
+            calculator.pressDigitKey(4);
+            calculator.pressUnaryOperationKey("√");
+            calculator.pressEqualsKey();
+            String expected = "7";
+            String actual = calculator.readScreen();
+            assertEquals(expected, actual);
+        }
+
 }
 
