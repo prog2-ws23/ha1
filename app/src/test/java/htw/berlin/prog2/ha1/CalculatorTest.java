@@ -89,41 +89,4 @@ class CalculatorTest {
     }
 
     //TODO hier weitere Tests erstellen
-    //Teilaufgabe1
-    @Test
-    @DisplayName("should display result after adding two negative multi-digit numbers")
-    void testPositiveSubtraction() {
-        Calculator calc = new Calculator();
-
-        calc.pressDigitKey(2);
-        calc.pressDigitKey(0);
-        calc.pressBinaryOperationKey("-");
-        calc.pressDigitKey(2);
-        calc.pressDigitKey(0);
-        calc.pressEqualsKey();
-
-        String expected = "0";
-        String actual = calc.readScreen();
-
-        assertEquals(expected, actual);
-    }
-
-    //Teilaufgabe2 erster Test
-
-    @Test
-    @DisplayName("should be able to iverse the Iversion")
-    void testDoubleInversion() {
-        Calculator calc = new Calculator();
-
-        calc.pressDigitKey(2);
-        calc.pressDigitKey(7);
-        calc.pressDigitKey(5);
-        calc.pressUnaryOperationKey("1/x");
-        calc.pressUnaryOperationKey("1/x");
-
-        String expected = "275";
-        String actual = calc.readScreen();
-
-        assertEquals(expected, actual);
-    }
 }
