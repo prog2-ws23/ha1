@@ -120,7 +120,19 @@ class CalculatorTest {
     }
 
 
+    @Test
+    @DisplayName("should display result inbetween after pressing binary operator again")
+    void testResultBinaryOperator(){
+        Calculator calc= new Calculator();
+        calc.pressDigitKey(4);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(4);
+        calc.pressBinaryOperationKey("+");
 
+        String expected="8";
+        String actual=calc.readScreen();
+        assertEquals(expected,actual);
+    }
     //TODO hier weitere Tests erstellen
 }
 
