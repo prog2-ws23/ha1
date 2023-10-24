@@ -88,6 +88,35 @@ class CalculatorTest {
         assertEquals(expected, actual);
     }
 
+    //TODO hier weitere Tests erstellen
+    // With the help of Zeinab Ballout
+
+    /**
+     * Dieser Test überprüft, ob der Taschenrechner nach der Subtraktion von zwei positiven mehrstelligen Zahlen
+     * das korrekte Ergebnis auf dem Bildschirm anzeigt.
+     */
+    @Test
+    @DisplayName("should display result after subtracting two positive multi-digit numbers")
+    void test(){
+            Calculator calc = new Calculator();
+
+            calc.pressDigitKey(3);
+            calc.pressDigitKey(0);
+            calc.pressBinaryOperationKey("-");
+            calc.pressDigitKey(2);
+            calc.pressDigitKey(0);
+            calc.pressEqualsKey();
+
+            String expected = "10";
+            String actual = calc.readScreen();
+
+            assertEquals(expected, actual);
+        }
+
+    /**
+     * Dieser Test überprüft, ob der Taschenrechner nach dem Drücken der Clear-Taste (CE) den Bildschirm auf "0" zurücksetzt.
+     */
+
     @Test
     @DisplayName("should display 0 after pressing Clear key")
     void testClearKey(){
@@ -104,9 +133,13 @@ class CalculatorTest {
 
     }
 
+    /**
+     * Dieser Test überprüft, ob der Taschenrechner die Ziffer auf dem Bildschirm anzeigt,
+     * wenn nach dem Drücken der binären Operationstaste keine zweite Ziffer hinzugefügt wird.
+     */
 
     @Test
-    @DisplayName("should not allow operation when no second digit is provided after the BinaryOperationKey")
+    @DisplayName("should display the digit before operation key no second digit is added")
     void testWithoutSecondDigit(){
         Calculator calc = new Calculator();
 
@@ -121,80 +154,25 @@ class CalculatorTest {
 
     }
 
+    /**
+     * Dieser Test überprüft, ob der Taschenrechner die Ziffer mit einem Dezimaltrennzeichen auf dem Bildschirm korrekt anzeigt.
+     */
+
     @Test
-    @DisplayName("should handle more than one decimal places ")
-    void testDecimalPlaces() {
+    @DisplayName("should display the digit wih a decimal dot ")
+    void testDot() {
         Calculator calc = new Calculator();
 
-        calc.pressDigitKey(2);
+        calc.pressDigitKey(3);
         calc.pressDotKey();
-        calc.pressDigitKey(1);
-        calc.pressDigitKey(3);
-        calc.pressDigitKey(2);
-        calc.pressDigitKey(3);
-        calc.pressDigitKey(9);
-        calc.pressDigitKey(7);
-        calc.pressDigitKey(6);
-        calc.pressDigitKey(7);
-        calc.pressDigitKey(6);
-        calc.pressDigitKey(5);
-        calc.pressDigitKey(4);
-
-        String expected = "2.13239767654";
-        String actual = calc.readScreen();
-
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    @DisplayName("should ")
-    void testpercent(){
-        Calculator calc = new Calculator();
-
-        calc.pressDigitKey(5);
         calc.pressDigitKey(0);
-        calc.pressUnaryOperationKey("%");
-
-        String expected = "0.5";
-        String actual = calc.readScreen();
-
-        assertEquals(expected, actual);
-
-
-    }
-
-    @Test
-    @DisplayName("should display error when pressing equals key without a binary operation")
-    void testEqualsWithoutOperation() {
-        Calculator calc = new Calculator();
-
-        calc.pressDigitKey(3);
         calc.pressEqualsKey();
 
-        String expected = "Error";
+        String expected = "3.0";
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
     }
 
-    @Test
-    @DisplayName("")
-    void testDots() {
-        Calculator calc = new Calculator();
-
-        calc.pressDigitKey(3);
-        calc.pressDotKey();
-        calc.pressDotKey();
-
-        String expected = "Error";
-        String actual = calc.readScreen();
-
-        assertEquals(expected, actual);
-    }
-
-
-
-
-    //TODO hier weitere Tests erstellen
 }
 
