@@ -90,18 +90,18 @@ class CalculatorTest {
 
 
     //TODO hier weitere Tests erstellen
-
     @Test
-    @DisplayName("should display result after substracting two positive numbers")
-    void testPositiveSubstraction() {
+    @DisplayName("should display correct result after changing the binary operation key")
+    void testChangingOperator() {
         Calculator calc = new Calculator();
 
-        calc.pressDigitKey(4);
+        calc.pressDigitKey(9);
+        calc.pressBinaryOperationKey("+");
         calc.pressBinaryOperationKey("-");
         calc.pressDigitKey(2);
         calc.pressEqualsKey();
 
-        String expected = "2";
+        String expected = "7";
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
