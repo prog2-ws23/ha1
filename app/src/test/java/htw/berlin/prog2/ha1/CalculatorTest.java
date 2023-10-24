@@ -105,7 +105,9 @@ class CalculatorTest {
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
-    }@Test
+    }
+
+    @Test
     @DisplayName("must show a double without 000 at the end after the delimeter")
     void testDoubleWIthoutZeros() {
         Calculator calc = new Calculator();
@@ -141,5 +143,27 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
     }
+    /*
+    * Ein zusatzlicher Test, der ermöglicht, mehrere Operationen ohne das Drucken von Equals-Taste zu
+    * durchführen.
+
+    @Test
+    @DisplayName("should ")
+    void testNoEqualsKey() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(9);
+        calc.pressBinaryOperationKey("-");
+        calc.pressDigitKey(2);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(4);
+        calc.pressEqualsKey();
+
+        String expected = "11";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+     */
 }
 
