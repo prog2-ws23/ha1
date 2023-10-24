@@ -12,7 +12,7 @@ public class Calculator {
 
     private double latestValue;
 
-    double res;
+    private double res;
 
     private String latestOperation = "";
 
@@ -34,9 +34,13 @@ public class Calculator {
     public void pressDigitKey(int digit) {
         if (digit > 9 || digit < 0) throw new IllegalArgumentException();
 
-        if (screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = "";
+        if (screen.equals("0")) screen = "";
 
-        //if (screen.equals("0")) pressDotKey();
+        // if (screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = "";
+        // Bedingung rausgenommen, weil die 0 sonst immer vor einer Zahl gestanden hätte, wenn man eine
+        // Dezimalzahl hätte schreiben woll
+        // so ist die Bedingung, wenn der Screen 0 zeigt, kann eine beliebe Zahl im Screen gespeichert werden
+        // Test hätte auch funktioniert ohne eine Null vorher eingezugeben
 
         screen = screen + digit;
     }
@@ -69,12 +73,13 @@ public class Calculator {
     public void pressBinaryOperationKey(String operation) {
         latestValue = Double.parseDouble(screen);
         latestOperation = operation;
+        screen = "";
+        //nach hier hier ausgelagert, um bei BinaryKeyOperations eine Speicherung im Screen möglich zu machen
 
-        switch (operation) {
-            case "x":
-                res = 1;
-                break;
-        }
+        // switch (operation) {
+        //   case "x":
+        //     res = 1;
+        //   break;
     }
 
     /**
@@ -108,11 +113,8 @@ public class Calculator {
      */
     public void pressDotKey() {
         if (!screen.contains(".")) {
-            screen += "."; //++ original ++
+            screen += ".";
         }
-        //if (screen.contains("0") && screen.contains("0.") ) screen = "0."; //meins, macht nichts
-        // if(latestValue == 0 && screen.equals("0")) screen = "0."; meins, macht nichts
-
     }
 
 

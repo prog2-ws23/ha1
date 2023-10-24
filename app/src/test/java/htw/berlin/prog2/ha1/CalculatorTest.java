@@ -123,7 +123,6 @@ class CalculatorTest {
         calc.pressDigitKey(3);
         calc.pressBinaryOperationKey("x");
         calc.pressDigitKey(2);
-        calc.pressEqualsKey();
         calc.pressBinaryOperationKey("x");
         calc.pressDigitKey(6);
         calc.pressEqualsKey();
@@ -136,7 +135,7 @@ class CalculatorTest {
 
   @Test
   @DisplayName("should allow a zero before a decimal dot")
-    void testPressPositiveKey() {
+    void testShouldAllowDecimalDot() {
         Calculator calc = new Calculator();
 
         calc.pressDigitKey(0);
