@@ -106,4 +106,39 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
     }
+    //Teilaufgabe2 erster Test
+    @Test
+    @DisplayName("should be able to iverse the Iversion")
+    void testDoubleInversion() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(2);
+        calc.pressDigitKey(7);
+        calc.pressDigitKey(5);
+        calc.pressUnaryOperationKey("1/x");
+        calc.pressUnaryOperationKey("1/x");
+
+        String expected = "275";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+    //Teilaufgabe2 zweiter Test
+    @Test
+    @DisplayName("should display result after using clear button")
+    void testClearButtonCalc() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(1);
+        calc.pressBinaryOperationKey("/");
+        calc.pressDigitKey(5);
+        calc.pressClearKey();
+        calc.pressDigitKey(4);
+        calc.pressEqualsKey();
+
+        String expected = "0.25";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
 }
