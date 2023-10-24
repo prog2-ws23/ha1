@@ -15,6 +15,7 @@ public class Calculator {
 
     private String latestOperation = "";
 
+    private int counter = 0;
     /**
      * @return den aktuellen Bildschirminhalt als String
      */
@@ -46,9 +47,17 @@ public class Calculator {
      * im Ursprungszustand ist.
      */
     public void pressClearKey() {
-        screen = "0";
-        latestOperation = "";
-        latestValue = 0.0;
+        this.counter++;
+
+        if(this.counter == 1){
+            screen = "0";
+        }
+        else{
+            screen = "0";
+            latestOperation = "";
+            latestValue = 0.0;
+            this.counter = 0;
+        }
     }
 
     /**
@@ -84,6 +93,12 @@ public class Calculator {
         screen = Double.toString(result);
         if(screen.equals("NaN")) screen = "Error";
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
+        if (result % 1 == 0) {
+            screen = Integer.toString((int) Math.round(result));
+        } else {
+            screen = Double.toString(result);
+
+        }
     }
 
     /**
