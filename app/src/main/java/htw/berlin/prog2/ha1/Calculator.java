@@ -10,6 +10,10 @@ public class Calculator {
 
     private String screen = "0";
 
+    /*
+     * Die Variabel latestValue und latestOperation sind in Methode pressBinaryOperationKey() benutzt.
+     * In der Methode pressEqualsKey() sind diese auf 0 gesetzt.
+    */
     private double latestValue;
 
     private String latestOperation = "";
@@ -21,6 +25,10 @@ public class Calculator {
         return screen;
     }
 
+    public Double readValestValue() {
+        return latestValue;
+    }
+
     /**
      * Empfängt den Wert einer gedrückten Zifferntaste. Da man nur eine Taste auf einmal
      * drücken kann muss der Wert positiv und einstellig sein und zwischen 0 und 9 liegen.
@@ -29,11 +37,14 @@ public class Calculator {
      * @param digit Die Ziffer, deren Taste gedrückt wurde
      */
     public void pressDigitKey(int digit) {
+
         if(digit > 9 || digit < 0) throw new IllegalArgumentException();
 
-        if(screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = "";
-
-        screen = screen + digit;
+        if (screen.equals("0") == true) {
+            screen = Integer.toString(digit);
+        } else {
+            screen = screen + digit;
+        }
     }
 
     /**
@@ -55,12 +66,21 @@ public class Calculator {
      * Addition, Substraktion, Division, oder Multiplikation, welche zwei Operanden benötigen.
      * Beim ersten Drücken der Taste wird der Bildschirminhalt nicht verändert, sondern nur der
      * Rechner in den passenden Operationsmodus versetzt.
+     *
      * Beim zweiten Drücken nach Eingabe einer weiteren Zahl wird direkt des aktuelle Zwischenergebnis
      * auf dem Bildschirm angezeigt. Falls hierbei eine Division durch Null auftritt, wird "Error" angezeigt.
      * @param operation "+" für Addition, "-" für Substraktion, "x" für Multiplikation, "/" für Division
      */
     public void pressBinaryOperationKey(String operation)  {
-        latestValue = Double.parseDouble(screen);
+        if(
+                latestValue != 0 &&
+                !latestOperation.equals("") &&
+                !screen.equals("")
+        ) pressEqualsKey();
+        if(latestValue == 0 && latestOperation.equals("")) {
+            latestValue = Double.parseDouble(screen);
+            if(latestValue == Double.parseDouble(screen)) screen = "";
+        }
         latestOperation = operation;
     }
 
@@ -72,16 +92,17 @@ public class Calculator {
      * @param operation "√" für Quadratwurzel, "%" für Prozent, "1/x" für Inversion
      */
     public void pressUnaryOperationKey(String operation) {
-        latestValue = Double.parseDouble(screen);
-        latestOperation = operation;
+
         var result = switch(operation) {
             case "√" -> Math.sqrt(Double.parseDouble(screen));
             case "%" -> Double.parseDouble(screen) / 100;
             case "1/x" -> 1 / Double.parseDouble(screen);
             default -> throw new IllegalArgumentException();
         };
+
         screen = Double.toString(result);
         if(screen.equals("NaN")) screen = "Error";
+        if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2);
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
 
     }
@@ -116,6 +137,10 @@ public class Calculator {
      * Wird die Taste weitere Male gedrückt (ohne andere Tasten dazwischen), so wird die letzte
      * Operation (ggf. inklusive letztem Operand) erneut auf den aktuellen Bildschirminhalt angewandt
      * und das Ergebnis direkt angezeigt.
+     *
+     * Falls die Endzahl eine Kommazahl ist und mehr als 10 Ziffer hat, werden die letzte Zuffer ausgeschlossen.
+     * Die Methode, die die überflüßigen 0 von Nachkommastellen entfernt, wurde von mir selbst entwickelt.
+     * Die Lösung von https://www.baeldung.com/java-remove-trailing-characters habe ich nut danach gefunden.
      */
     public void pressEqualsKey() {
         var result = switch(latestOperation) {
@@ -125,9 +150,24 @@ public class Calculator {
             case "/" -> latestValue / Double.parseDouble(screen);
             default -> throw new IllegalArgumentException();
         };
+
         screen = Double.toString(result);
-        if(screen.equals("Infinity")) screen = "Error";
-        if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2);
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
+        if(screen.equals("Infinity")) screen = "Error";
+        if(screen.contains(".")) {
+            for(int i = screen.length() - 1; i > 0; i--) {
+                if(screen.charAt(i) != '0') {
+                    screen = screen.substring(0, i + 1);
+                    break;
+                } else if(screen.endsWith(".0")) {
+                    screen = screen.substring(0, screen.length() - 2);
+                    break;
+                }
+            }
+        }
+
+        latestOperation = "";
+        latestValue = 0.0;
+
     }
 }
