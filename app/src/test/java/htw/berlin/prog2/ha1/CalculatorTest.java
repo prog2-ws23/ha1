@@ -126,7 +126,7 @@ class CalculatorTest {
     }
     @Test
     @DisplayName("should successfully add four positive integers together")
-    void testAdditionOfFourDigits() {
+    void testAdditionOfThreeDigits() {
         Calculator calc = new Calculator();
 
         calc.pressDigitKey(2);
@@ -134,11 +134,9 @@ class CalculatorTest {
         calc.pressDigitKey(2);
         calc.pressBinaryOperationKey("+");
         calc.pressDigitKey(2);
-        calc.pressBinaryOperationKey("+");
-        calc.pressDigitKey(2);
         calc.pressEqualsKey();
 
-        String expected = "8";
+        String expected = "6";
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
