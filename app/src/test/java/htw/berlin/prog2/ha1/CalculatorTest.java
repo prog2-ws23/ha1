@@ -109,8 +109,8 @@ class CalculatorTest {
     }
     //Teilaufgabe2 roter Test1
     @Test
-    @DisplayName("should display Error for Insufficient operands after unary operation")
-        void insufficientOperandsAfterunaryoperation(){
+    @DisplayName("should display Error when trying to calculate 1/0")
+        void testInvertofZero(){
             Calculator calculator = new Calculator();
             calculator.pressDigitKey(0);
             calculator.pressUnaryOperationKey("1/x");
@@ -121,7 +121,7 @@ class CalculatorTest {
 
         }
         @Test
-    @DisplayName("schould calculate Binary plus Unary and Display Result")
+    @DisplayName("schould display result when calculate Binary plus Unary ")
     void testResultCalculateOfBinaryplusUnary(){
             Calculator calculator = new Calculator();
             calculator.pressDigitKey(5);
