@@ -109,7 +109,7 @@ class CalculatorTest {
     }
     @Test
     @DisplayName("should successfully add a positive integer to a negative number")
-    void testNegativeAddition() {
+    void testAdditionOfNegativeNumber() {
         Calculator calc = new Calculator();
 
         calc.pressBinaryOperationKey("-");
