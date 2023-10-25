@@ -81,7 +81,12 @@ public class Calculator {
             default -> throw new IllegalArgumentException();
         };
         screen = Double.toString(result);
-        if(screen.equals("NaN")) screen = "Error";
+        // vorher if(screen.equals("NaN")) screen = "Error";
+        // Ohne den Check auf Infinity hätte der Taschenrechner möglicherweise auf dem Bildschirm
+        // nicht Error angezeigt, sondern etwas anderes. Jetzt wird sichergestellt das Error bei Division durch 0 angezeigt wird.
+        // || logische ODER-Operator
+        // NEU: if(screen.equals("NaN") || screen.equals("Infinity")) screen = "Error";
+        if(screen.equals("NaN") || screen.equals("Infinity")) screen = "Error";
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
 
     }
@@ -118,6 +123,14 @@ public class Calculator {
      * und das Ergebnis direkt angezeigt.
      */
     public void pressEqualsKey() {
+        // Das erwartete Verhalten ist, dass die eingegebene Zahl direkt angezeigt wird, weil noch keine Operation ausgewählt wurde.
+        // Da latestOperation beim Start einen leeren String als Wert hat (da noch keine Operation gewählt wurde), wirft der Code in der switch-Anweisung eine IllegalArgumentException
+        // Neu: die Methode wird frühzeitig beendet, wenn keine Operation gesetzt ist, und verhindert so den Fehler
+        // NEU:         if (latestOperation.isEmpty()) {
+        //            return;
+        if (latestOperation.isEmpty()) {
+            return;
+        }
         var result = switch(latestOperation) {
             case "+" -> latestValue + Double.parseDouble(screen);
             case "-" -> latestValue - Double.parseDouble(screen);
