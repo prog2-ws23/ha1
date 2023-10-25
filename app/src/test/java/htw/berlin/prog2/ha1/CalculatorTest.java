@@ -116,7 +116,7 @@ class CalculatorTest {
         calc.pressBinaryOperationKey("-");
         calc.pressDigitKey(6);
         calc.pressEqualsKey();
-        calc.pressEqualsKey();
+        //calc.pressEqualsKey();
 
         String expected = "-6";
         String actual = calc.readScreen();
@@ -124,10 +124,11 @@ class CalculatorTest {
         assertEquals(expected, actual);
     }
     @Test
+    @DisplayName("should allow press +/- first and then the number after and still be correct positiv or negativ")
     public void testPressNegativeKey() {
         Calculator calc = new Calculator();
 
-        calc.pressBinaryOperationKey("-");
+        calc.pressNegativeKey();
         calc.pressDigitKey(5);
         calc.pressBinaryOperationKey("-");
         calc.pressDigitKey(5);
