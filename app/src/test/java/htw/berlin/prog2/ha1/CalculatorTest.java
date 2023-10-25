@@ -13,14 +13,15 @@ class CalculatorTest {
     void testPositiveAddition() {
         Calculator calc = new Calculator();
 
-        calc.pressDigitKey(2);
         calc.pressDigitKey(0);
-        calc.pressBinaryOperationKey("+");
         calc.pressDigitKey(2);
+        calc.pressBinaryOperationKey("/");
         calc.pressDigitKey(0);
+        calc.pressDigitKey(2);
         calc.pressEqualsKey();
 
-        String expected = "40";
+        String expected = "1";
+        //20+20=40
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
@@ -45,7 +46,7 @@ class CalculatorTest {
     void testDivisionByZero() {
         Calculator calc = new Calculator();
 
-        calc.pressDigitKey(7);
+        calc.pressDigitKey(2);
         calc.pressBinaryOperationKey("/");
         calc.pressDigitKey(0);
         calc.pressEqualsKey();
@@ -90,5 +91,30 @@ class CalculatorTest {
 
 
     //TODO hier weitere Tests erstellen
-}
+    //Test der  funktioniert
+    @Test
+    @DisplayName("should be able to subtract numbers")
+    void testsubtractnumbers() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(6);
+        calc.pressBinaryOperationKey("-");
+        calc.pressDigitKey(3);
+
+        String expected = "3";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+
+
+        }
+    }
+
+
+
+
+
+
+
+
 
