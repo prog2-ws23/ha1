@@ -140,15 +140,28 @@ class CalculatorTest {
         assertEquals(expected, actual);
     }
     @Test
-    @DisplayName("should substract two negative numbers")
-    void testNegativeSubstraction(){
+    @DisplayName("should kehrwert bilden")
+    void testKehrwert(){
         Calculator calc = new Calculator();
 
-        calc.pressDigitKey(3);
-        calc.pressNegativeKey();
+        calc.pressDigitKey(6);
         calc.pressBinaryOperationKey("1/x");
+        //calc.pressEqualsKey();
+        String expected = "0.16666667";
+        String actual = calc.readScreen();
 
-        String expected = "-0.33333333";
+        assertEquals(expected, actual);
+    }
+    @Test
+    @DisplayName("sollte Prozente multiplizieren koennen")
+    void testMultiplyPercentages(){
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(6);
+        calc.pressBinaryOperationKey("x");
+        calc.pressUnaryOperationKey("%");
+
+        String expected = "0.36";
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
