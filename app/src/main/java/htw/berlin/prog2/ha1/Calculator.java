@@ -45,10 +45,11 @@ public class Calculator {
      * im Ursprungszustand ist.
      */
     public void pressClearKey() {
-
+        double tempValue = latestValue;//temporärer Speicher
+        String tempOperation = latestOperation; //temporärer speicehr des Operanten
         screen = "0";
-        latestOperation = "";
-        latestValue = 0.0;
+        latestValue = tempValue;//wieder zurückgeben
+        latestOperation = tempOperation;//wieder zurückgeben
     }
 
     /**
@@ -121,13 +122,16 @@ public class Calculator {
      * und das Ergebnis direkt angezeigt.
      */
     public void pressEqualsKey() {
+        var operand = Double.parseDouble(screen);//neue Zeile. Hier wird der Wert auf dem Bildschirm (screen) in eine Gleitkommazahl (double) umgewandelt und in der Variable operand gespeichert.
         var result = switch(latestOperation) {
+            case " " -> latestValue + Double.parseDouble(screen);
             case "+" -> latestValue + Double.parseDouble(screen);
             case "-" -> latestValue - Double.parseDouble(screen);
             case "x" -> latestValue * Double.parseDouble(screen);
             case "/" -> latestValue / Double.parseDouble(screen);
             default -> throw new IllegalArgumentException();
         };
+        latestValue = result;
         screen = Double.toString(result);
         if(screen.equals("Infinity")) screen = "Error";
         if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2);
