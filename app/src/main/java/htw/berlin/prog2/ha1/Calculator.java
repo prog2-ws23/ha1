@@ -104,9 +104,19 @@ public class Calculator {
      * Zeigt der Bildschirm bereits einen negativen Wert mit führendem Minus an, dann wird dieses
      * entfernt und der Inhalt fortan als positiv interpretiert.
      */
-    public void pressNegativeKey() {
+    /*public void pressNegativeKey() {
         screen = screen.startsWith("-") ? screen.substring(1) : "-" + screen;
     }
+
+     */
+
+    public void pressNegativeKey() {
+            if (screen.startsWith("-")) {
+                screen = screen.substring(1);
+            } else {
+                screen = "-" + screen;
+            }
+        }
 
     /**
      * Empfängt den Befehl der gedrückten "="-Taste.
@@ -118,6 +128,7 @@ public class Calculator {
      * und das Ergebnis direkt angezeigt.
      */
     public void pressEqualsKey() {
+
         var result = switch(latestOperation) {
             case "+" -> latestValue + Double.parseDouble(screen);
             case "-" -> latestValue - Double.parseDouble(screen);
