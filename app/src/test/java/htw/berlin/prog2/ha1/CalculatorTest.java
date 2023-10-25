@@ -91,10 +91,9 @@ class CalculatorTest {
 
     //TODO hier weitere Tests erstellen
     @Test
-    @DisplayName("should subtract two positive multi-digit numbers")
+    @DisplayName("should subtract two positive numbers")
     void testSubtraction() {
         Calculator calc = new Calculator();
-
         calc.pressDigitKey(9);
         calc.pressBinaryOperationKey("-");
         calc.pressDigitKey(7);
