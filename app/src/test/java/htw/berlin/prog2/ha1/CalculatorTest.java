@@ -127,6 +127,27 @@ class CalculatorTest {
 
 
     }
+
+    @Test
+    @DisplayName("Binary operand should show intermediate")
+    void testIntermediateResult() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(3);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(3);
+        calc.pressEqualsKey();
+        calc.pressBinaryOperationKey("x");
+        calc.pressDigitKey(6);
+        calc.pressBinaryOperationKey("x");
+
+        String expected ="36";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+
+
+    }
     //TODO hier weitere Tests erstellen
 }
 
