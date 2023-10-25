@@ -30,10 +30,17 @@ public class Calculator {
      */
     public void pressDigitKey(int digit) {
         if(digit > 9 || digit < 0) throw new IllegalArgumentException();
+        //fix testAddingFractions
+        if(screen.equals("0."))
+        {
+            screen = screen + digit;
+        }
+        else {
+            if (screen.equals("0") || latestValue == Double.parseDouble(screen))
+            {screen = "";
+            }
 
-        if(screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = "";
-
-        screen = screen + digit;
+        screen = screen + digit; }
     }
 
     /**
@@ -59,7 +66,11 @@ public class Calculator {
      * auf dem Bildschirm angezeigt. Falls hierbei eine Division durch Null auftritt, wird "Error" angezeigt.
      * @param operation "+" für Addition, "-" für Substraktion, "x" für Multiplikation, "/" für Division
      */
-    public void pressBinaryOperationKey(String operation)  {
+    public void pressBinaryOperationKey(String operation)  {   //fix testsum3Numbers
+        if (latestOperation != "") {
+            this.pressEqualsKey();
+        }
+
         latestValue = Double.parseDouble(screen);
         latestOperation = operation;
     }

@@ -89,6 +89,68 @@ class CalculatorTest {
     }
 
 
+
+
     //TODO hier weitere Tests erstellen
+
+    @Test
+    @DisplayName("should display result after dividing 2 number,24 by 4 ")
+    void testdividing (){
+
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(2);
+        calc.pressDigitKey(4);
+        calc.pressBinaryOperationKey("/");
+        calc.pressDigitKey(4);
+
+        calc.pressEqualsKey();
+        String expected ="6";
+        String actual= calc.readScreen();
+        assertEquals(expected, actual);
+    }
+    @Test
+    // test 1: 3 ads
+    @DisplayName("should display result after adding 2 number and then add another number ")
+    void testsum3Numbers (){
+
+        Calculator calc= new Calculator();
+        // screen = "0"
+        calc.pressDigitKey(4);
+        calc.pressDigitKey(0);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(3);
+        calc.pressDigitKey(0);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(2);
+        calc.pressDigitKey(0);
+        calc.pressEqualsKey();
+
+        String expected="90";
+        String actual= calc.readScreen();
+
+        assertEquals(expected, actual);
+
+    }
+
+    @Test
+    @DisplayName("should display result 7.8 after adding fractions")
+    void testAddingFractions() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(0);
+        calc.pressDotKey();
+        calc.pressDigitKey(8);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(7);
+
+        calc.pressEqualsKey();
+
+        String expected = "7.8";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
 }
 
