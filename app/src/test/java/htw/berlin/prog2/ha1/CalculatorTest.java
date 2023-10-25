@@ -107,7 +107,7 @@ class CalculatorTest {
 
 
     }
-    //Test der nicht funktioniert
+    //Ein Test der nicht funktioniert
     @Test
     @DisplayName("potenz einer Zahl berechnen ")
     void testExponentiation() {
