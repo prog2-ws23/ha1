@@ -20,7 +20,7 @@ class CalculatorTest {
         calc.pressDigitKey(0);
         calc.pressEqualsKey();
 
-        String expected = "40";
+        String expected = "40";                         //wird auch so beim Online-Rechner ausgegeben
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
@@ -34,7 +34,7 @@ class CalculatorTest {
         calc.pressDigitKey(2);
         calc.pressUnaryOperationKey("√");
 
-        String expected = "1.41421356";
+        String expected = "1.41421356";                 //wird auch so beim Online-Rechner ausgegeben
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
@@ -50,7 +50,7 @@ class CalculatorTest {
         calc.pressDigitKey(0);
         calc.pressEqualsKey();
 
-        String expected = "Error";
+        String expected = "Error";                      //wird auch so beim Online-Rechner ausgegeben
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
@@ -65,7 +65,7 @@ class CalculatorTest {
         calc.pressNegativeKey();
         calc.pressUnaryOperationKey("√");
 
-        String expected = "Error";
+        String expected = "Error";                      //wird auch so beim Online-Rechner ausgegeben
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
@@ -79,7 +79,7 @@ class CalculatorTest {
         calc.pressDigitKey(1);
         calc.pressDotKey();
         calc.pressDigitKey(7);
-        calc.pressDotKey();
+        calc.pressDotKey();                             //der Punkt wird nicht übernommen
         calc.pressDigitKey(8);
 
         String expected = "1.78";
@@ -90,5 +90,50 @@ class CalculatorTest {
 
 
     //TODO hier weitere Tests erstellen
-}
 
+    //haben wir: Wurzel(+/-),/0, + ,
+    @Test
+    @DisplayName("should display result after pull of two positive multi-digit number")
+    void testPositiveSubtration() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(2);
+        calc.pressDigitKey(0);
+        calc.pressBinaryOperationKey("-");
+        calc.pressDigitKey(2);
+        calc.pressDigitKey(0);
+        calc.pressEqualsKey();
+
+        String expected = "0";                         //wird auch so ausgegeben
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("should be displayed after press two and Equalskey")
+    void testTwoDividZeroWrongExpected() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(2);
+        calc.pressEqualsKey();
+
+        String expected = "2";
+        String actual = calc.readScreen();   // kann nicht 2 ausgeben werden
+
+        assertEquals(expected, actual);
+    }
+    @Test
+    @DisplayName("should be displayed after invert the number zero")
+    void test2PositivPercentWrongExpected() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(0);
+        calc.pressUnaryOperationKey("1/x");
+
+        String expected = "Error";          //wurde vorher 0 ausgegeben
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+}
