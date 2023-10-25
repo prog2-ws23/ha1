@@ -104,7 +104,7 @@ class CalculatorTest {
         calc.pressDigitKey(0);
         calc.pressEqualsKey();
 
-        String expected = "0";                         //wird auch so beim Online-Rechner ausgegeben
+        String expected = "0";                         //wird auch so ausgegeben
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
@@ -118,8 +118,8 @@ class CalculatorTest {
         calc.pressDigitKey(2);
         calc.pressEqualsKey();
 
-        String expected = "2";       // kann nicht 2 ausgeben
-        String actual = calc.readScreen();
+        String expected = "2";
+        String actual = calc.readScreen();   // kann nicht 2 ausgeben werden
 
         assertEquals(expected, actual);
     }
@@ -131,7 +131,7 @@ class CalculatorTest {
         calc.pressDigitKey(0);
         calc.pressUnaryOperationKey("1/x");
 
-        String expected = "Error";
+        String expected = "Error";          //wurde vorher 0 ausgegeben
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
