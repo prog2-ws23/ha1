@@ -12,8 +12,6 @@ public class Calculator {
 
     private double latestValue;
 
-    private double res;
-
     private String latestOperation = "";
 
     /**
@@ -38,7 +36,7 @@ public class Calculator {
 
         // if (screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = "";
         // Bedingung rausgenommen, weil die 0 sonst immer vor einer Zahl gestanden hätte, wenn man eine
-        // Dezimalzahl hätte schreiben woll
+        // Dezimalzahl hätte schreiben wollen, die 0 wurde nicht gespeichert
         // so ist die Bedingung, wenn der Screen 0 zeigt, kann eine beliebe Zahl im Screen gespeichert werden
         // Test hätte auch funktioniert ohne eine Null vorher eingezugeben
 
@@ -71,16 +69,28 @@ public class Calculator {
      * @param operation "+" für Addition, "-" für Substraktion, "x" für Multiplikation, "/" für Division
      */
     public void pressBinaryOperationKey(String operation) {
-        latestValue = Double.parseDouble(screen);
+        if (latestOperation.equals("x")) { //so lange die letzte Operation * ist
+            double currentValue = Double.parseDouble(screen); //wird hier der erste Wert eingegeben (2),
+            //dann wird der in currentValue (neu angelegt) gespeichert
+            latestValue = latestValue * currentValue;// dann wird latestValue(2) multipliziert mit
+            //currentValue(5) = latestVaLue ist dann 10
+        } else {
+            latestValue = Double.parseDouble(screen); //ansonsten fahre so fort, wie am Anfang (Operation zweier Zahlen)
+        }
         latestOperation = operation;
         screen = "";
         //nach hier hier ausgelagert, um bei BinaryKeyOperations eine Speicherung im Screen möglich zu machen
 
-        // switch (operation) {
-        //   case "x":
-        //     res = 1;
-        //   break;
+        //Ausgang:
+        //latestValue = Double.parseDouble(screen);
+        //latestOperation = operation;
+        //screen = "";
+
+        //vorher ging es nicht, weil ohne die Bedingung, dass nochmal ein x gewählt wird, der Vorgang mit zwei Zahlen geklappt hätte
+        //die erste Zahl würde dabei immer übersprungen werden, weil die letzte Zahl, die im Screen eingegeben wurde in dieser Methode eine 2 gewesen wäre
+        //aber in der pressEqualsKey die 5 als latestValue gegriffen hätte
     }
+
 
     /**
      * Empfängt den Wert einer gedrückten unären Operationstaste, also eine der drei Operationen
@@ -142,7 +152,9 @@ public class Calculator {
         var result = switch (latestOperation) {
             case "+" -> latestValue + Double.parseDouble(screen);
             case "-" -> latestValue - Double.parseDouble(screen);
-            case "x" -> latestValue * Double.parseDouble(screen) * res;
+            case "x" ->
+                    latestValue * Double.parseDouble(screen); //hier ist latestValue 10 (aus anderer Methode oben) und screen 6, weil
+            //im screen wieder neu 6 eingegeben wurde, also wurde dann 6*10 multipliziert
             case "/" -> latestValue / Double.parseDouble(screen);
             default -> throw new IllegalArgumentException();
         };
@@ -152,3 +164,4 @@ public class Calculator {
         if (screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
     }
 }
+

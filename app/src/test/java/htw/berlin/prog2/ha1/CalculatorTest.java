@@ -120,14 +120,14 @@ class CalculatorTest {
     void testThreeNumbersMultiplied() {
         Calculator calc = new Calculator();
 
-        calc.pressDigitKey(3);
-        calc.pressBinaryOperationKey("x");
         calc.pressDigitKey(2);
+        calc.pressBinaryOperationKey("x");
+        calc.pressDigitKey(5);
         calc.pressBinaryOperationKey("x");
         calc.pressDigitKey(6);
         calc.pressEqualsKey();
 
-        String expected = "36";
+        String expected = "60";
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
@@ -149,3 +149,5 @@ class CalculatorTest {
 
     }
 }
+
+//Hilfe von Nils + ChatGPT + StackOverflow + Youtube (Calculator)
