@@ -88,7 +88,63 @@ class CalculatorTest {
         assertEquals(expected, actual);
     }
 
+    @Test // Aufgabe 1 (nicht bereits vorhandene funktion)
+    @DisplayName("should display result after subtract two positive multi-digit numbers")
+    void testMinusDecimalDots() {
+        Calculator calc = new Calculator();
 
-    //TODO hier weitere Tests erstellen
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(4);
+        calc.pressBinaryOperationKey("-");
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(0);
+        calc.pressEqualsKey();
+
+        String expected = "4";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+
+    }
+
+    //Aufgabe 2
+    @Test
+    @DisplayName("should Display zero dot some Digit")
+    void testDotWithSomeDigit() {
+
+        Calculator calc = new Calculator();
+
+        calc.pressDotKey();
+        calc.pressDigitKey(3);
+
+        String expected = "0.3";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+// Aufgabe 2
+    @Test
+    @DisplayName("should save the right Digit after press clear Key")
+    void testSaveDigitAfterClearKey() {
+
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(3);
+        calc.pressBinaryOperationKey("+");
+        calc.pressClearKey();
+        calc.pressDigitKey(5);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(2);
+        calc.pressEqualsKey();
+
+        String expected = "10";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
 }
+
+
 
