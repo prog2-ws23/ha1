@@ -78,13 +78,13 @@ public class Calculator {
             case "√" -> Math.sqrt(Double.parseDouble(screen));
             case "%" -> Double.parseDouble(screen) / 100;
             case "1/x" -> 1 / Double.parseDouble(screen);
-            case "x" -> Math.multiplyExact((int) latestValue, (int) Double.parseDouble(screen)); //mal mit ganzen Zahlen
-            case "/" -> Math.floorDiv((int) latestValue, (int) Double.parseDouble(screen)); //durch mit ganzen Zahlen
             default -> throw new IllegalArgumentException();
         };
-        if (screen.contains(".") && screen.length() > 11) {
-            screen = screen.substring(0, 10);
-        }
+        screen = Double.toString(result);
+        if (screen.equals("NaN") || screen.equals("Infinity")) {
+            screen = "Error";}
+        if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
+
     }
 
     /**
@@ -124,6 +124,9 @@ public class Calculator {
             case "-" -> latestValue - Double.parseDouble(screen);
             case "x" -> latestValue * Double.parseDouble(screen);
             case "/" -> latestValue / Double.parseDouble(screen);
+            case "1/x" -> Double.parseDouble(screen);
+            case "" -> Double.parseDouble(screen);
+
             default -> throw new IllegalArgumentException();
         };
         screen = Double.toString(result);

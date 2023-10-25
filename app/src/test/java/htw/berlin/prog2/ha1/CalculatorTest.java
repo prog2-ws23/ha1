@@ -111,33 +111,27 @@ class CalculatorTest {
     }
 
     @Test
-    @DisplayName("should be displayed after divided a positive number")
+    @DisplayName("should be displayed after press two and Equalskey")
     void testTwoDividZeroWrongExpected() {
         Calculator calc = new Calculator();
 
         calc.pressDigitKey(2);
-        calc.pressUnaryOperationKey("/");
-        calc.pressDigitKey(2);
         calc.pressEqualsKey();
 
-        String expected = "1";       // kann nicht / gerechnet werden
+        String expected = "2";       // kann nicht 2 ausgeben
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
     }
     @Test
-    @DisplayName("should be displayed after multiplying a positive number")
+    @DisplayName("should be displayed after invert the number zero")
     void test2PositivPercentWrongExpected() {
         Calculator calc = new Calculator();
 
-        calc.pressDigitKey(2);
-        calc.pressNegativeKey();
-        calc.pressUnaryOperationKey("x");
-        calc.pressDigitKey(3);
-        calc.pressNegativeKey();
-        calc.pressEqualsKey();
+        calc.pressDigitKey(0);
+        calc.pressUnaryOperationKey("1/x");
 
-        String expected = "6";                 //es kann nicht x gerechnet werden
+        String expected = "Error";
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
