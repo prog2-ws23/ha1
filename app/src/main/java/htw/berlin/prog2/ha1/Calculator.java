@@ -45,6 +45,7 @@ public class Calculator {
      * im Ursprungszustand ist.
      */
     public void pressClearKey() {
+
         screen = "0";
         latestOperation = "";
         latestValue = 0.0;
@@ -59,6 +60,7 @@ public class Calculator {
      * auf dem Bildschirm angezeigt. Falls hierbei eine Division durch Null auftritt, wird "Error" angezeigt.
      * @param operation "+" für Addition, "-" für Substraktion, "x" für Multiplikation, "/" für Division
      */
+
     public void pressBinaryOperationKey(String operation)  {
         latestValue = Double.parseDouble(screen);
         latestOperation = operation;
@@ -96,6 +98,7 @@ public class Calculator {
     public void pressDotKey() {
         if(!screen.contains(".")) screen = screen + ".";
     }
+
 
     /**
      * Empfängt den Befehl der gedrückten Vorzeichenumkehrstaste ("+/-").
