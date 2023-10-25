@@ -107,7 +107,7 @@ class CalculatorTest {
     }
 
     @Test
-    @DisplayName("should test")
+    @DisplayName("Should display the result after multiplication and addition 3 numbers")
     void testTESTTTTTTTT() {
         Calculator calc = new Calculator();
 
