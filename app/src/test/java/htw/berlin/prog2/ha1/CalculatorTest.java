@@ -107,6 +107,23 @@ class CalculatorTest {
 
 
     }
+    //Test der nicht funktioniert
+    @Test
+    @DisplayName("should display result after adding two positive multi-digit numbers")
+    void testMultiplenumbers() {
+        Calculator calc = new Calculator();
+
+
+        calc.pressDigitKey(4);
+        calc.pressBinaryOperationKey("*");
+        calc.pressDigitKey(4);
+        calc.pressEqualsKey();
+
+        String expected = "16";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
 }
 
 
