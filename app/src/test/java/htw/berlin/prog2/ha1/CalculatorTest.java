@@ -111,6 +111,8 @@ class CalculatorTest {
     void testClearing() {
         Calculator calc = new Calculator();
 
+        calc.pressDigitKey(9);
+        calc.pressBinaryOperationKey("+");
         calc.pressDigitKey(5);
         calc.pressDigitKey(5);
         calc.pressClearKey();
@@ -118,31 +120,14 @@ class CalculatorTest {
         calc.pressDigitKey(9);
         calc.pressEqualsKey();
 
-        String expected = "14";
+        String expected = "18";
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
     }
 
     @Test
-    @DisplayName("Should delete only the last Entry.")
-    void testProzent() {
-        Calculator calc = new Calculator();
-
-        calc.pressDigitKey(5);
-        calc.pressClearKey();
-        calc.pressBinaryOperationKey("+");
-        calc.pressDigitKey(9);
-        calc.pressEqualsKey();
-
-        String expected = "14";
-        String actual = calc.readScreen();
-
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    @DisplayName("Soll eine 0 vpr dem Punkte platzieren, sollte keine Zahl eingegeben worden sein.")
+    @DisplayName("Soll eine 0 vor dem Punkte platzieren, sollte keine Zahl eingegeben worden sein.")
     void testPressDotKey() {
         Calculator calc = new Calculator();
 
@@ -154,5 +139,6 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
     }
+
 }
 
