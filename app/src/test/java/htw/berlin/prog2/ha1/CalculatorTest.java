@@ -164,5 +164,22 @@ class CalculatorTest {
     }
 
 
+
+    @Test
+    @DisplayName("should display result after getting the square root of two")
+    void testSquareRoots() {
+        Calculator calc = new Calculator();
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(2);
+        calc.pressDigitKey(1);
+
+        calc.pressUnaryOperationKey("√");
+
+        String expected = "11";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
 }
 
