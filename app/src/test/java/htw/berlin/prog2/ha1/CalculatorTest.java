@@ -90,5 +90,22 @@ class CalculatorTest {
 
 
     //TODO hier weitere Tests erstellen
+
+    //erfolgreicher Test
+    @Test
+    @DisplayName("should display 0 when multiplying with zero")
+    void testMultiplicationByZero() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(3);
+        calc.pressBinaryOperationKey("*");
+        calc.pressDigitKey(0);
+
+        String expected = "0";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
 }
 
