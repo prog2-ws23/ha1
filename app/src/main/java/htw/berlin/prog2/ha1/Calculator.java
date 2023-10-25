@@ -13,6 +13,7 @@ public class Calculator {
     private double latestValue;
 
     private String latestOperation = "";
+    private int clearCounter = 0;
 
 
 
@@ -54,26 +55,25 @@ public class Calculator {
     /**
      * Empfängt den Befehl der C- bzw. CE-Taste (Clear bzw. Clear Entry).
      * Einmaliges Drücken der Taste (counter)
-     * löscht die zuvor eingegebenen Ziffern auf dem Bildschirm
-     * so dass "0" angezeigt wird, jedoch ohne zuvor zwischengespeicherte Werte zu löschen.
+     * löscht die zuvor eingegebenen Ziffern auf dem Bildschirm,
+     * sodass "0" angezeigt wird, jedoch ohne zuvor zwischengespeicherte Werte zu löschen.
      * Wird daraufhin noch einmal die Taste gedrückt, dann werden auch zwischengespeicherte
-     * Werte sowie der aktuelle Operationsmodus zurückgesetzt, so dass der Rechner wieder
+     * Werte sowie der aktuelle Operationsmodus zurückgesetzt, sodass der Rechner wieder
      * im Ursprungszustand ist.
-     * @param counter Zählt wie oft die Clear Taste gedrückt wurde.
      */
-    // Hat Bug siehe Test 7.
-    // Gewolltes Verhalten: Multi-Digit sollte nach der Betätigung der C-Taste nicht gelöscht, sondern zwischengepeichert werden
 
 
-    public void pressClearKey(int counter) {
-        if (counter == 1) {
-           screen= "0";
-        } else if (counter == 2) {
+    public void pressClearKey() {
+        screen = "0";
+        clearCounter++;
+        if (clearCounter == 2) {
             screen = "0";
             latestOperation = "";
             latestValue = 0.0;
+            clearCounter = 0;
         }
     }
+
 
     /**
      * Empfängt den Wert einer gedrückten binären Operationstaste, also eine der vier Operationen

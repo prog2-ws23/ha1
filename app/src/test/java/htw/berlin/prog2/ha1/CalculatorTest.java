@@ -110,17 +110,17 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
     }
-    /** Test-Driven 1
+    /** Test-Driven 1.1
      *
      */
     @Test
-    @DisplayName("should only clear and delete latest Calculations if the clear key is twice, if not it should just clear the screen and continue with the calculation.")
+    @DisplayName("should the clear key be pressed just once then the screen should cleared but the calculation should proceed.")
     void testClearKeyOperatedOnce() {
         Calculator calc = new Calculator();
 
         calc.pressDigitKey(2);
         calc.pressBinaryOperationKey("+");
-        calc.pressClearKey(1);
+        calc.pressClearKey();
 
         String expected = "0";
         String actual = calc.readScreen();
@@ -135,14 +135,18 @@ class CalculatorTest {
 
         assertEquals(secondExpected, secondActual);
     }
+    /** Test-Driven 1.2
+     *
+     */
     @Test
-    @DisplayName("should only clear and delete latest Calculations if the clear key is twice, if not it should just clear the screen and continue with the calculation.")
+    @DisplayName("should the clear key be pressed twice then the screen should cleared and the latest calculation should be deleted.")
     void testClearKeyOperatedTwice() {
         Calculator calc = new Calculator();
 
         calc.pressDigitKey(2);
         calc.pressBinaryOperationKey("+");
-        calc.pressClearKey(2);
+        calc.pressClearKey();
+        calc.pressClearKey();
 
         String expected = "0";
         String actual = calc.readScreen();
@@ -151,13 +155,12 @@ class CalculatorTest {
 
         calc.pressDigitKey(2);
 
+
         String secondExpected = "2";
         String secondActual = calc.readScreen();
 
         assertEquals(secondExpected, secondActual);
     }
-
-
 
     /** Test-Driven 2
      *
