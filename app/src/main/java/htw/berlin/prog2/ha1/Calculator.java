@@ -45,9 +45,17 @@ public class Calculator {
      * im Ursprungszustand ist.
      */
     public void pressClearKey() {
-        screen = "0";
-        latestOperation = "";
-        latestValue = 0.0;
+        if (screen.equals("0")) {
+            screen = "0";
+            latestValue = 0.0;
+            latestOperation = "";
+        }
+        else {
+            screen = "0";
+            latestValue = latestValue;
+            latestOperation = latestOperation;
+        }
+
     }
 
     /**
@@ -59,10 +67,24 @@ public class Calculator {
      * auf dem Bildschirm angezeigt. Falls hierbei eine Division durch Null auftritt, wird "Error" angezeigt.
      * @param operation "+" für Addition, "-" für Substraktion, "x" für Multiplikation, "/" für Division
      */
-    public void pressBinaryOperationKey(String operation)  {
+    public void pressBinaryOperationKey(String operation) {
+        if (latestOperation.equals("+"))
+            screen = String.valueOf(latestValue + Double.parseDouble(screen));
+
+        else if (latestOperation.equals("-"))
+            screen = String.valueOf(latestValue - Double.parseDouble(screen));
+
+        else if (latestOperation.equals("x"))
+            screen = String.valueOf(latestValue * Double.parseDouble(screen));
+
+        else if (latestOperation.equals("/"))
+            screen = String.valueOf(latestValue / Double.parseDouble(screen));
+
         latestValue = Double.parseDouble(screen);
         latestOperation = operation;
+
     }
+
 
     /**
      * Empfängt den Wert einer gedrückten unären Operationstaste, also eine der drei Operationen
