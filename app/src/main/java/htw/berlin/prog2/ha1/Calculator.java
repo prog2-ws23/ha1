@@ -12,7 +12,28 @@ public class Calculator {
 
     private double latestValue;
 
+    private int digitGotPressed;
+
     private String latestOperation = "";
+
+    /**
+     * Signal für ClearKey ob C oder CE
+     */
+    private String clatestOperation = "";
+
+    /**
+     * @return das letzte gespeicherte Value
+     */
+    public double getLatestValue() {
+        return this.latestValue;
+    }
+
+    /**
+     * @return die letzte gespeicherte Operation
+     */
+    public String getLatestOperation() {
+        return this.latestOperation;
+    }
 
     /**
      * @return den aktuellen Bildschirminhalt als String
@@ -34,6 +55,8 @@ public class Calculator {
         if(screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = "";
 
         screen = screen + digit;
+        clatestOperation = "";
+        digitGotPressed = 1;
     }
 
     /**
@@ -43,11 +66,18 @@ public class Calculator {
      * Wird daraufhin noch einmal die Taste gedrückt, dann werden auch zwischengespeicherte
      * Werte sowie der aktuelle Operationsmodus zurückgesetzt, so dass der Rechner wieder
      * im Ursprungszustand ist.
-     */
+     */ //einmal drücken funktioniert nicht
     public void pressClearKey() {
-        screen = "0";
-        latestOperation = "";
-        latestValue = 0.0;
+        if(clatestOperation.equals("pressClearKey")) {
+            screen = "0";
+            latestOperation = "";
+            latestValue = 0.0;
+        }
+        else {
+            screen = "0";
+            clatestOperation = "pressClearKey";
+            //wird resettet, wenn digitKey gedrückt wird wie im Online Calc
+        }
     }
 
     /**
@@ -58,10 +88,14 @@ public class Calculator {
      * Beim zweiten Drücken nach Eingabe einer weiteren Zahl wird direkt des aktuelle Zwischenergebnis
      * auf dem Bildschirm angezeigt. Falls hierbei eine Division durch Null auftritt, wird "Error" angezeigt.
      * @param operation "+" für Addition, "-" für Substraktion, "x" für Multiplikation, "/" für Division
-     */
+     */ //kein zwischenergebnis, wenn 2tes mal drücken
     public void pressBinaryOperationKey(String operation)  {
-        latestValue = Double.parseDouble(screen);
-        latestOperation = operation;
+            if(!latestOperation.isEmpty() && digitGotPressed == 1) {
+                pressEqualsKey();
+            }
+            latestValue = Double.parseDouble(screen);
+            latestOperation = operation;
+            digitGotPressed = -1;
     }
 
     /**
@@ -82,7 +116,7 @@ public class Calculator {
         };
         screen = Double.toString(result);
         if(screen.equals("NaN")) screen = "Error";
-        if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
+        if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10); //evtl
 
     }
 
@@ -92,10 +126,9 @@ public class Calculator {
      * Seite hinzu und aktualisiert den Bildschirm. Daraufhin eingegebene Zahlen werden rechts vom
      * Trennzeichen angegeben und daher als Dezimalziffern interpretiert.
      * Beim zweimaligem Drücken, oder wenn bereits ein Trennzeichen angezeigt wird, passiert nichts.
-     */
+     */ //wenn screen voll (9 Zeichen) dann kein punkt
     public void pressDotKey() {
-        if(!screen.contains(".")) screen = screen + ".";
-    }
+        if(!screen.contains(".")) screen = screen + ".";}
 
     /**
      * Empfängt den Befehl der gedrückten Vorzeichenumkehrstaste ("+/-").
