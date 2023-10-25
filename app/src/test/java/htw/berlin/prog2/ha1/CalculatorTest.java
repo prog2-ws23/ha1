@@ -106,5 +106,23 @@ class CalculatorTest {
         assertEquals(expected, actual);
     }
 
-}
+    @Test
+    @DisplayName("should allow to execute multiple additions of digits")
+    void testMultipleOperations() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(4);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(1);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(2);
+        calc.pressEqualsKey();
+
+        String expected = "7";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+    }
 
