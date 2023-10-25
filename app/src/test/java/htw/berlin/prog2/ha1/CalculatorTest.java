@@ -109,21 +109,20 @@ class CalculatorTest {
     }
     //Test der nicht funktioniert
     @Test
-    @DisplayName("should display result after adding two positive multi-digit numbers")
-    void testMultiplenumbers() {
+    @DisplayName("potenz einer Zahl berechnen ")
+    void testExponentiation() {
         Calculator calc = new Calculator();
 
-
-        calc.pressDigitKey(4);
-        calc.pressBinaryOperationKey("*");
-        calc.pressDigitKey(4);
+        calc.pressDigitKey(2);
+        calc.pressBinaryOperationKey("√");
         calc.pressEqualsKey();
 
-        String expected = "16";
+        String expected = "1.41421356";
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
     }
+
 }
 
 
