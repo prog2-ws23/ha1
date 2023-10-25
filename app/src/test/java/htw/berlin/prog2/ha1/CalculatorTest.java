@@ -127,10 +127,10 @@ class CalculatorTest {
     void testDivideAndAdd() {
         Calculator calc = new Calculator();
 
-        calc.pressDigitKey(6);
-        calc.pressBinaryOperationKey("x");
-        calc.pressDigitKey(2);
+        calc.pressDigitKey(4);
         calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(2);
+        calc.pressBinaryOperationKey("x");
         calc.pressDigitKey(8);
         calc.pressEqualsKey();
 
