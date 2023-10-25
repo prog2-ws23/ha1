@@ -13,15 +13,14 @@ class CalculatorTest {
     void testPositiveAddition() {
         Calculator calc = new Calculator();
 
-        calc.pressDigitKey(0);
         calc.pressDigitKey(2);
-        calc.pressBinaryOperationKey("/");
         calc.pressDigitKey(0);
+        calc.pressBinaryOperationKey("+");
         calc.pressDigitKey(2);
+        calc.pressDigitKey(0);
         calc.pressEqualsKey();
 
-        String expected = "1";
-        //20+20=40
+        String expected = "40";
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
