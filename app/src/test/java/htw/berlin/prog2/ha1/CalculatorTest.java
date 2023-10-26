@@ -90,5 +90,63 @@ class CalculatorTest {
 
 
     //TODO hier weitere Tests erstellen
-}
+    @Test
+    @DisplayName("should substract two positive numbers")
+    void testSubstractTwoPositiveNumbers() {
+        Calculator calc = new Calculator();
 
+        calc.pressDigitKey(5);
+        calc.pressBinaryOperationKey("-");
+        calc.pressDigitKey(3);
+        calc.pressEqualsKey();
+
+        String expected = "2";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+    @Test
+    @DisplayName("should add negative and postive numbers")
+    void testAddOnePositiveAndOneNegativeNumber() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(5);
+        calc.pressNegativeKey();
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(7);
+        calc.pressEqualsKey();
+
+        String expected = "2";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+    @Test
+    @DisplayName("sollte richtig runden bei 1/x")
+    void testDivideAndAdd() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(6);
+        calc.pressUnaryOperationKey("1/x");
+
+
+        String expected = "0.16666667";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+    @Test
+    @DisplayName("sollte nur zahl raus kommen")
+    void testAddingMultiDigitNumbers() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(5);
+        calc.pressDotKey();
+        calc.pressEqualsKey();
+
+        String expected = "5";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+}
