@@ -137,7 +137,6 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
     }
-
     @Test
     @DisplayName("sollte nur zahl raus kommen")
     void testAddingMultiDigitNumbers() {
