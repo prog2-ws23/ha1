@@ -14,6 +14,11 @@ public class Calculator {
 
     private String latestOperation = "";
 
+    private double latestDigit;
+
+    private String latestKey;
+
+
     /**
      * @return den aktuellen Bildschirminhalt als String
      */
@@ -34,6 +39,8 @@ public class Calculator {
         if(screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = "";
 
         screen = screen + digit;
+        latestDigit = digit;
+        latestKey = "Digit";
     }
 
     /**
@@ -45,9 +52,15 @@ public class Calculator {
      * im Ursprungszustand ist.
      */
     public void pressClearKey() {
-        screen = "0";
-        latestOperation = "";
-        latestValue = 0.0;
+
+        if (latestOperation.isEmpty())  {
+            screen = "0";
+            latestValue = 0.0;
+
+        } else {
+            screen = "0";
+        }
+        latestKey = "Clear";
     }
 
     /**
@@ -62,6 +75,7 @@ public class Calculator {
     public void pressBinaryOperationKey(String operation)  {
         latestValue = Double.parseDouble(screen);
         latestOperation = operation;
+        latestKey = "Binary";
     }
 
     /**
@@ -83,7 +97,7 @@ public class Calculator {
         screen = Double.toString(result);
         if(screen.equals("NaN")) screen = "Error";
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
-
+        latestKey = "Unary";
     }
 
     /**
@@ -95,6 +109,7 @@ public class Calculator {
      */
     public void pressDotKey() {
         if(!screen.contains(".")) screen = screen + ".";
+        latestKey = "Dot";
     }
 
     /**
@@ -105,7 +120,9 @@ public class Calculator {
      * entfernt und der Inhalt fortan als positiv interpretiert.
      */
     public void pressNegativeKey() {
+
         screen = screen.startsWith("-") ? screen.substring(1) : "-" + screen;
+        latestKey = "Negative";
     }
 
     /**
@@ -118,16 +135,23 @@ public class Calculator {
      * und das Ergebnis direkt angezeigt.
      */
     public void pressEqualsKey() {
-        var result = switch(latestOperation) {
+
+        if(latestKey == "Equals") {
+            latestValue = latestDigit;
+        }
+         var result = switch(latestOperation) {
             case "+" -> latestValue + Double.parseDouble(screen);
             case "-" -> latestValue - Double.parseDouble(screen);
             case "x" -> latestValue * Double.parseDouble(screen);
             case "/" -> latestValue / Double.parseDouble(screen);
             default -> throw new IllegalArgumentException();
         };
+
         screen = Double.toString(result);
         if(screen.equals("Infinity")) screen = "Error";
         if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2);
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
+        latestKey = "Equals";
+
     }
 }

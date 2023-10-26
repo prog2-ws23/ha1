@@ -2,8 +2,9 @@ package htw.berlin.prog2.ha1;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("Retro calculator")
 class CalculatorTest {
@@ -90,5 +91,51 @@ class CalculatorTest {
 
 
     //TODO hier weitere Tests erstellen
+
+    @Test
+    @DisplayName("Should throw Exception if Press digit is Higher then 9")
+    void testPressClearKeyTwoTimes() {
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            Calculator calculator = new Calculator();
+            calculator.pressDigitKey(15);
+        });
+    }
+
+    @Test
+    @DisplayName("Should use the latest Operation and latest Operand on the actual screen if EqualsKey is pressed twice ")
+    void testTwoTimesEqualsKey()  {
+
+        Calculator calculator = new Calculator();
+        calculator.pressDigitKey(5);
+        calculator.pressBinaryOperationKey("+");
+        calculator.pressDigitKey(9);
+        calculator.pressEqualsKey();
+        calculator.pressEqualsKey();
+
+        String expected = "23";
+        String actual = calculator.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("Should save the previous operation and previous operands when the ClearKey is pressed once")
+    void testPressClearKeyOneTime() {
+
+        Calculator calculator = new Calculator();
+        calculator.pressDigitKey(6);
+        calculator.pressBinaryOperationKey("x");
+        calculator.pressDigitKey(5);
+        calculator.pressClearKey();
+        calculator.pressDigitKey(6);
+        calculator.pressEqualsKey();
+
+        String expected = "36";
+        String actual = calculator.readScreen();
+
+        assertEquals(expected, actual);
+
+    }
 }
 
