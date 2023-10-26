@@ -80,7 +80,12 @@ public class Calculator {
             case "1/x" -> 1 / Double.parseDouble(screen);
             default -> throw new IllegalArgumentException();
         };
-        screen = Double.toString(result);
+
+        //CHANGED
+        if (result == (int) result) screen = Integer.toString((int) result);
+        else screen = Double.toString(result);
+        // BEFORE: screen = Double.toString(result);
+
         if(screen.equals("NaN")) screen = "Error";
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
 
@@ -105,8 +110,7 @@ public class Calculator {
      * entfernt und der Inhalt fortan als positiv interpretiert.
      */
     public void pressNegativeKey() {
-        screen = screen.startsWith("-") ? screen.substring(1) : "-" + screen;
-    }
+    screen = screen.startsWith("-") ? screen.substring(1) : "-" + screen;}
 
     /**
      * Empfängt den Befehl der gedrückten "="-Taste.
@@ -123,6 +127,7 @@ public class Calculator {
             case "-" -> latestValue - Double.parseDouble(screen);
             case "x" -> latestValue * Double.parseDouble(screen);
             case "/" -> latestValue / Double.parseDouble(screen);
+            case "" -> Double.parseDouble(screen);
             default -> throw new IllegalArgumentException();
         };
         screen = Double.toString(result);
