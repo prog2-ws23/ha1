@@ -123,7 +123,7 @@ class CalculatorTest {
     }
 
     @Test
-    @DisplayName("should richtig runden")
+    @DisplayName("should richtig runden bei 1/x")
     void testDivideAndAdd() {
         Calculator calc = new Calculator();
 

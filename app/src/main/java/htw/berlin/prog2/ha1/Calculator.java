@@ -133,6 +133,11 @@ public class Calculator {
         if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2);
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
     }
+    /**
+     * Berechnet die Kehrwert (Reciprocal) des Wertes, der in der 'screen'-Variablen gespeichert ist.
+     *
+     * @return Der Kehrwert des Wertes in der 'screen'-Variablen, auf 8 Dezimalstellen gerundet.
+     */
     private double reciprocal() {
         double value = 1 / Double.parseDouble(screen);
         return Double.parseDouble(String.format(Locale.ENGLISH, "%.8f", value));
