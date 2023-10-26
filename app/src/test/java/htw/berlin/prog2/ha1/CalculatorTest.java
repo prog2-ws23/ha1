@@ -90,5 +90,59 @@ class CalculatorTest {
 
 
     //TODO hier weitere Tests erstellen
+    //A1- Test für eine neue Funktion, der grün wird
+    @Test
+    @DisplayName("should display result after subtracting two positive multi-digit numbers")
+    void testPositiveSubtraction() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(2);
+        calc.pressDigitKey(0);
+        calc.pressBinaryOperationKey("-");
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(0);
+        calc.pressEqualsKey();
+
+        String expected = "10";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+    //A2 - Test der rot schlägt neu
+    @Test
+    @DisplayName("should display result of a squareroot as an integer")
+    void testSqrtAsInteger() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(9);
+        calc.pressUnaryOperationKey("√");
+
+        String expected = "3";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+    //A2 - Test der rot schlägt
+    @Test
+    @DisplayName("should display result after adding 3 numbers")
+    void testAdditionOf3Addends() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(7);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(7);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(7);
+        calc.pressEqualsKey();
+
+        String expected = "21";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+
 }
 

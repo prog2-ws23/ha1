@@ -14,6 +14,8 @@ public class Calculator {
 
     private String latestOperation = "";
 
+    private boolean multipleBinOperators = false;
+
     /**
      * @return den aktuellen Bildschirminhalt als String
      */
@@ -60,8 +62,12 @@ public class Calculator {
      * @param operation "+" für Addition, "-" für Substraktion, "x" für Multiplikation, "/" für Division
      */
     public void pressBinaryOperationKey(String operation)  {
+        if(multipleBinOperators){
+            pressEqualsKey();
+        }
         latestValue = Double.parseDouble(screen);
         latestOperation = operation;
+        multipleBinOperators = true;
     }
 
     /**
@@ -83,6 +89,8 @@ public class Calculator {
         screen = Double.toString(result);
         if(screen.equals("NaN")) screen = "Error";
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
+        //bugfix für @Test testSqrtAsInteger
+        if(screen.endsWith(".0")) screen = screen.substring(0, screen.length() - 2);
 
     }
 
