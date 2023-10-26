@@ -72,62 +72,69 @@ public class Calculator {
      * @param operation "√" für Quadratwurzel, "%" für Prozent, "1/x" für Inversion
      */
     public void pressUnaryOperationKey(String operation) {
-        latestValue = Double.parseDouble(screen);
-        latestOperation = operation;
-        var result = switch(operation) {
-            case "√" -> Math.sqrt(Double.parseDouble(screen));
-            case "%" -> Double.parseDouble(screen) / 100;
-            case "1/x" -> 1 / Double.parseDouble(screen);
-            default -> throw new IllegalArgumentException();
-        };
-        screen = Double.toString(result);
-        if(screen.equals("NaN")) screen = "Error";
-        if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
+        if (Double.parseDouble(screen) < 0 && operation.equals("√")) {
+            screen = "Error";
+        } else {
+            var result = switch (operation) {
+                case "√" -> Math.sqrt(Double.parseDouble(screen));
+                case "%" -> Double.parseDouble(screen) / 100;
+                case "1/x" -> 1 / Double.parseDouble(screen);
+                default -> throw new IllegalArgumentException();
+            };
+            screen = Double.toString(result);
+            if (screen.equals("NaN")) screen = "Error";
+            if (screen.endsWith(".0")) screen = screen.substring(0, screen.length() - 2);
+            if (screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
 
-    }
+        }
+     }
 
-    /**
-     * Empfängt den Befehl der gedrückten Dezimaltrennzeichentaste, im Englischen üblicherweise "."
-     * Fügt beim ersten Mal Drücken dem aktuellen Bildschirminhalt das Trennzeichen auf der rechten
-     * Seite hinzu und aktualisiert den Bildschirm. Daraufhin eingegebene Zahlen werden rechts vom
-     * Trennzeichen angegeben und daher als Dezimalziffern interpretiert.
-     * Beim zweimaligem Drücken, oder wenn bereits ein Trennzeichen angezeigt wird, passiert nichts.
-     */
-    public void pressDotKey() {
-        if(!screen.contains(".")) screen = screen + ".";
-    }
+        /**
+         * Empfängt den Befehl der gedrückten Dezimaltrennzeichentaste, im Englischen üblicherweise "."
+         * Fügt beim ersten Mal Drücken dem aktuellen Bildschirminhalt das Trennzeichen auf der rechten
+         * Seite hinzu und aktualisiert den Bildschirm. Daraufhin eingegebene Zahlen werden rechts vom
+         * Trennzeichen angegeben und daher als Dezimalziffern interpretiert.
+         * Beim zweimaligem Drücken, oder wenn bereits ein Trennzeichen angezeigt wird, passiert nichts.
+         */
+        public void pressDotKey () {
+            if (!screen.contains(".")) screen = screen + ".";
+        }
 
-    /**
-     * Empfängt den Befehl der gedrückten Vorzeichenumkehrstaste ("+/-").
-     * Zeigt der Bildschirm einen positiven Wert an, so wird ein "-" links angehängt, der Bildschirm
-     * aktualisiert und die Inhalt fortan als negativ interpretiert.
-     * Zeigt der Bildschirm bereits einen negativen Wert mit führendem Minus an, dann wird dieses
-     * entfernt und der Inhalt fortan als positiv interpretiert.
-     */
-    public void pressNegativeKey() {
-        screen = screen.startsWith("-") ? screen.substring(1) : "-" + screen;
-    }
+        /**
+         * Empfängt den Befehl der gedrückten Vorzeichenumkehrstaste ("+/-").
+         * Zeigt der Bildschirm einen positiven Wert an, so wird ein "-" links angehängt, der Bildschirm
+         * aktualisiert und die Inhalt fortan als negativ interpretiert.
+         * Zeigt der Bildschirm bereits einen negativen Wert mit führendem Minus an, dann wird dieses
+         * entfernt und der Inhalt fortan als positiv interpretiert.
+         */
+        public void pressNegativeKey () {
+            screen = screen.startsWith("-") ? screen.substring(1) : "-" + screen;
+        }
 
-    /**
-     * Empfängt den Befehl der gedrückten "="-Taste.
-     * Wurde zuvor keine Operationstaste gedrückt, passiert nichts.
-     * Wurde zuvor eine binäre Operationstaste gedrückt und zwei Operanden eingegeben, wird das
-     * Ergebnis der Operation angezeigt. Falls hierbei eine Division durch Null auftritt, wird "Error" angezeigt.
-     * Wird die Taste weitere Male gedrückt (ohne andere Tasten dazwischen), so wird die letzte
-     * Operation (ggf. inklusive letztem Operand) erneut auf den aktuellen Bildschirminhalt angewandt
-     * und das Ergebnis direkt angezeigt.
-     */
-    public void pressEqualsKey() {
-        var result = switch(latestOperation) {
-            case "+" -> latestValue + Double.parseDouble(screen);
-            case "-" -> latestValue - Double.parseDouble(screen);
-            case "x" -> latestValue * Double.parseDouble(screen);
-            case "/" -> latestValue / Double.parseDouble(screen);
-            default -> throw new IllegalArgumentException();
-        };
-        screen = Double.toString(result);
-        if(screen.equals("Infinity")) screen = "Error";
-        if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2);
-        if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
+        /**
+         * Empfängt den Befehl der gedrückten "="-Taste.
+         * Wurde zuvor keine Operationstaste gedrückt, passiert nichts.
+         * Wurde zuvor eine binäre Operationstaste gedrückt und zwei Operanden eingegeben, wird das
+         * Ergebnis der Operation angezeigt. Falls hierbei eine Division durch Null auftritt, wird "Error" angezeigt.
+         * Wird die Taste weitere Male gedrückt (ohne andere Tasten dazwischen), so wird die letzte
+         * Operation (ggf. inklusive letztem Operand) erneut auf den aktuellen Bildschirminhalt angewandt
+         * und das Ergebnis direkt angezeigt.
+         */
+        public void pressEqualsKey () {
+            var result = switch (latestOperation) {
+                case "+" -> latestValue + Double.parseDouble(screen);
+                case "-" -> latestValue - Double.parseDouble(screen);
+                case "x" -> latestValue * Double.parseDouble(screen);
+                case "/" -> latestValue / Double.parseDouble(screen);
+                default -> throw new IllegalArgumentException();
+            };
+            if (Double.isInfinite(result) || Double.isNaN(result)) {
+                screen = "Error";
+            } else {
+                screen = Double.toString(result);
+                if (screen.equals("Infinity")) screen = "Error";
+                if (screen.endsWith(".0")) screen = screen.substring(0, screen.length() - 2);
+                if (screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
+            }
+        }
     }
-}
