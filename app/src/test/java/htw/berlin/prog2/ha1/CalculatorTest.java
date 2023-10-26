@@ -105,7 +105,6 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
     }
-
     @Test
     @DisplayName("should add negative and postive numbers")
     void testAddOnePositiveAndOneNegativeNumber() {
@@ -122,7 +121,6 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
     }
-
     @Test
     @DisplayName("sollte richtig runden bei 1/x")
     void testDivideAndAdd() {
