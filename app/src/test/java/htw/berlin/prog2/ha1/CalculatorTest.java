@@ -137,17 +137,15 @@ class CalculatorTest {
         assertEquals(expected, actual);
     }
     @Test
-    @DisplayName("should add up two multi-digit numbers")
+    @DisplayName("sollte ")
     void testAddingMultiDigitNumbers(){
         Calculator calc = new Calculator();
 
-        calc.pressDigitKey(6);
-        calc.pressDigitKey(6);
-        calc.pressBinaryOperationKey("+");
-        calc.pressDigitKey(3);
-        calc.pressDigitKey(4);;
+        calc.pressDigitKey(5);
+        calc.pressDotKey();
+        calc.pressEqualsKey();
 
-        String expected = "100";
+        String expected = "5";
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
