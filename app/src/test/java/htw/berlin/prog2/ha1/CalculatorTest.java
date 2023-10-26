@@ -130,7 +130,21 @@ class CalculatorTest {
 
 
     }
+    /*
+    Aufgabe 2.2:
+     */
+    @Test
+    @DisplayName("pressUnaryOperationKey 1/x")
+    void testPressUnaryOperationKey(){
+        Calculator calc = new Calculator();
+        calc.pressUnaryOperationKey("1/x");
+        String expected = "Error";
+        String actual = calc.readScreen();
+        assertEquals(expected, actual);
 
+
+
+    }
 
 
 }
