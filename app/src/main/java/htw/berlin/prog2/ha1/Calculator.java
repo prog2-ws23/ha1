@@ -88,6 +88,8 @@ public class Calculator {
         if (screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
         // bugfix für 1. roten Test
         if (screen.equals("Infinity")) screen = "Error";
+        // bugfix für 2. roten Test
+        if (screen.endsWith(".0")) screen = screen.substring(0, screen.length()-2);
 
     }
 
