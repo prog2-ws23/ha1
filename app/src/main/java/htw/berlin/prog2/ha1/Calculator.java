@@ -14,13 +14,15 @@ public class Calculator {
 
     private String latestOperation = "";
 
-    private String latestPressedKey;
+    private double latestDigit;
+
+    private String latestKey;
+
 
     /**
      * @return den aktuellen Bildschirminhalt als String
      */
     public String readScreen() {
-        latestPressedKey = "ReadScreen";
         return screen;
     }
 
@@ -37,7 +39,8 @@ public class Calculator {
         if(screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = "";
 
         screen = screen + digit;
-        latestPressedKey = "DigitKey";
+        latestDigit = digit;
+        latestKey = "Digit";
     }
 
     /**
@@ -57,7 +60,7 @@ public class Calculator {
         } else {
             screen = "0";
         }
-        latestPressedKey = "ClearKey";
+        latestKey = "Clear";
     }
 
     /**
@@ -72,7 +75,7 @@ public class Calculator {
     public void pressBinaryOperationKey(String operation)  {
         latestValue = Double.parseDouble(screen);
         latestOperation = operation;
-        latestPressedKey = "BinaryOperationKey";
+        latestKey = "Binary";
     }
 
     /**
@@ -94,8 +97,7 @@ public class Calculator {
         screen = Double.toString(result);
         if(screen.equals("NaN")) screen = "Error";
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
-        latestPressedKey = "UnaryOperationKey";
-
+        latestKey = "Unary";
     }
 
     /**
@@ -107,7 +109,7 @@ public class Calculator {
      */
     public void pressDotKey() {
         if(!screen.contains(".")) screen = screen + ".";
-        latestPressedKey = "DotKey";
+        latestKey = "Dot";
     }
 
     /**
@@ -118,8 +120,9 @@ public class Calculator {
      * entfernt und der Inhalt fortan als positiv interpretiert.
      */
     public void pressNegativeKey() {
+
         screen = screen.startsWith("-") ? screen.substring(1) : "-" + screen;
-        latestPressedKey = "NegativKey";
+        latestKey = "Negative";
     }
 
     /**
@@ -133,8 +136,8 @@ public class Calculator {
      */
     public void pressEqualsKey() {
 
-        if(latestPressedKey == "EqualsKey") {
-                latestValue = Double.parseDouble(screen);
+        if(latestKey == "Equals") {
+            latestValue = latestDigit;
         }
          var result = switch(latestOperation) {
             case "+" -> latestValue + Double.parseDouble(screen);
@@ -143,11 +146,12 @@ public class Calculator {
             case "/" -> latestValue / Double.parseDouble(screen);
             default -> throw new IllegalArgumentException();
         };
+
         screen = Double.toString(result);
         if(screen.equals("Infinity")) screen = "Error";
         if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2);
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
-        latestPressedKey = "EqualsKey";
+        latestKey = "Equals";
 
     }
 }
