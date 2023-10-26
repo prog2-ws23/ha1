@@ -62,7 +62,7 @@ public class Calculator {
      */
     public void pressBinaryOperationKey(String operation)  {
         if (!latestOperation.isEmpty()) {
-            pressEqualsKey();6
+            pressEqualsKey();
         }
         latestValue = Double.parseDouble(screen);
         latestOperation = operation;
@@ -129,6 +129,7 @@ public class Calculator {
                 default -> throw new IllegalArgumentException();
             };
 
+             latestOperation = "";
         screen = Double.toString(result);
         if(screen.equals("Infinity")) screen = "Error";
         if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2);
