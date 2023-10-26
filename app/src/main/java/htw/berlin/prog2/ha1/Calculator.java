@@ -31,10 +31,20 @@ public class Calculator {
     public void pressDigitKey(int digit) {
         if(digit > 9 || digit < 0) throw new IllegalArgumentException();
 
-        if(screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = "";
+        //(screen.contains(".")) screen = screen + digit;
+        //if(screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = "";
+
+        if(screen.contains(".")){
+            screen = screen + digit;
+            return;
+        }
+        else{
+            if(screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = "";
+        }
 
         screen = screen + digit;
     }
+
 
     /**
      * Empfängt den Befehl der C- bzw. CE-Taste (Clear bzw. Clear Entry).
