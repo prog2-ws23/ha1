@@ -149,19 +149,19 @@ class CalculatorTest {
 
     }
     @Test
-    @DisplayName("varied")
-    void varied() {
+    @DisplayName("EqualsKey works as documented")
+    void testEqualsKey() {
         Calculator calc = new Calculator();
 
+        calc.pressEqualsKey();
         calc.pressDigitKey(3);
         calc.pressBinaryOperationKey("+");
-        calc.pressBinaryOperationKey("-");
-        calc.pressBinaryOperationKey("/");
-        calc.pressBinaryOperationKey("+");
         calc.pressDigitKey(3);
-        calc.pressBinaryOperationKey("+");
-        
-        String expected ="6";
+        calc.pressEqualsKey();
+        calc.pressEqualsKey();
+        calc.pressEqualsKey();
+
+        String expected ="12";
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
