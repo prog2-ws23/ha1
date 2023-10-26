@@ -123,18 +123,15 @@ class CalculatorTest {
     }
 
     @Test
-    @DisplayName("should mehrere rechenoperationen ausfuehren")
+    @DisplayName("should richtig runden")
     void testDivideAndAdd() {
         Calculator calc = new Calculator();
 
-        calc.pressDigitKey(4);
-        calc.pressBinaryOperationKey("+");
-        calc.pressDigitKey(2);
-        calc.pressBinaryOperationKey("+");
-        calc.pressDigitKey(8);
-        calc.pressEqualsKey();
+        calc.pressDigitKey(6);
+        calc.pressUnaryOperationKey("1/x");
 
-        String expected = "14";
+
+        String expected = "0.16666667";
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
