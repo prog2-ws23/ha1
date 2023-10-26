@@ -12,7 +12,19 @@ public class Calculator {
 
     private double latestValue;
 
+    /**
+     * Diese methode gibt den wert von latestValue zurück
+     * @return latestValue der zuletzt genutzte Zahlwert
+     */
+    public double getLatestValue() {
+        return latestValue;
+    }
+
     private String latestOperation = "";
+
+    private int equalsCounter = 0;
+
+    private double number = 0;
 
     /**
      * @return den aktuellen Bildschirminhalt als String
@@ -45,9 +57,14 @@ public class Calculator {
      * im Ursprungszustand ist.
      */
     public void pressClearKey() {
-        screen = "0";
-        latestOperation = "";
-        latestValue = 0.0;
+        if(!screen.equals("0")){
+            screen = "0";
+        }
+        else {
+            screen = "0";
+            latestOperation = "";
+            latestValue = 0.0;
+        }
     }
 
     /**
@@ -118,16 +135,22 @@ public class Calculator {
      * und das Ergebnis direkt angezeigt.
      */
     public void pressEqualsKey() {
+        if(equalsCounter < 1){
+            number = Double.parseDouble(screen);
+        }
         var result = switch(latestOperation) {
-            case "+" -> latestValue + Double.parseDouble(screen);
-            case "-" -> latestValue - Double.parseDouble(screen);
-            case "x" -> latestValue * Double.parseDouble(screen);
-            case "/" -> latestValue / Double.parseDouble(screen);
+            case "+" -> latestValue + number;
+            case "-" -> latestValue - number;
+            case "x" -> latestValue * number;
+            case "/" -> latestValue / number;
             default -> throw new IllegalArgumentException();
         };
         screen = Double.toString(result);
+        latestValue = result;
         if(screen.equals("Infinity")) screen = "Error";
         if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2);
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
+
+        equalsCounter++;
     }
 }
