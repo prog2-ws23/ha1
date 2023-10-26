@@ -93,7 +93,7 @@ class CalculatorTest {
     //Test der  funktioniert
     @Test
     @DisplayName("should be able to subtract numbers")
-    void testsubtractnumbers() {
+    void testSubtractNumbers() {
         Calculator calc = new Calculator();
 
         calc.pressDigitKey(6);
@@ -109,7 +109,7 @@ class CalculatorTest {
     }
     @Test
     @DisplayName("should display Error for a very long number")
-    void teststoolongnumbers() {
+    void testsTooLongNumbers() {
         Calculator calc = new Calculator();
 
 
@@ -137,8 +137,8 @@ class CalculatorTest {
         }
 
     @Test
-    @DisplayName("should handle overflow in addition")
-    void testOverflowInAddition() {
+    @DisplayName("should display Error when you try to take the inverse of zero")
+    void testInverseOfZero() {
         Calculator calc = new Calculator();
 
         calc.pressDigitKey(0);
@@ -149,8 +149,6 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
     }
-
-
 
 
 }
