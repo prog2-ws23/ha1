@@ -12,6 +12,8 @@ public class Calculator {
 
     private double latestValue;
 
+    private double secondValue;
+
     private String latestOperation = "";
 
     /**
@@ -119,16 +121,30 @@ public class Calculator {
      * und das Ergebnis direkt angezeigt.
      */
     public void pressEqualsKey() {
-        var result = switch(latestOperation) {
-            case "+" -> latestValue + Double.parseDouble(screen);
-            case "-" -> latestValue - Double.parseDouble(screen);
-            case "x" -> latestValue * Double.parseDouble(screen);
-            case "/" -> latestValue / Double.parseDouble(screen);
-            default -> throw new IllegalArgumentException();
-        };
+        var result = 0.0;
+        if (secondValue != 0) {
+            result = switch (latestOperation) {
+                case "+" -> Double.parseDouble(screen) + secondValue;
+                case "-" -> Double.parseDouble(screen) - secondValue;
+                case "x" -> Double.parseDouble(screen) * secondValue;
+                case "/" -> Double.parseDouble(screen) / secondValue;
+                default -> throw new IllegalArgumentException();
+            };
+        } else {
+            secondValue = Double.parseDouble(screen);
+            result = switch (latestOperation) {
+                case "+" -> latestValue + Double.parseDouble(screen);
+                case "-" -> latestValue - Double.parseDouble(screen);
+                case "x" -> latestValue * Double.parseDouble(screen);
+                case "/" -> latestValue / Double.parseDouble(screen);
+                default -> throw new IllegalArgumentException();
+
+            };
+        }
+
         screen = Double.toString(result);
-        if(screen.equals("Infinity")) screen = "Error";
-        if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2);
-        if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
+        if (screen.equals("Infinity")) screen = "Error";
+        if (screen.endsWith(".0")) screen = screen.substring(0, screen.length() - 2);
+        if (screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
     }
 }
