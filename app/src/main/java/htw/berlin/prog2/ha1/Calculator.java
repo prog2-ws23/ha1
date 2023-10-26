@@ -12,7 +12,15 @@ public class Calculator {
 
     private double latestValue;
 
+    private double previousValue;
+
     private String latestOperation = "";
+
+    private String latestInput = "";
+
+    private String previousOperation ="";
+
+    private String previousInput ="";
 
     /**
      * @return den aktuellen Bildschirminhalt als String
@@ -29,11 +37,20 @@ public class Calculator {
      * @param digit Die Ziffer, deren Taste gedrückt wurde
      */
     public void pressDigitKey(int digit) {
+        previousInput = latestInput;
+        latestInput = "digit";
+        previousValue = Double.parseDouble(screen);
+
         if(digit > 9 || digit < 0) throw new IllegalArgumentException();
 
         if(screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = "";
 
-        screen = screen + digit;
+        latestValue = previousValue + digit;
+        screen = Double.toString(latestValue);
+        if(screen.equals("Infinity")) screen = "Error";
+        if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2);
+        if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
+
     }
 
     /**
@@ -46,8 +63,16 @@ public class Calculator {
      */
     public void pressClearKey() {
         screen = "0";
-        latestOperation = "";
-        latestValue = 0.0;
+        if(latestInput.equals("c")){
+            latestOperation = "";
+            latestValue = 0.0;
+            latestInput = "";
+
+            previousInput = "";
+            previousOperation = "";
+            previousValue = 0.0;
+        }
+        latestInput = "c";
     }
 
     /**
@@ -60,8 +85,29 @@ public class Calculator {
      * @param operation "+" für Addition, "-" für Substraktion, "x" für Multiplikation, "/" für Division
      */
     public void pressBinaryOperationKey(String operation)  {
+        String binaryOperations = "+,-,x,/";
+        previousValue = latestValue;
         latestValue = Double.parseDouble(screen);
+        previousOperation = latestOperation;
         latestOperation = operation;
+        previousInput = latestInput;
+        latestInput = operation;
+        if(previousInput.equals("digit") && previousOperation.contains(binaryOperations) && latestOperation.contains(binaryOperations)){
+            var result = switch(previousOperation) {
+                case "+" -> previousValue + latestValue;
+                case "-" -> previousValue - latestValue;
+                case "x" -> previousValue * latestValue;
+                case "/" -> previousValue / latestValue;
+                default -> throw new IllegalArgumentException();
+            };
+            latestValue = result;
+            screen = Double.toString(latestValue);
+        }
+        if(screen.equals("Infinity")) screen = "Error";
+        if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2);
+        if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
+
+
     }
 
     /**
@@ -81,8 +127,10 @@ public class Calculator {
             default -> throw new IllegalArgumentException();
         };
         screen = Double.toString(result);
+        latestValue = result;
         if(screen.equals("NaN")) screen = "Error";
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
+        latestInput = operation;
 
     }
 
@@ -117,6 +165,9 @@ public class Calculator {
      * Operation (ggf. inklusive letztem Operand) erneut auf den aktuellen Bildschirminhalt angewandt
      * und das Ergebnis direkt angezeigt.
      */
+
+     //FIXME does not work as inteded
+     //reworked binaryKey messes with this
     public void pressEqualsKey() {
         if(latestOperation != "") {
             var result = switch(latestOperation) {
@@ -130,7 +181,6 @@ public class Calculator {
             if(screen.equals("Infinity")) screen = "Error";
             if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2);
             if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
-
         };
     }
 }

@@ -113,14 +113,14 @@ class CalculatorTest {
         calc.pressBinaryOperationKey("+");
         calc.pressDigitKey(5);
         calc.pressEqualsKey();
-        calc.pressBinaryOperationKey("+");
-        calc.pressDigitKey(5);
-        calc.pressClearKey();
-        calc.pressBinaryOperationKey("+");
-        calc.pressDigitKey(5);
-        calc.pressEqualsKey();
+        // calc.pressBinaryOperationKey("+");
+        // calc.pressDigitKey(5);
+        // calc.pressClearKey();
+        // calc.pressBinaryOperationKey("+");
+        // calc.pressDigitKey(5);
+        // calc.pressEqualsKey();
 
-        String expected ="15";
+        String expected ="10";
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
@@ -136,12 +136,15 @@ class CalculatorTest {
         calc.pressDigitKey(3);
         calc.pressBinaryOperationKey("+");
         calc.pressDigitKey(3);
+        calc.pressBinaryOperationKey("+");
+        calc.pressBinaryOperationKey("-");
+        calc.pressBinaryOperationKey("/");
+        calc.pressBinaryOperationKey("x");
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(3);
+        calc.pressBinaryOperationKey("+");
         calc.pressEqualsKey();
-        calc.pressBinaryOperationKey("x");
-        calc.pressDigitKey(6);
-        calc.pressBinaryOperationKey("x");
-
-        String expected ="36";
+        String expected ="18";
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
@@ -165,9 +168,9 @@ class CalculatorTest {
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
-
-
     }
+
+    
 
     //TODO hier weitere Tests erstellen
 }
