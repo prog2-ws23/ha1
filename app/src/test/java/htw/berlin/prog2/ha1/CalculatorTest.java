@@ -45,7 +45,7 @@ class CalculatorTest {
     void testDivisionByZero() {
         Calculator calc = new Calculator();
 
-        calc.pressDigitKey(7);
+        calc.pressDigitKey(2);
         calc.pressBinaryOperationKey("/");
         calc.pressDigitKey(0);
         calc.pressEqualsKey();
@@ -90,5 +90,75 @@ class CalculatorTest {
 
 
     //TODO hier weitere Tests erstellen
+    //Test der  funktioniert
+    @Test
+    @DisplayName("should be able to subtract numbers")
+    void testSubtractNumbers() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(6);
+        calc.pressBinaryOperationKey("-");
+        calc.pressDigitKey(3);
+
+        String expected = "3";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+
+
+    }
+    @Test
+    @DisplayName("should display Error for a very long number")
+    void testsTooLongNumbers() {
+        Calculator calc = new Calculator();
+
+
+        calc.pressDigitKey(1);
+        calc.pressDotKey();
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(1);
+
+        //darf ich hier auch eine Schleife anwenden ?
+        //Hier die Eingabe von 10 Ziffern und einem Dezimaltrennzeichen um zu gucken ob Error erscheint
+
+        String expected = "Error";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+
+        }
+
+    @Test
+    @DisplayName("should display Error when you try to take the inverse of zero")
+    void testInverseOfZero() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(0);
+        calc.pressUnaryOperationKey("1/x");
+
+        String expected = "Error";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+
 }
+
+
+
+
+
+
+
+
+
 

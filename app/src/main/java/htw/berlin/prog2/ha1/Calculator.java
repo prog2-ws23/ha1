@@ -29,12 +29,20 @@ public class Calculator {
      * @param digit Die Ziffer, deren Taste gedrückt wurde
      */
     public void pressDigitKey(int digit) {
-        if(digit > 9 || digit < 0) throw new IllegalArgumentException();
+        if (digit > 9 || digit < 0) //überprüfung ob die Ziffer zwischen 0 und 9 liegt
+            throw new IllegalArgumentException(); // wirft im Falle eines Fehlers exception aus
 
-        if(screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = "";
+        if (screen.equals("0") || latestValue == Double.parseDouble(screen)) // prüft die Bedingung
+            screen = ""; // leert den Display
 
-        screen = screen + digit;
+        if (screen.length() < 11) {
+            screen = screen + digit;
+        } else {
+            screen = "Error"; // Wenn die Ziffer zu lang ist zeige Error an
+        }
     }
+
+
 
     /**
      * Empfängt den Befehl der C- bzw. CE-Taste (Clear bzw. Clear Entry).
@@ -83,8 +91,15 @@ public class Calculator {
         screen = Double.toString(result);
         if(screen.equals("NaN")) screen = "Error";
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
+        if(screen.equals("Infinity")) screen = "Error"; //inverse mit 0 ergibt Infinity deswegen
+        // Infinity zu Error umändern damit Fehler Error wird und behandelt wird.
+
+
 
     }
+
+
+
 
     /**
      * Empfängt den Befehl der gedrückten Dezimaltrennzeichentaste, im Englischen üblicherweise "."
@@ -96,6 +111,7 @@ public class Calculator {
     public void pressDotKey() {
         if(!screen.contains(".")) screen = screen + ".";
     }
+
 
     /**
      * Empfängt den Befehl der gedrückten Vorzeichenumkehrstaste ("+/-").
