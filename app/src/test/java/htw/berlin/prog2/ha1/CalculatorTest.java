@@ -108,5 +108,17 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
     }
-}
 
+    @Test
+    @DisplayName("should display result after getting the square root of two")
+    void test1() {
+        Calculator calc = new Calculator();
+        calc.pressUnaryOperationKey("1/x");
+
+        String expected = "Error";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+}
