@@ -12,6 +12,8 @@ public class Calculator {
 
     private double latestValue;
 
+    private double latestLatestValue;
+
     private String latestOperation = "";
 
     /**
@@ -60,6 +62,9 @@ public class Calculator {
      * @param operation "+" für Addition, "-" für Substraktion, "x" für Multiplikation, "/" für Division
      */
     public void pressBinaryOperationKey(String operation)  {
+        if(!(latestValue ==0)) {
+            latestLatestValue = latestValue;
+        }
         latestValue = Double.parseDouble(screen);
         latestOperation = operation;
     }
@@ -119,9 +124,9 @@ public class Calculator {
      */
     public void pressEqualsKey() {
         var result = switch(latestOperation) {
-            case "+" -> latestValue + Double.parseDouble(screen);
+            case "+" -> latestValue + Double.parseDouble(screen)  + latestLatestValue;
             case "-" -> latestValue - Double.parseDouble(screen);
-            case "x" -> latestValue * Double.parseDouble(screen);
+            case "x" -> latestValue * Double.parseDouble(screen) + latestLatestValue;
             case "/" -> latestValue / Double.parseDouble(screen);
             default -> throw new IllegalArgumentException();
         };
