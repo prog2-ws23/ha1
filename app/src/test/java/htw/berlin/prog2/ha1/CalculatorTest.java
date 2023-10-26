@@ -138,7 +138,7 @@ class CalculatorTest {
     }
     @Test
     @DisplayName("should add up two multi-digit numbers")
-    void testKehrwert(){
+    void testAddingMultiDigitNumbers(){
         Calculator calc = new Calculator();
 
         calc.pressDigitKey(6);
