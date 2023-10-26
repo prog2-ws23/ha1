@@ -89,6 +89,7 @@ class CalculatorTest {
     }
 
 
-    //TODO hier weitere Tests erstellen
-}
-
+    /*
+    TODO hier weitere Tests erstellen
+    Test Test Test
+     */
