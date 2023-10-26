@@ -107,25 +107,10 @@ class CalculatorTest {
         assertEquals(expected, actual);
     }
 
-    @Test
-    @DisplayName("checks result after press equal repeated ")
-    void testNegativeNumber() {
-        Calculator calc = new Calculator();
 
-        calc.pressDigitKey(6);
-        calc.pressBinaryOperationKey("-");
-        calc.pressDigitKey(6);
-        calc.pressEqualsKey();
-        //calc.pressEqualsKey();
-
-        String expected = "-6";
-        String actual = calc.readScreen();
-
-        assertEquals(expected, actual);
-    }
     @Test
     @DisplayName("should allow press +/- first and then the number after and still be correct positiv or negativ")
-    public void testPressNegativeKey() {
+    void testPressNegativeKey() {
         Calculator calc = new Calculator();
 
         calc.pressNegativeKey();
@@ -139,4 +124,23 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
     }
+
+    @Test
+    @DisplayName(" adds three times two ")
+    void testAdditionOf2Plus2Plus2() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(2);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(2);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(2);
+        calc.pressEqualsKey();
+
+        String expected = "6";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
 }
