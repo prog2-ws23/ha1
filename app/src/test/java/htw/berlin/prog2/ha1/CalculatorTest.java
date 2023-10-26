@@ -110,4 +110,55 @@ class CalculatorTest {
         assertEquals(expected, actual);
 
     }
+
+
+    @Test
+    @DisplayName("should display result after multiplicare  two multi-digit numbers")
+    void testmultiplicaretwoNumbers() {
+        Calculator calc = new Calculator();
+
+
+        calc.pressBinaryOperationKey("/");
+        calc.pressUnaryOperationKey("√");
+        calc.pressBinaryOperationKey("/");
+        String expected = "ERROR";
+        String actual = calc.readScreen();
+        assertEquals(expected, actual);
+
+    }
+
+
+    @Test
+    @DisplayName("should display result after adding two positive multi-digit numbers")
+    void testPositive() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(3);
+        calc.pressNegativeKey();
+        calc.pressBinaryOperationKey("x");
+        calc.pressDigitKey(5);
+        calc.pressNegativeKey();
+        calc.pressBinaryOperationKey("x");
+        calc.pressDigitKey(3);
+        calc.pressEqualsKey();
+        String expected = "45";
+        String actual = calc.readScreen();
+        assertEquals(expected, actual);
+
+    }
+
+    @Test
+    @DisplayName("display result after adding two positive multi-digit numbers")
+    void testPositifve() {
+        Calculator calc = new Calculator();
+        calc.pressDigitKey(9);
+        calc.pressDotKey();
+        calc.pressDigitKey(9);
+        calc.pressBinaryOperationKey("/");
+        calc.pressEqualsKey();
+        String expected = "1";
+        String actual = calc.readScreen();
+        assertEquals(expected, actual);
+
+    }
 }
