@@ -112,8 +112,10 @@ class CalculatorTest {
     void teststoolongnumbers() {
         Calculator calc = new Calculator();
 
+
         calc.pressDigitKey(1);
         calc.pressDotKey();
+        calc.pressDigitKey(1);
         calc.pressDigitKey(1);
         calc.pressDigitKey(1);
         calc.pressDigitKey(1);
