@@ -109,7 +109,25 @@ class CalculatorTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    @DisplayName("should repeatedly display the result after repeatedly using the equals key")
+    void testMultipleEqualKeys(){
+        Calculator calc = new Calculator();
 
+        calc.pressDigitKey(3);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(5);
+        calc.pressEqualsKey();
+        calc.pressEqualsKey();
+        calc.pressEqualsKey();
+        calc.pressEqualsKey();
+        calc.pressEqualsKey();
+
+        String expected = "28";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
 
 
 }
