@@ -14,6 +14,8 @@ public class Calculator {
 
     private String latestOperation = "";
 
+    private int zähler = 0;
+
     /**
      * @return den aktuellen Bildschirminhalt als String
      */
@@ -45,9 +47,18 @@ public class Calculator {
      * im Ursprungszustand ist.
      */
     public void pressClearKey() {
-        screen = "0";
-        latestOperation = "";
-        latestValue = 0.0;
+
+        this.zähler++;
+        if(this.zähler == 1) screen = "0";
+        else if(this.zähler == 2)
+        {
+            screen = "0";
+            latestOperation = "";
+            latestValue = 0.0;
+            this.zähler = 0;
+        }
+
+
     }
 
     /**
@@ -82,6 +93,8 @@ public class Calculator {
         };
         screen = Double.toString(result);
         if(screen.equals("NaN")) screen = "Error";
+        if(screen.equals("Infinity")) screen = "Error";
+        if(screen.equals("-0.0")) screen = "0";
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
 
     }

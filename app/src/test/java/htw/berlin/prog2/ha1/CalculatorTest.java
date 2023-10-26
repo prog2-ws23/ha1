@@ -90,5 +90,61 @@ class CalculatorTest {
 
 
     //TODO hier weitere Tests erstellen
+    //Aufgabe 1
+    @Test
+    @DisplayName("should display sub between two numbers")
+    void testSubtraction() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(2);
+        calc.pressBinaryOperationKey("-");
+        calc.pressDigitKey(2);
+        calc.pressEqualsKey();
+
+        String expected = "0";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+    //Aufagebe 2 code 1
+    @Test
+    @DisplayName("should calculate Inversion with 0")
+    void testInversionWith0(){
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(0);
+        calc.pressUnaryOperationKey("1/x");
+
+        String expected = "Error";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+    //Aufgabe 2 code 2
+    @Test
+    @DisplayName("should delete a key and calculate it correctly")
+
+    void testDeleteKey(){
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(8);
+        calc.pressBinaryOperationKey("x");
+        calc.pressDigitKey(8);
+        calc.pressClearKey();
+        calc.pressDigitKey(7);
+        calc.pressEqualsKey();
+
+        String expected = "56";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+
+    }
+
+
+
 }
+
 
