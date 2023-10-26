@@ -135,6 +135,8 @@ class CalculatorTest {
         Calculator calc = new Calculator();
 
         calc.pressDigitKey(3);
+        calc.pressDotKey();
+        calc.pressDigitKey(9);
         calc.pressBinaryOperationKey("+");
         calc.pressDigitKey(5);
         calc.pressClearKey();
