@@ -12,6 +12,14 @@ public class Calculator {
 
     private double latestValue;
 
+    /**
+     * Diese methode gibt den wert von latestValue zurück
+     * @return latestValue der zuletzt genutzte Zahlwert
+     */
+    public double getLatestValue() {
+        return latestValue;
+    }
+
     private String latestOperation = "";
 
     private int equalsCounter = 0;

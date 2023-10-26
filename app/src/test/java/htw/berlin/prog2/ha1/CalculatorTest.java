@@ -129,6 +129,22 @@ class CalculatorTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    @DisplayName("should only clear the screen leaving the latestValue as it is")
+    void testOfClearingOnlyTheScreen(){
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(3);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(5);
+        calc.pressClearKey();
+
+        String expected = "3.0";
+        String actual = String.valueOf(calc.getLatestValue());
+
+        assertEquals(expected, actual);
+
+    }
 
 }
 
