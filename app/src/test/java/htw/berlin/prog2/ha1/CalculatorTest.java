@@ -93,7 +93,7 @@ class CalculatorTest {
     //TODO hier weitere Tests erstellen
 
     @Test
-    @DisplayName("aufgabe 1 test for change of sign")
+    @DisplayName("task 1 test for change of sign")
     void testVorzeichenAenderung() {
         Calculator calc = new Calculator();
 
@@ -106,26 +106,43 @@ class CalculatorTest {
 
         String expected = "6";
         String actual = calc.readScreen();
+
         assertEquals(expected, actual);
     }
 
     @Test
-    @DisplayName("aufgabe 2 should display result after using clear button")
-    void testClearButtonCalc() {
+    @DisplayName("task 2 test for when pressing multiple numbers, the same number should be the output after pressing the equals button")
+    void testNumberInputOutput() {
         Calculator calc = new Calculator();
 
-        calc.pressDigitKey(5);
-        calc.pressBinaryOperationKey("/");
-        calc.pressDigitKey(3);
-        calc.pressClearKey();
         calc.pressDigitKey(2);
+        calc.pressDigitKey(2);
+        calc.pressDigitKey(2);
+        calc.pressDigitKey(3);
         calc.pressEqualsKey();
 
-        String expected = "2.5";
+        String expected = "2223";
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
     }
 
+    @Test
+    @DisplayName("task 2 test for multiplying x amount of numbers")
+    void testMultipleNumbersMultiplying() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(3);
+        calc.pressBinaryOperationKey("x");
+        calc.pressDigitKey(2);
+        calc.pressBinaryOperationKey("x");
+        calc.pressDigitKey(2);
+        calc.pressEqualsKey();
+
+        String expected = "12";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
 }
 
