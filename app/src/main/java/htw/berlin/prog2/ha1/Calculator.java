@@ -38,18 +38,14 @@ public class Calculator {
      */
 
     public void pressDigitKey(int digit) {
-        if (digit > 9 || digit < 0) throw new IllegalArgumentException();
+        if(digit > 9 || digit < 0) throw new IllegalArgumentException();
 
         if (latestValue == Double.parseDouble(screen) && !screen.equals("0.")) {
             screen = "";
         }
 
         screen = screen + digit;
-
-
-
     }
-
 
 
     /**
@@ -125,14 +121,10 @@ public class Calculator {
      * Beim zweimaligem Drücken, oder wenn bereits ein Trennzeichen angezeigt wird, passiert nichts.
      */
 
-
     public void pressDotKey() {
-        if (screen.equals("0") && !screen.contains(".")) {
-            screen = "0.";
-        } else if (!screen.equals("0")&&!screen.contains(".")) {
-            screen = screen + ".";
-        }
+        if(!screen.contains(".")) screen = screen + ".";
     }
+
 
 
     /**

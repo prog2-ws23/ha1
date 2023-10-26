@@ -98,20 +98,21 @@ class CalculatorTest {
     void testPositiveSubtraction() {
         Calculator calc = new Calculator();
 
-        calc.pressDigitKey(2);
-        calc.pressDigitKey(0);
+        calc.pressDigitKey(5);
+        calc.pressDigitKey(5);
         calc.pressBinaryOperationKey("-");
         calc.pressDigitKey(2);
         calc.pressDigitKey(0);
         calc.pressEqualsKey();
 
-        String expected = "0";
+        String expected = "35";
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
     }
-    /** Test-Driven 1.1
-     *
+
+    /**
+     * Test-Driven 1.1
      */
     @Test
     @DisplayName("should the clear key be pressed just once then the screen should cleared but the calculation should proceed.")
@@ -135,8 +136,9 @@ class CalculatorTest {
 
         assertEquals(secondExpected, secondActual);
     }
-    /** Test-Driven 1.2
-     *
+
+    /**
+     * Test-Driven 1.2
      */
     @Test
     @DisplayName("should the clear key be pressed twice then the screen should cleared and the latest calculation should be deleted.")
@@ -162,8 +164,8 @@ class CalculatorTest {
         assertEquals(secondExpected, secondActual);
     }
 
-    /** Test-Driven 2
-     *
+    /**
+     * Regressionstest
      */
 
     @Test
@@ -180,4 +182,5 @@ class CalculatorTest {
         assertEquals(expected, actual);
     }
 }
+
 
