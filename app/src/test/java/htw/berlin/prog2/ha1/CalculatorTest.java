@@ -148,6 +148,26 @@ class CalculatorTest {
 
 
     }
+    
+    @Test
+    @DisplayName("EqualsKey works as documented")
+    void testEqualsKey() {
+        Calculator calc = new Calculator();
+
+        calc.pressEqualsKey();
+        calc.pressDigitKey(3);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(3);
+        calc.pressEqualsKey();
+        calc.pressEqualsKey();
+        calc.pressEqualsKey();
+
+        String expected ="12";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
     //TODO hier weitere Tests erstellen
 }
 
