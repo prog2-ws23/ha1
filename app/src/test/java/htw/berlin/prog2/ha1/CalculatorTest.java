@@ -93,18 +93,40 @@ class CalculatorTest {
     //TODO hier weitere Tests erstellen
 
     @Test
-    @DisplayName("should divide and show the correct result")
-    void testDivisionResult() {
+    @DisplayName("aufgabe 1 test for change of sign")
+    void testVorzeichenAenderung() {
         Calculator calc = new Calculator();
 
-        calc.pressDigitKey(6);
-        calc.pressBinaryOperationKey("/");
+        calc.pressDigitKey(3);
+        calc.pressNegativeKey();
+        calc.pressBinaryOperationKey("x");
         calc.pressDigitKey(2);
+        calc.pressNegativeKey();
         calc.pressEqualsKey();
 
-        String expected = "3";
+        String expected = "6";
         String actual = calc.readScreen();
         assertEquals(expected, actual);
     }
+
+    @Test
+    @DisplayName("aufgabe 2 should display result after using clear button")
+    void testClearButtonCalc() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(5);
+        calc.pressBinaryOperationKey("/");
+        calc.pressDigitKey(3);
+        calc.pressClearKey();
+        calc.pressDigitKey(2);
+        calc.pressEqualsKey();
+
+        String expected = "2.5";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+
 }
 
