@@ -112,7 +112,7 @@ class CalculatorTest {
 
     @Test
     @DisplayName("should display result after adding a negative number with a positive number ")
-    void testAdditionOfNegativeNumbers() {
+    void testAdditionOfANegativeNumberWithAPositiveNumber() {
         Calculator calc = new Calculator();
 
         calc.pressBinaryOperationKey("-");
