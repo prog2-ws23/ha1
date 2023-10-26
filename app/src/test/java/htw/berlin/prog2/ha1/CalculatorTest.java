@@ -109,20 +109,38 @@ class CalculatorTest {
         assertEquals(expected, actual);
     }
 
+
     @Test
-    @DisplayName("should display result after multiplying two numbers")
-    void testMultiplication() {
+    @DisplayName("should display result after adding a negative number with a positive number ")
+    void testAdditionOfNegativeNumbers() {
         Calculator calc = new Calculator();
 
-        calc.pressDigitKey(7);
-        calc.pressBinaryOperationKey("*");
-        calc.pressDigitKey(7);
+        calc.pressBinaryOperationKey("-");
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(0);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(0);
         calc.pressEqualsKey();
 
-        String expected = "49";
+        String expected = "0";
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
+
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 
