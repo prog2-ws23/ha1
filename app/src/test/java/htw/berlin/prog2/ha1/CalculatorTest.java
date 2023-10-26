@@ -107,7 +107,6 @@ class CalculatorTest {
         assertEquals(expected, actual);
     }
 
-
     @Test // zweite Aufgabe, erster roter Test
     @DisplayName("soll Zahlen addieren und subtrahieren")
     void testPositiveAndNegative() {
@@ -143,14 +142,12 @@ class CalculatorTest {
         calc.pressEqualsKey();
 
 
-        String expected = "9";
+        String expected = "-1";
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
 
     }
-
-
 }
 
 
