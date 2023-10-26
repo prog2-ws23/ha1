@@ -102,6 +102,42 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
     }
+    @Test
+    @DisplayName("should display an integer as a result after adding three digit numbers")
+    void testAdditionMultipleDigits(){
+        Calculator calc = new Calculator();
+       calc.pressDigitKey(5);
+       calc.pressBinaryOperationKey("+");
+       calc.pressDigitKey(5);
+       calc.pressBinaryOperationKey("+");
+       calc.pressDigitKey(5);
+       calc.pressEqualsKey();
+
+        String expected = "15";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+
+    }
+    @Test
+    @DisplayName("should display a positive digit")
+    void testMulitiplicationNegativeDigits(){
+        Calculator calc = new Calculator();
+        calc.pressNegativeKey();
+        calc.pressDigitKey(7);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(7);
+        calc.pressEqualsKey();
+
+        String expected = "0";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+
+
+    }
+
+
 
     //TODO hier weitere Tests erstellen
 }
