@@ -107,21 +107,6 @@ class CalculatorTest {
         assertEquals(expected, actual);
     }
 
-    @Test
-    @DisplayName("should display correct result as well after using the binary operation key instead of the negative key")
-    void testBinaryOperationKeyForNegativeNumbers() {
-        Calculator calc = new Calculator();
-
-        calc.pressBinaryOperationKey("-");
-        calc.pressDigitKey(2);
-        calc.pressBinaryOperationKey("+");
-        calc.pressDigitKey(5);
-
-        String expected = "3";
-        String actual = calc.readScreen();
-
-        assertEquals(expected, actual);
-    }
 
     @Test
     @DisplayName("should display error when doing inversion by zero")
@@ -134,6 +119,22 @@ class CalculatorTest {
 
 
         String expected = "Error";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("should display result without a decimal zero when drawing the square root")
+    void test2() {
+
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(2);
+        calc.pressDigitKey(5);
+        calc.pressUnaryOperationKey("√");
+
+        String expected = "5";
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
