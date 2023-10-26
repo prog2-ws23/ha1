@@ -141,7 +141,7 @@ class CalculatorTest {
         calc.pressDigitKey(5);
         calc.pressClearKey();
 
-        String expected = "3.0";
+        String expected = "3.9";
         String actual = String.valueOf(calc.getLatestValue());
 
         assertEquals(expected, actual);
