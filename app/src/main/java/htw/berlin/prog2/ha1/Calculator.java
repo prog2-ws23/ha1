@@ -91,6 +91,10 @@ public class Calculator {
         screen = Double.toString(result);
         if(screen.equals("NaN")) screen = "Error";
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
+        if(screen.equals("Infinity")) screen = "Error"; //inverse mit 0 ergibt Infinity deswegen
+        // Infinity zu Error umändern damit Fehler Error wird und behandelt wird.
+
+
 
     }
 
