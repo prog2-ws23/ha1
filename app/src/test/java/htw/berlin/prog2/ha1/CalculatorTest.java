@@ -107,21 +107,32 @@ class CalculatorTest {
 
 
     }
-    //Ein Test der nicht funktioniert
     @Test
-    @DisplayName("potenz einer Zahl berechnen ")
-    void testExponentiation() {
+    @DisplayName("should display Error for a very long number")
+    void teststoolongnumbers() {
         Calculator calc = new Calculator();
 
-        calc.pressDigitKey(2);
-        calc.pressBinaryOperationKey("√");
-        calc.pressEqualsKey();
+        calc.pressDigitKey(1);
+        calc.pressDotKey();
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(1);
 
-        String expected = "1.41421356";
+        //darf ich hier auch eine Schleife anwenden ?
+        //Hier die Eingabe von 10 Ziffern und einem Dezimaltrennzeichen um zu gucken ob Error erscheint
+
+        String expected = "Error";
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
-    }
+
+        }
 
 }
 
