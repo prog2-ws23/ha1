@@ -148,6 +148,27 @@ class CalculatorTest {
 
 
     }
+    @Test
+    @DisplayName("varied")
+    void varied() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(3);
+        calc.pressBinaryOperationKey("+");
+        calc.pressBinaryOperationKey("-");
+        calc.pressBinaryOperationKey("/");
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(3);
+        calc.pressBinaryOperationKey("+");
+        
+        String expected ="6";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+
+
+    }
+
     //TODO hier weitere Tests erstellen
 }
 
