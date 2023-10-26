@@ -80,6 +80,7 @@ class CalculatorTest {
         calc.pressDotKey();
         calc.pressDigitKey(7);
         calc.pressDotKey();
+        calc.pressDotKey();
         calc.pressDigitKey(8);
 
         String expected = "1.78";
@@ -89,6 +90,61 @@ class CalculatorTest {
     }
 
 
+
+
+
+
     //TODO hier weitere Tests erstellen
+
+    @Test
+    @DisplayName("should display result after subtract two positive multi-digit numbers")
+    void testPositiveSubtract() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(2);
+        calc.pressDigitKey(0);
+        calc.pressBinaryOperationKey("-");
+        calc.pressDigitKey(2);
+        calc.pressDigitKey(0);
+        calc.pressEqualsKey();
+
+        String expected = "0";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+    
+    @Test
+    @DisplayName("should delete one key and calc correctly")
+    void testDeletKeyAndCalc(){
+        Calculator calc = new Calculator();
+        calc.pressDigitKey(1);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(6);
+        calc.pressClearKey();
+        calc.pressDigitKey(4);
+        calc.pressEqualsKey();
+        
+        String expected = "5";
+        String actual = calc.readScreen();
+        
+        assertEquals(expected, actual);
+    }
+    
+    
+    @Test
+    @DisplayName("should calculate inversion of 0")
+    void testCalc1Div0 () {
+        Calculator calc = new Calculator();
+        calc.pressDigitKey(0);
+        calc.pressUnaryOperationKey("1/x");
+        
+
+        String expected = "Error";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+    
 }
 
