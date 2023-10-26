@@ -90,5 +90,21 @@ class CalculatorTest {
 
 
     //TODO hier weitere Tests erstellen
+    @Test
+    @DisplayName("should display the correct number after dividing by 1")
+    void testDividing1WithAnNumber() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(6);
+        calc.pressUnaryOperationKey("1/x");
+
+        String expected = "0.16666666";
+        String actual = calc.readScreen();
+        assertEquals(expected, actual);
+    }
+
+
+
+
 }
 
