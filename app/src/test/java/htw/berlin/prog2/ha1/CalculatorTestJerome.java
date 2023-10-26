@@ -20,4 +20,20 @@ class CalculatorTestJerome {
         assertEquals(expected, actual);
     }
 
+    @Test
+//"should not display more than 16 digits"
+    void testLimitDisplayToSixteenDigits() {
+        Calculator calc = new Calculator();
+
+        for (int i = 0; i < 18; i++) {
+            calc.pressDigitKey(1);
+        }
+
+        String expected = "1111111111111111";  // Only 16 digits
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+
 }
