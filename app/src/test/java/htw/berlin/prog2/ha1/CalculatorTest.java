@@ -125,7 +125,7 @@ class CalculatorTest {
         assertEquals(expected, actual);
     }
     @Test
-    @DisplayName("should successfully add four positive integers together")
+    @DisplayName("should successfully add three positive integers together")
     void testAdditionOfThreeDigits() {
         Calculator calc = new Calculator();
 
@@ -139,6 +139,20 @@ class CalculatorTest {
         String expected = "6";
         String actual = calc.readScreen();
 
+        assertEquals(expected, actual);
+    }
+    @Test
+    @DisplayName("should successfully take the square root of a three digit integer without any unnecessary decimal places")
+    void testSquareRootOfThreeDigitInteger() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(2);
+        calc.pressDigitKey(1);
+        calc.pressUnaryOperationKey("√");
+
+        String expected = "11";
+        String actual = calc.readScreen();
         assertEquals(expected, actual);
     }
 }
