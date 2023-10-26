@@ -34,6 +34,20 @@ class CalculatorTestJerome {
 
         assertEquals(expected, actual);
     }
+    @Test
+    //"should keep the screen as 0 when pressing negative key with 0 displayed")
+    void testNegativeKeyWithZero() {
+        Calculator calc = new Calculator();
+
+        calc.pressNegativeKey();
+
+        String expected = "0";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+
 
 
 }
