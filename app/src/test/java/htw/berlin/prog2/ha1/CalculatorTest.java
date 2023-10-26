@@ -1,5 +1,6 @@
 package htw.berlin.prog2.ha1;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -112,6 +113,26 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
     }
+    /*
+    Aufgabe 2.1:
+     */
+    @Test
+    @DisplayName("should display show a negative number when entering the negative key before the digit key")
+    void testOrderOfNegativeKeyAndDigitKey(){
+        Calculator calc = new Calculator();
+        calc.pressNegativeKey();
+        calc.pressDigitKey(2);
+        String expected = "-2";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+
+
+
+    }
+
+
+
 }
 
 
