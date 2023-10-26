@@ -14,6 +14,10 @@ public class Calculator {
 
     private String latestOperation = "";
 
+    private int equalsCounter = 0;
+
+    private double number = 0;
+
     /**
      * @return den aktuellen Bildschirminhalt als String
      */
@@ -118,16 +122,22 @@ public class Calculator {
      * und das Ergebnis direkt angezeigt.
      */
     public void pressEqualsKey() {
+        if(equalsCounter < 1){
+            number = Double.parseDouble(screen);
+        }
         var result = switch(latestOperation) {
-            case "+" -> latestValue + Double.parseDouble(screen);
-            case "-" -> latestValue - Double.parseDouble(screen);
-            case "x" -> latestValue * Double.parseDouble(screen);
-            case "/" -> latestValue / Double.parseDouble(screen);
+            case "+" -> latestValue + number;
+            case "-" -> latestValue - number;
+            case "x" -> latestValue * number;
+            case "/" -> latestValue / number;
             default -> throw new IllegalArgumentException();
         };
         screen = Double.toString(result);
+        latestValue = result;
         if(screen.equals("Infinity")) screen = "Error";
         if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2);
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
+
+        equalsCounter++;
     }
 }
