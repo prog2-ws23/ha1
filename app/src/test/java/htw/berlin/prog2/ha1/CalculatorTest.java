@@ -107,22 +107,22 @@ class CalculatorTest {
 
     }
 
-
-    //Aufgabe 2
     @Test
-    @DisplayName("should Display a negative decimal number with Dot")
-    void testNegativeDecimalNumbersWithDot() {
-
+    @DisplayName("should display result after getting the square root of two")
+    void testSquareRoots() {
         Calculator calc = new Calculator();
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(4);
+        calc.pressDigitKey(4);
 
-        calc.pressNegativeKey();
-        calc.pressDotKey();
-        calc.pressDigitKey(3);
+        calc.pressUnaryOperationKey("√");
 
-        String expected = "-0.3";
+        String expected = "12";
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
     }
 
 }
+
+
