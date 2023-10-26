@@ -129,17 +129,5 @@ public class Calculator {
         if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2);
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
     }
-    /**
-     * Berechnet den Kehrwert (1/x) der aktuellen Zahl auf dem Bildschirm und aktualisiert den Bildschirminhalt.
-     */
-    public void calculateReciprocal() {
-        double value = Double.parseDouble(screen);
-        if (value != 0) {
-            value = 1 / value;
-            screen = String.format("%.8f", value);
-            if (screen.equals("Infinity")) screen = "Error";
-        } else {
-            screen = "Error"; // Division durch Null ist nicht erlaubt
-        }
-    }
+
 }

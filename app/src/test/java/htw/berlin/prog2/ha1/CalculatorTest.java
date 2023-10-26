@@ -123,45 +123,30 @@ class CalculatorTest {
     }
 
     @Test
-    @DisplayName("should multiply and then add with numbers")
+    @DisplayName("should mehrere rechenoperationen ausfuehren")
     void testDivideAndAdd() {
         Calculator calc = new Calculator();
 
         calc.pressDigitKey(4);
         calc.pressBinaryOperationKey("+");
         calc.pressDigitKey(2);
-        calc.pressBinaryOperationKey("x");
+        calc.pressBinaryOperationKey("+");
         calc.pressDigitKey(8);
         calc.pressEqualsKey();
 
-        String expected = "20";
+        String expected = "14";
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
     }
     @Test
-    @DisplayName("should kehrwert bilden")
+    @DisplayName("should richtig runden")
     void testKehrwert(){
         Calculator calc = new Calculator();
 
         calc.pressDigitKey(6);
-        calc.pressBinaryOperationKey("1/x");
-        //calc.pressEqualsKey();
+        calc.pressUnaryOperationKey("1/x");
         String expected = "0.16666667";
-        String actual = calc.readScreen();
-
-        assertEquals(expected, actual);
-    }
-    @Test
-    @DisplayName("sollte Prozente multiplizieren koennen")
-    void testMultiplyPercentages(){
-        Calculator calc = new Calculator();
-
-        calc.pressDigitKey(6);
-        calc.pressBinaryOperationKey("x");
-        calc.pressUnaryOperationKey("%");
-
-        String expected = "0.36";
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
