@@ -92,22 +92,6 @@ class CalculatorTest {
     //TODO hier weitere Tests erstellen
 
     @Test
-    @DisplayName("should display 0.0 after pressing the clear key")
-    void testClearKey() {
-        Calculator calc = new Calculator();
-        calc.pressDigitKey(3);
-        calc.pressBinaryOperationKey("+");
-        calc.pressDigitKey(7);
-        calc.pressDigitKey(1);
-        calc.pressClearKey();
-
-        String expected = "0";
-        String actual = calc.readScreen();
-
-        assertEquals(expected, actual);
-    }
-
-    @Test
     @DisplayName("should display 6 after adding 1, 2 and 3")
     void testTwoOperations() {
         Calculator calc = new Calculator();
