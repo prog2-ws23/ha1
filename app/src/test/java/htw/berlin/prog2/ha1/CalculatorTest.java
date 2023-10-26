@@ -110,8 +110,8 @@ class CalculatorTest {
     }
 
     @Test
-    @DisplayName("should display result after getting the square root of two")
-    void test1() {
+    @DisplayName("should display error when press the button 1/x")
+    void redtest1() {
         Calculator calc = new Calculator();
         calc.pressUnaryOperationKey("1/x");
 
