@@ -105,6 +105,7 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
     }
+
     @Test
     @DisplayName("should add negative and postive numbers")
     void testAddOnePositiveAndOneNegativeNumber() {
@@ -123,7 +124,7 @@ class CalculatorTest {
     }
 
     @Test
-    @DisplayName("should richtig runden bei 1/x")
+    @DisplayName("sollte richtig runden bei 1/x")
     void testDivideAndAdd() {
         Calculator calc = new Calculator();
 
@@ -136,9 +137,10 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
     }
+
     @Test
-    @DisplayName("sollte ")
-    void testAddingMultiDigitNumbers(){
+    @DisplayName("sollte nur zahl raus kommen")
+    void testAddingMultiDigitNumbers() {
         Calculator calc = new Calculator();
 
         calc.pressDigitKey(5);
