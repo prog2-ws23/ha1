@@ -124,17 +124,10 @@ public class Calculator {
     public void pressEqualsKey() {
         var result = switch(latestOperation) {
             case "+" -> latestValue + Double.parseDouble(screen);
-            case "-" -> {
-                if (latestValue < 0 && Double.parseDouble(screen) < 0) {
-                    //yield um wert an result variable zurück geben
-                    //Math.abs aboluten wert, also abstand von 0 bis zahl, so wird nicht doppelt negiert
-                    yield latestValue - Math.abs(Double.parseDouble(screen));
-                } else {
-                    yield latestValue - Double.parseDouble(screen);
-                }
-            }
+            case "-" -> latestValue - Double.parseDouble(screen);
             case "x" -> latestValue * Double.parseDouble(screen);
             case "/" -> latestValue / Double.parseDouble(screen);
+            case "" -> Double.parseDouble(screen);
             default -> throw new IllegalArgumentException();
         };
         screen = Double.toString(result);

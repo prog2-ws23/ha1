@@ -127,15 +127,10 @@ class CalculatorTest {
         Calculator calc = new Calculator();
 
         calc.pressDigitKey(1);
-        calc.pressNegativeKey();
-        calc.pressBinaryOperationKey("-");
-        calc.pressDigitKey(1);
-        calc.pressNegativeKey();
-
         calc.pressEqualsKey();
 
 
-        String expected = "-2";
+        String expected = "1";
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
