@@ -135,6 +135,28 @@ class CalculatorTest {
         assertEquals(expected, actual);
     }
 
+    /**
+     * 2. roter Test = beim Wurzeln ziehen wird das Ergebnis immer mit einer Dezimalstelle angezeigt also .0
+     */
+
+    @Test
+    @DisplayName("should display the result after getting the square root of a number but without a decimal point")
+    void testASquareRoot() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(9);
+        calc.pressDigitKey(6);
+        calc.pressUnaryOperationKey("√");
+
+        String expected = "14";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+
+
 
 
 
