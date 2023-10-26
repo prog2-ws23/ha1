@@ -107,7 +107,22 @@ class CalculatorTest {
 
     }
 
+
+    //Aufgabe 2
+    @Test
+    @DisplayName("should Display a negative decimal number with Dot")
+    void testNegativeDecimalNumbersWithDot() {
+
+        Calculator calc = new Calculator();
+
+        calc.pressNegativeKey();
+        calc.pressDotKey();
+        calc.pressDigitKey(3);
+
+        String expected = "-0.3";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
 }
-
-
-
