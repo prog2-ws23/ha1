@@ -60,9 +60,17 @@ public class Calculator {
      * @param operation "+" für Addition, "-" für Substraktion, "x" für Multiplikation, "/" für Division
      */
     public void pressBinaryOperationKey(String operation)  {
-        latestValue = Double.parseDouble(screen);
+        double currentValue = Double.parseDouble(screen);
+
+        if(latestOperation.equals("+")) {
+            latestValue += currentValue;
+        } else {
+            latestValue = currentValue;
+        }
         latestOperation = operation;
+        screen = Double.toString(latestValue);
     }
+
 
     /**
      * Empfängt den Wert einer gedrückten unären Operationstaste, also eine der drei Operationen

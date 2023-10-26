@@ -123,6 +123,25 @@ class CalculatorTest {
         assertEquals(expected, actual);
     }
 
+    // Aufgabe 2
+    @Test
+    @DisplayName("should add three Digits and display the result ")
+    void testAddThreeDigitsInRow() {
+
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(4);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(4);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(4);
+        calc.pressEqualsKey();
+
+        String expected = "12";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
 }
 
 
