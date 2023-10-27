@@ -57,9 +57,15 @@ public class Calculator {
      * Rechner in den passenden Operationsmodus versetzt.
      * Beim zweiten Drücken nach Eingabe einer weiteren Zahl wird direkt des aktuelle Zwischenergebnis
      * auf dem Bildschirm angezeigt. Falls hierbei eine Division durch Null auftritt, wird "Error" angezeigt.
+     *
+     * Die Methode wurde folgendermaßen erweitert, wenn der latestOperator Null ist bzw es gab keine Operationen Eingabe, wird die Methodo pressEqualsKey automatisch ausgegeben.
+     *
      * @param operation "+" für Addition, "-" für Substraktion, "x" für Multiplikation, "/" für Division
      */
     public void pressBinaryOperationKey(String operation)  {
+        if (latestOperation != null) { //
+            pressEqualsKey();
+        }
         latestValue = Double.parseDouble(screen);
         latestOperation = operation;
     }
@@ -116,6 +122,9 @@ public class Calculator {
      * Wird die Taste weitere Male gedrückt (ohne andere Tasten dazwischen), so wird die letzte
      * Operation (ggf. inklusive letztem Operand) erneut auf den aktuellen Bildschirminhalt angewandt
      * und das Ergebnis direkt angezeigt.
+     *
+     * die Methode habe ich folgendermaßen erweitert, ein Case wurde hinzugefügt, wenn es keine Operationeneingabe gab, wrid der Screen ausgelesen.
+     *
      */
     public void pressEqualsKey() {
         var result = switch(latestOperation) {
@@ -123,11 +132,13 @@ public class Calculator {
             case "-" -> latestValue - Double.parseDouble(screen);
             case "x" -> latestValue * Double.parseDouble(screen);
             case "/" -> latestValue / Double.parseDouble(screen);
+            case "" -> Double.parseDouble(screen); //wenn der latestOperator leer bleibt, gibt er den Screen aus
             default -> throw new IllegalArgumentException();
         };
         screen = Double.toString(result);
         if(screen.equals("Infinity")) screen = "Error";
         if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2);
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
+
     }
 }

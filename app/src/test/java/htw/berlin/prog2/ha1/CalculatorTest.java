@@ -1,5 +1,6 @@
 package htw.berlin.prog2.ha1;
 
+import org.checkerframework.checker.units.qual.C;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -90,5 +91,58 @@ class CalculatorTest {
 
 
     //TODO hier weitere Tests erstellen
+
+    @Test
+    @DisplayName("task 1 test for change of sign")
+    void testVorzeichenAenderung() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(3);
+        calc.pressNegativeKey();
+        calc.pressBinaryOperationKey("x");
+        calc.pressDigitKey(2);
+        calc.pressNegativeKey();
+        calc.pressEqualsKey();
+
+        String expected = "6";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("task 2 test for when pressing multiple numbers, the same number should be the output after pressing the equals button")
+    void testNumberInputOutput() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(2);
+        calc.pressDigitKey(2);
+        calc.pressDigitKey(2);
+        calc.pressDigitKey(3);
+        calc.pressEqualsKey();
+
+        String expected = "2223";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("task 2 test for multiplying x amount of numbers")
+    void testMultipleNumbersMultiplying() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(3);
+        calc.pressBinaryOperationKey("x");
+        calc.pressDigitKey(2);
+        calc.pressBinaryOperationKey("x");
+        calc.pressDigitKey(2);
+        calc.pressEqualsKey();
+
+        String expected = "12";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
 }
 
