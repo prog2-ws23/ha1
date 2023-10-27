@@ -14,6 +14,8 @@ public class Calculator {
 
     private String latestOperation = "";
 
+
+
     /**
      * @return den aktuellen Bildschirminhalt als String
      */
@@ -57,11 +59,18 @@ public class Calculator {
      * Rechner in den passenden Operationsmodus versetzt.
      * Beim zweiten Drücken nach Eingabe einer weiteren Zahl wird direkt des aktuelle Zwischenergebnis
      * auf dem Bildschirm angezeigt. Falls hierbei eine Division durch Null auftritt, wird "Error" angezeigt.
+     * Bevor einen neue binäre Operation gesetzt wird, wird überprüft ob schon vorher eine Operation ausgeführt wurde. Wenn ja
+     * dann berechnet er davon das Zwischenergebnis bevor aauf die neue Operation eingegangen wird. Dadurch
+     * kann mit mehr als zwei Zahlen gerechnet werden
      * @param operation "+" für Addition, "-" für Substraktion, "x" für Multiplikation, "/" für Division
      */
-    public void pressBinaryOperationKey(String operation)  {
+    public void pressBinaryOperationKey(String operation) {
+        if (!latestOperation.isEmpty()) {
+            pressEqualsKey();
+        }
         latestValue = Double.parseDouble(screen);
         latestOperation = operation;
+        screen = "0";
     }
 
     /**
@@ -69,6 +78,8 @@ public class Calculator {
      * Quadratwurzel, Prozent, Inversion, welche nur einen Operanden benötigen.
      * Beim Drücken der Taste wird direkt die Operation auf den aktuellen Zahlenwert angewendet und
      * der Bildschirminhalt mit dem Ergebnis aktualisiert.
+     * Außerdem wird noch überprüft, ob das Ergebnis eine ganze Zahl ist, was dann dementsprechend so
+     * angezeigt werden soll
      * @param operation "√" für Quadratwurzel, "%" für Prozent, "1/x" für Inversion
      */
     public void pressUnaryOperationKey(String operation) {
@@ -80,8 +91,14 @@ public class Calculator {
             case "1/x" -> 1 / Double.parseDouble(screen);
             default -> throw new IllegalArgumentException();
         };
-        screen = Double.toString(result);
-        if(screen.equals("NaN")) screen = "Error";
+
+        if (result == (int) result) {
+            screen = String.valueOf((int) result);
+        } else {
+            screen = Double.toString(result);
+        }
+
+        if (screen.equals("NaN")) screen = "Error";
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
 
     }
@@ -125,6 +142,8 @@ public class Calculator {
             case "/" -> latestValue / Double.parseDouble(screen);
             default -> throw new IllegalArgumentException();
         };
+
+
         screen = Double.toString(result);
         if(screen.equals("Infinity")) screen = "Error";
         if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2);
