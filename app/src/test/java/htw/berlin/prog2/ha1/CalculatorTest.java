@@ -153,5 +153,22 @@ class CalculatorTest {
         assertEquals(expected, actual);
 
     }
+
+    @Test
+    @DisplayName("Überprüft ob Ergebnis bei unaryOperationsKey .0 ist wenn es eigentlich nur eine ganzzahl ist")
+    void wholeNumberResult() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(9);
+        calc.pressUnaryOperationKey("√");
+
+
+        String expected = "3";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+
+    }
+
 }
 

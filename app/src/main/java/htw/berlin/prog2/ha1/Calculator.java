@@ -77,8 +77,6 @@ public class Calculator {
             screen = String.valueOf(result);
             if (screen.equals("Infinity") || screen.equals("NaN")) {
                 screen = "Error";
-            } else if (screen.endsWith(".0")) {
-                screen = screen.substring(0, screen.length() - 2);
             }
             latestValue = result;
         } else {
