@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @DisplayName("Retro calculator")
 class CalculatorTest {
@@ -90,5 +91,22 @@ class CalculatorTest {
 
 
     //TODO hier weitere Tests erstellen
+
+    @Test
+    @DisplayName("Test der Prozent Taste ")
+    void testPercentButton(){
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(4);
+        calc.pressDigitKey(2);
+        calc.pressDigitKey(0);
+        calc.pressUnaryOperationKey("%");
+
+        String expected = "4.2";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+
+    }
 }
 

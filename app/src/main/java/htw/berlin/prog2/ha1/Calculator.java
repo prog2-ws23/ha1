@@ -130,4 +130,20 @@ public class Calculator {
         if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2);
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
     }
-}
+
+    public double add(double v, double v1) {
+        return v + v1;
+    }
+
+    public double divide(double v, double v1) {
+        if (v1 == 0) {
+
+            return Double.POSITIVE_INFINITY; // Division durch Null ergibt positive Unendlichkeit - Bugfix1
+        }
+
+        return v / v1;
+    }
+    public double multiply(double v, double v1) {
+            return v * v1;              //Bugfix2
+        }
+    }
