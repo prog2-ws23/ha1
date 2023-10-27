@@ -60,6 +60,9 @@ public class Calculator {
      * @param operation "+" für Addition, "-" für Substraktion, "x" für Multiplikation, "/" für Division
      */
     public void pressBinaryOperationKey(String operation)  {
+        if (!latestOperation.isEmpty()) {
+            pressEqualsKey();
+        }
         latestValue = Double.parseDouble(screen);
         latestOperation = operation;
     }
@@ -82,6 +85,7 @@ public class Calculator {
         };
         screen = Double.toString(result);
         if(screen.equals("NaN")) screen = "Error";
+        if(screen.equals("Infinity")) screen = "Error"; // fix für roten test mit "Kehrwert" 0
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
 
     }
