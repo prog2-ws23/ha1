@@ -180,9 +180,6 @@ public class Calculator {
      * Operation (ggf. inklusive letztem Operand) erneut auf den aktuellen Bildschirminhalt angewandt
      * und das Ergebnis direkt angezeigt.
      */
-
-     //FIXME does not work as inteded
-     //reworked binaryKey messes with this
     public void pressEqualsKey() {
         if(latestOperation != "") {
             var result = switch(latestOperation) {
