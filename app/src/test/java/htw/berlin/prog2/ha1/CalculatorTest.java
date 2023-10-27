@@ -87,6 +87,7 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
     }
+
     @Test
     @DisplayName("should display only one digit, when first digit is 0")
     void testDoubleDigitZero() {
@@ -117,11 +118,13 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
     }
+
     @Test
     @DisplayName("should revert answer back to original after pressing 1/x twice")
     void testDoubleUnaryPress() {
         Calculator calc = new Calculator();
 
+        calc.pressDigitKey(1);
         calc.pressDigitKey(0);
         calc.pressUnaryOperationKey("1/x");
         calc.pressUnaryOperationKey("1/x");
@@ -130,6 +133,5 @@ class CalculatorTest {
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
-
     }
 }
