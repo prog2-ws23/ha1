@@ -15,7 +15,7 @@ public class Calculator {
     private String latestOperation = "";
 
     /**
-     * @return den aktuellen Bildschirminhalt als String
+     * @return den aktuellen Bi ldschirminhalt als String
      */
     public String readScreen() {
         return screen;
@@ -60,8 +60,14 @@ public class Calculator {
      * @param operation "+" für Addition, "-" für Substraktion, "x" für Multiplikation, "/" für Division
      */
     public void pressBinaryOperationKey(String operation)  {
-        latestValue = Double.parseDouble(screen);
+        if (!latestOperation.equals("")) {
+            latestValue = partAnswer();
+        }
+        else {
+            latestValue = Double.parseDouble(screen);
+        }
         latestOperation = operation;
+        screen = Double.toString(latestValue);
     }
 
     /**
@@ -109,8 +115,24 @@ public class Calculator {
     }
 
     /**
+     * berechnet das Zwischenergebnis bei der Berechnung mit mehreren Operatoren 
+     * @return partAnswer bzw. das zwischenergbenis
+     */
+    public double partAnswer() {
+        var partResult = switch(latestOperation) {
+            case "+" -> latestValue + Double.parseDouble(screen);
+            case "-" -> latestValue - Double.parseDouble(screen);
+            case "x" -> latestValue * Double.parseDouble(screen);
+            case "/" -> latestValue / Double.parseDouble(screen);
+            case ""  -> Double.parseDouble(screen);
+            default -> throw new IllegalArgumentException();
+        };
+        return partResult;
+    }
+
+    /**
      * Empfängt den Befehl der gedrückten "="-Taste.
-     * Wurde zuvor keine Operationstaste gedrückt, passiert nichts.
+     * Wurde zuvor keine Operationstaste gedrückt, wird die eingegebene Zahl wiedergegeben.
      * Wurde zuvor eine binäre Operationstaste gedrückt und zwei Operanden eingegeben, wird das
      * Ergebnis der Operation angezeigt. Falls hierbei eine Division durch Null auftritt, wird "Error" angezeigt.
      * Wird die Taste weitere Male gedrückt (ohne andere Tasten dazwischen), so wird die letzte
@@ -123,6 +145,7 @@ public class Calculator {
             case "-" -> latestValue - Double.parseDouble(screen);
             case "x" -> latestValue * Double.parseDouble(screen);
             case "/" -> latestValue / Double.parseDouble(screen);
+            case ""  -> Double.parseDouble(screen);
             default -> throw new IllegalArgumentException();
         };
         screen = Double.toString(result);
