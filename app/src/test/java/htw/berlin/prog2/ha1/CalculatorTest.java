@@ -114,26 +114,32 @@ class CalculatorTest {
 
     @Test
     @DisplayName("should display result after multiplicare  two multi-digit numbers")
-    void testmultiplicaretwoNumbers() {
+    void testMultiplicaretwoNumbers() {
         Calculator calc = new Calculator();
 
-
-        calc.pressBinaryOperationKey("/");
-        calc.pressUnaryOperationKey("√");
-        calc.pressBinaryOperationKey("/");
-        String expected = "ERROR";
+        calc.pressDigitKey(0);
+        calc.pressDotKey();
+        calc.pressDigitKey(7);
+        calc.pressDigitKey(5);
+        calc.pressNegativeKey();
+        calc.pressBinaryOperationKey("x");
+        calc.pressDigitKey(0);
+        calc.pressDotKey();
+        calc.pressDigitKey(7);
+        calc.pressDigitKey(5);
+        calc.pressEqualsKey();
+        String expected = "-0.5625";
         String actual = calc.readScreen();
         assertEquals(expected, actual);
 
     }
 
-
     @Test
-    @DisplayName("should display result after adding two positive multi-digit numbers")
-    void testPositive() {
+    @DisplayName("should display result after adding three positive multi-digit numbers")
+    void testPositiveMultiNumbers() {
         Calculator calc = new Calculator();
 
-        calc.pressDigitKey(3);
+        calc.pressDigitKey(7);
         calc.pressNegativeKey();
         calc.pressBinaryOperationKey("x");
         calc.pressDigitKey(5);
@@ -141,24 +147,10 @@ class CalculatorTest {
         calc.pressBinaryOperationKey("x");
         calc.pressDigitKey(3);
         calc.pressEqualsKey();
-        String expected = "45";
+        String expected = "105";
         String actual = calc.readScreen();
         assertEquals(expected, actual);
 
     }
 
-    @Test
-    @DisplayName("display result after adding two positive multi-digit numbers")
-    void testPositifve() {
-        Calculator calc = new Calculator();
-        calc.pressDigitKey(9);
-        calc.pressDotKey();
-        calc.pressDigitKey(9);
-        calc.pressBinaryOperationKey("/");
-        calc.pressEqualsKey();
-        String expected = "1";
-        String actual = calc.readScreen();
-        assertEquals(expected, actual);
-
-    }
-}
+   }
