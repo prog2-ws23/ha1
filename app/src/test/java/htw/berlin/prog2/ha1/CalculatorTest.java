@@ -106,9 +106,42 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
     }
-}
+    @Test
+    @DisplayName("should display result after multiplying with two numbers")
+    void testNegativeAddition() {
+        Calculator calc = new Calculator();
 
-// eine Zahl mit einer anderen Mal nehmen geht nicht
-// bei divison geht es ebenfalls nicht
+        calc.pressDigitKey(3);
+        calc.pressNegativeKey();
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(5);
+        calc.pressNegativeKey();
+        calc.pressEqualsKey();
+
+
+        String expected = "-8";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+    @Test
+    @DisplayName("should display result after adding at least three positive numbers")
+    void testMultipleAddition() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(6);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(8);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(2);
+        calc.pressEqualsKey();
+
+
+        String expected = "16";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+
 // zwei negative Zahlen addieren geht nicht
-// subtraktion geht nicht
