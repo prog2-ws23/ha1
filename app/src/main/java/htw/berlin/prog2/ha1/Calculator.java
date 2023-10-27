@@ -50,6 +50,7 @@ public class Calculator {
         screen = "0";
         latestOperation = "";
         latestValue = 0.0;
+
     }
 
     /**
@@ -64,6 +65,10 @@ public class Calculator {
     public void pressBinaryOperationKey(String operation)  {
         latestValue = Double.parseDouble(screen);
         latestOperation = operation;
+
+        if (screen.startsWith("-")){
+            screen = "0";
+        }
     }
 
     /**
