@@ -26,6 +26,8 @@ public class Calculator {
      * drücken kann muss der Wert positiv und einstellig sein und zwischen 0 und 9 liegen.
      * Führt in jedem Fall dazu, dass die gerade gedrückte Ziffer auf dem Bildschirm angezeigt
      * oder rechts an die zuvor gedrückte Ziffer angehängt angezeigt wird.
+     * Überprüft und kürzt den Bildschirm, um sicherzustellen,
+     * dass die Gesamtlänge des Bildschirms 9 Zeichen nicht überschreitet,auch bei Dezimalstellen.
      *
      * @param digit Die Ziffer, deren Taste gedrückt wurde
      */
@@ -34,7 +36,18 @@ public class Calculator {
 
         if (screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = "";
 
-        screen = screen + digit;
+        // Überprüfen und kürzen des Bildschirm, wenn Dezimalstellen hinzugefügt werden
+        if (screen.contains(".")) {
+            int decimalIndex = screen.indexOf(".");
+            int remainingDecimalPlaces = screen.length() - decimalIndex - 1;
+
+            if (remainingDecimalPlaces < 8) {
+                screen = screen + digit;
+            }
+            // Wenn keine Dezimalstellen hinzugefügt werden
+        } else if (screen.length() < 9) {
+            screen = screen + digit;
+        }
     }
 
     /**
