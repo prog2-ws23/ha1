@@ -106,6 +106,7 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
     }
+
     @Test
     @DisplayName("should display result after multiplying with two numbers")
     void testNegativeAddition() {
@@ -124,6 +125,7 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
     }
+
     @Test
     @DisplayName("should display result after adding at least three positive numbers")
     void testMultipleAddition() {
@@ -142,6 +144,28 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
     }
+    @Test
+    @DisplayName("should display result after substracting a multi digit number with percentage ")
+    void testSubstractWithPercentage() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(2);
+        calc.pressDigitKey(5);
+        calc.pressDigitKey(0);
+        calc.pressBinaryOperationKey("-");
+        calc.pressDigitKey(5);
+        calc.pressDigitKey(0);
+        calc.pressUnaryOperationKey("%");
+
+
+
+        String expected = "125";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+}
+
 
 
 // zwei negative Zahlen addieren geht nicht
