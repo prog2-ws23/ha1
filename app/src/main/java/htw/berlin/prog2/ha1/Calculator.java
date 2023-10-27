@@ -23,7 +23,7 @@ public class Calculator {
 
     /**
      * Empfängt den Wert einer gedrückten Zifferntaste. Da man nur eine Taste auf einmal
-     * drücken kann muss der Wert positiv und einstellig sein und zwischen 0 und 9 liegen.
+     * drücken kann, muss der Wert positiv und einstellig sein und zwischen 0 und 9 liegen.
      * Führt in jedem Fall dazu, dass die gerade gedrückte Ziffer auf dem Bildschirm angezeigt
      * oder rechts an die zuvor gedrückte Ziffer angehängt angezeigt wird.
      * @param digit Die Ziffer, deren Taste gedrückt wurde
@@ -59,7 +59,7 @@ public class Calculator {
      * auf dem Bildschirm angezeigt. Falls hierbei eine Division durch Null auftritt, wird "Error" angezeigt.
      * @param operation "+" für Addition, "-" für Substraktion, "x" für Multiplikation, "/" für Division
      */
-    public void pressBinaryOperationKey(String operation)  {
+    public void pressBinaryOperationKey(String operation) {
         latestValue = Double.parseDouble(screen);
         latestOperation = operation;
     }
@@ -74,16 +74,17 @@ public class Calculator {
     public void pressUnaryOperationKey(String operation) {
         latestValue = Double.parseDouble(screen);
         latestOperation = operation;
-        var result = switch(operation) {
+        var result = switch (operation) {
             case "√" -> Math.sqrt(Double.parseDouble(screen));
             case "%" -> Double.parseDouble(screen) / 100;
             case "1/x" -> 1 / Double.parseDouble(screen);
             default -> throw new IllegalArgumentException();
         };
-        screen = Double.toString(result);
-        if(screen.equals("NaN")) screen = "Error";
-        if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
 
+        screen = Double.toString(result);
+
+        if (screen.equals("NaN")) screen = "Error";
+        if (screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
     }
 
     /**
@@ -129,5 +130,7 @@ public class Calculator {
         if(screen.equals("Infinity")) screen = "Error";
         if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2);
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
+        if (screen.equals("NaN")) screen = "Error";
     }
+
 }
