@@ -90,5 +90,65 @@ class CalculatorTest {
 
 
     //TODO hier weitere Tests erstellen
+
+    /**
+     * Der test wird sofort grün
+     */
+    @Test
+    @DisplayName("should display result after subtracting a larger number from a smaller number")
+    void testSubtractLargerNumberFromSmallerNumber() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(3);
+        calc.pressBinaryOperationKey("-");
+        calc.pressDigitKey(8);
+        calc.pressDigitKey(3);
+        calc.pressDigitKey(3);
+        calc.pressEqualsKey();
+
+        String expected = "-830";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+    /**
+     * Test war Rot
+     */
+    @Test //1
+    @DisplayName("should display result after getting the square root of a multi-digit number")
+    void testSquareRootOfMultiDigit() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(6);
+        calc.pressDigitKey(9);
+        calc.pressUnaryOperationKey("√");
+
+        String expected = "13"; // aktual war 13.0
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+    /**
+     * Test war rot
+     */
+    @Test //2
+    @DisplayName("should display result after adding three positive multi-digit numbers")
+    void testPositiveAddition2() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(2);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(2);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(2);
+        calc.pressEqualsKey();
+
+        String expected = "6";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
 }
 
