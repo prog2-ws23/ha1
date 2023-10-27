@@ -103,6 +103,37 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
     }
-    //TODO hier weitere Tests erstellen
+
+    @Test
+    @DisplayName("inversion with 0 should not be possible")
+    void testInversion() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(0);
+        calc.pressUnaryOperationKey("1/x");
+
+        String expected = "Error";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("should take squareroot of digit and multiply the equal")
+    void testSquarerootAndMultiplication() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(9);
+        calc.pressUnaryOperationKey("√");
+        calc.pressEqualsKey();
+        calc.pressBinaryOperationKey("x");
+        calc.pressDigitKey(3);
+        calc.pressEqualsKey();
+
+        String expected = "9";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
 }
 
