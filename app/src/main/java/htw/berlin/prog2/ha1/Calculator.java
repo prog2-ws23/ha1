@@ -122,6 +122,10 @@ public class Calculator {
      * entfernt und der Inhalt fortan als positiv interpretiert.
      */
     public void pressNegativeKey() {
+
+        if(binaryOperatorCounter >= 1){
+            screen = screen.startsWith("-") ? "-0" : "0";
+        }
         screen = screen.startsWith("-") ? screen.substring(1) : "-" + screen;
     }
 

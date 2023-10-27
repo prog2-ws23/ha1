@@ -103,6 +103,7 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
     }
+
     @Test
     @DisplayName("should correctly handle multiple additions in sequence")
     void testMultiplyAdditions() {
@@ -122,7 +123,6 @@ class CalculatorTest {
 
 
     }
-
 
 
     @Test
@@ -146,25 +146,24 @@ class CalculatorTest {
 
     }
 
-//@Test
-//@DisplayName("Test for subtraction of positive and negative numbers")
-//void testSubtractionOfTwoNumbers() {
-//Calculator calc = new Calculator();
+    @Test
+    void testSubtractionOfTwoNumbers() {
+        Calculator calc = new Calculator();
 
-//calc.pressDigitKey(6);
-//calc.pressBinaryOperationKey("-");
-//calc.pressNegativeKey();
-//calc.pressDigitKey(6);
-//calc.pressEqualsKey();
+        calc.pressDigitKey(6);
+        calc.pressBinaryOperationKey("-");
+        calc.pressNegativeKey();
+        calc.pressDigitKey(6);
+        calc.pressEqualsKey();
 
-//String expected = "-12";
-//String actual = calc.readScreen();
+        String expected = "0";
+        String actual = calc.readScreen();
 
-//assertEquals(expected, actual);
+        assertEquals(expected, actual);
 
 
+    }
 }
-
 
 
 
