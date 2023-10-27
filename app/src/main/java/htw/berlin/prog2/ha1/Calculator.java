@@ -13,6 +13,7 @@ public class Calculator {
     private double latestValue;
 
     private String latestOperation = "";
+    private int clearKeyCounter = 0;
 
     /**
      * @return den aktuellen Bildschirminhalt als String
@@ -30,9 +31,8 @@ public class Calculator {
      */
     public void pressDigitKey(int digit) {
         if(digit > 9 || digit < 0) throw new IllegalArgumentException();
-
-        if(screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = "";
-
+        if(screen.equals("0.")) screen = "0.";
+        else if(screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = "";
         screen = screen + digit;
     }
 
@@ -45,9 +45,17 @@ public class Calculator {
      * im Ursprungszustand ist.
      */
     public void pressClearKey() {
-        screen = "0";
-        latestOperation = "";
-        latestValue = 0.0;
+        clearKeyCounter += 1;
+        clearEntry();
+    }
+
+    public void clearEntry(){
+        if(clearKeyCounter >= 2){
+            screen = "0";
+            latestOperation = "";
+            latestValue = 0.0;
+        }
+        else if(clearKeyCounter == 1) screen = "0";
     }
 
     /**
