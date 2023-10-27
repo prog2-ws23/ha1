@@ -32,7 +32,7 @@ class CalculatorTest {
         Calculator calc = new Calculator();
 
         calc.pressDigitKey(2);
-        calc.pressUnaryOperationKey("√");
+        calc.pressUnaryOperationKey("√put");
 
         String expected = "1.41421356";
         String actual = calc.readScreen();
@@ -167,5 +167,35 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
     }
-}
+    @Test
+    @DisplayName("should display error when nominating 0 for  fraction denominator")
+        void testZeroAsDenominator(){
+            Calculator calc = new Calculator();
+
+           calc.pressDigitKey(0);
+            calc.pressUnaryOperationKey("1/x");
+
+            String expected = "Error";
+            String actual = calc.readScreen();
+
+            assertEquals(expected, actual);
+        }
+    @Test
+    @DisplayName("should display error when deviding zero and then pressing fraction button ")
+    void abc(){
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(0);
+        calc.pressBinaryOperationKey("/");
+        calc.pressUnaryOperationKey("1/x");
+
+        String expected = "Error";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+
+    }
+
 

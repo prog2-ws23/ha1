@@ -81,6 +81,7 @@ public class Calculator {
             default -> throw new IllegalArgumentException();
         };
         screen = Double.toString(result);
+
         if(screen.equals("NaN")) screen = "Error";
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
 
@@ -124,6 +125,8 @@ public class Calculator {
             case "x" -> latestValue * Double.parseDouble(screen);
             case "/" -> latestValue / Double.parseDouble(screen);
             default -> throw new IllegalArgumentException();
+
+
         };
         screen = Double.toString(result);
         if(screen.equals("Infinity")) screen = "Error";
