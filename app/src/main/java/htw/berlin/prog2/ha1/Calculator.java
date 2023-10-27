@@ -74,24 +74,38 @@ public class Calculator {
     /**
      * Empfängt den Wert einer gedrückten unären Operationstaste, also eine der drei Operationen
      * Quadratwurzel, Prozent, Inversion, welche nur einen Operanden benötigen.
+     * Diese Methode ermöglicht das Rechnen mit Prozenten
      * Beim Drücken der Taste wird direkt die Operation auf den aktuellen Zahlenwert angewendet und
      * der Bildschirminhalt mit dem Ergebnis aktualisiert.
      * @param operation "√" für Quadratwurzel, "%" für Prozent, "1/x" für Inversion
      */
     public void pressUnaryOperationKey(String operation) {
-        latestValue = Double.parseDouble(screen);
-        latestOperation = operation;
-        var result = switch(operation) {
-            case "√" -> Math.sqrt(Double.parseDouble(screen));
-            case "%" -> Double.parseDouble(screen) / 100;
-            case "1/x" -> 1 / Double.parseDouble(screen);
-            default -> throw new IllegalArgumentException();
-        };
-        screen = Double.toString(result);
-        if(screen.equals("NaN")) screen = "Error";
-        if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
+            double value = Double.parseDouble(screen); // Bildschirminhalt wird in ein double-Wert konvertiert
+            double result; // Variable result deklariert, hier wird das Ergebnis der Operation gespeichert
 
-    }
+            switch (operation) { // switch-Anweisung um die Operation auf dem eingegeben Parameter auszuführen
+                case "√":
+                    result = Math.sqrt(value); // bei der Operation "√", wird hier die Quadratwurzel berechnet
+                    break;
+                case "%":
+                    if (!latestOperation.isEmpty()) {
+                        double previousValue = latestValue; // wenn "%" eingegeben wurde und bereits eine Operationstaste gedrückt wurde, wird das Ergebnis basierden auf dem aktuellen und dem vorherigem Wert berechnet
+                        result = previousValue * (value / 100);
+                    } else {
+                        result = value / 100; // falls jedoch keine Operationstaste gedrückt wurde vorher wird nur der Prozentsatz des aktuellen Werts berechnet
+                    }
+                    break;
+                case "1/x":
+                    result = 1 / value; // hier wird Kehrwert berechnet
+                    break;
+                default:
+                    throw new IllegalArgumentException(); // bei einer unbekannten Operation wird eine Ausnahme geworfen
+            }
+            screen = Double.toString(result); // Bildschirminhalt hat das Ergebnis der Operation (wird aktualisiert)
+            if (screen.equals("NaN")) screen = "Error"; // wenn es "NaN"ist, kommt ein Error
+            if (screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10); // falls Dezimalpunkt enthalten und länge größer als 11 Zeichen ist, wird es auf 10 gekürzt mäßig
+            if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2); // von der unteren Methode kopiert da immer ein .0 daneben stand, dies entfernt diese .0 am Ende, falls es da ist
+        }
     /**
      * Empfängt den Befehl der gedrückten Dezimaltrennzeichentaste, im Englischen üblicherweise "."
      * Fügt beim ersten Mal Drücken dem aktuellen Bildschirminhalt das Trennzeichen auf der rechten
