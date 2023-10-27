@@ -119,23 +119,20 @@ class CalculatorTest {
     }
 
     @Test
-    @DisplayName("should handle the order of binary operations correctly") // first * and /, then + and -
-    void testBinaryOperationOrder() {
+    @DisplayName("should correctly calculate 1.6 divided by 6")
+    void testRoundingOfDecimalNumbers() {
         Calculator calc = new Calculator();
 
-        calc.pressDigitKey(5);
-        calc.pressBinaryOperationKey("-");
-        calc.pressDigitKey(3);
-        calc.pressBinaryOperationKey("*");
-        calc.pressDigitKey(2);
+        calc.pressDigitKey(1);
+        calc.pressDotKey();
+        calc.pressDigitKey(6);
+        calc.pressBinaryOperationKey("/");
+        calc.pressDigitKey(6);
         calc.pressEqualsKey();
 
-        String expected = "-1"; // Expected result of 5 - 3 * 2
+        String expected = "0,26666667"; // Expected result of 1.6 / 6
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
     }
-
-    //TODO hier weitere Tests erstellen
 }
-
