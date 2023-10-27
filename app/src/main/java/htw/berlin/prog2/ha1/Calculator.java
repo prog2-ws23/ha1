@@ -60,6 +60,9 @@ public class Calculator {
      * @param operation "+" für Addition, "-" für Substraktion, "x" für Multiplikation, "/" für Division
      */
     public void pressBinaryOperationKey(String operation) {
+        if (!latestOperation.isEmpty()) {
+            pressEqualsKey(); // Berechnung der vorherigen Operation
+        }
         latestValue = Double.parseDouble(screen);
         latestOperation = operation;
     }
@@ -133,6 +136,7 @@ public class Calculator {
         if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2);
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
         if (screen.equals("NaN")) screen = "Error";
+        latestOperation = "";
     }
 
 }
