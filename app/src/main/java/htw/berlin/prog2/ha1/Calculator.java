@@ -123,6 +123,7 @@ public class Calculator {
             case "-" -> latestValue - Double.parseDouble(screen);
             case "x" -> latestValue * Double.parseDouble(screen);
             case "/" -> latestValue / Double.parseDouble(screen);
+            case "" -> Double.parseDouble(screen); //wenn der latestOperator leer bleibt, gibt er den Screen aus
             default -> throw new IllegalArgumentException();
         };
         screen = Double.toString(result);
