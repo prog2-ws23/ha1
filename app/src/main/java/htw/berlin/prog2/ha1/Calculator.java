@@ -12,13 +12,36 @@ public class Calculator {
 
     private double latestValue;
 
+    private double previousValue;
+
     private String latestOperation = "";
+
+    private String previousOperation ="";
+
+    private String latestInput = "";
+
+    private String previousInput ="";
+
+    private final String binaryOperations = "+-x/";
+
+
 
     /**
      * @return den aktuellen Bildschirminhalt als String
      */
     public String readScreen() {
         return screen;
+    }
+
+    /* Removes superfluous decimals, shortens displayed value to 10 digits,
+     * handles infinite and other erroneous results.
+     */    
+    private void cleanUpScreen(){
+
+        if(screen.equals("Infinity")) screen = "Error";
+        if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2);
+        if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
+        if(screen.equals("NaN")) screen = "Error";
     }
 
     /**
@@ -29,11 +52,17 @@ public class Calculator {
      * @param digit Die Ziffer, deren Taste gedrückt wurde
      */
     public void pressDigitKey(int digit) {
+		
+        previousInput = latestInput;
+        latestInput = "digit";
+
         if(digit > 9 || digit < 0) throw new IllegalArgumentException();
+        if(screen.equals("0") || Double.parseDouble(screen) == latestValue) screen = "";
 
-        if(screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = "";
+		screen += digit;
+		
+		cleanUpScreen();
 
-        screen = screen + digit;
     }
 
     /**
@@ -46,8 +75,15 @@ public class Calculator {
      */
     public void pressClearKey() {
         screen = "0";
-        latestOperation = "";
-        latestValue = 0.0;
+        if(latestInput.equals("c")){
+            latestOperation = "";
+            latestValue = 0.0;
+
+            previousInput = "";
+            previousOperation = "";
+            previousValue = 0.0;
+        }
+        latestInput = "c";
     }
 
     /**
@@ -58,10 +94,36 @@ public class Calculator {
      * Beim zweiten Drücken nach Eingabe einer weiteren Zahl wird direkt des aktuelle Zwischenergebnis
      * auf dem Bildschirm angezeigt. Falls hierbei eine Division durch Null auftritt, wird "Error" angezeigt.
      * @param operation "+" für Addition, "-" für Substraktion, "x" für Multiplikation, "/" für Division
+     * https://stackoverflow.com/a/506107 Source for indexOf check.
      */
     public void pressBinaryOperationKey(String operation)  {
+
+        previousValue = latestValue;
+        
         latestValue = Double.parseDouble(screen);
+        
+        previousOperation = latestOperation;
+
         latestOperation = operation;
+        
+        previousInput = latestInput;
+        
+        latestInput = operation;
+
+        if(previousInput.equals("digit") && !latestOperation.isEmpty() && !previousOperation.isEmpty() && binaryOperations.indexOf(latestOperation) !=-1 && binaryOperations.indexOf(previousOperation) !=-1){
+            var result = switch(previousOperation) {
+                case "+" -> previousValue + latestValue;
+                case "-" -> previousValue - latestValue;
+                case "x" -> previousValue * latestValue;
+                case "/" -> previousValue / latestValue;
+                default -> throw new IllegalArgumentException();
+            };
+            latestValue = result;
+            screen = Double.toString(latestValue);
+
+        }
+        cleanUpScreen();
+
     }
 
     /**
@@ -81,8 +143,9 @@ public class Calculator {
             default -> throw new IllegalArgumentException();
         };
         screen = Double.toString(result);
-        if(screen.equals("NaN")) screen = "Error";
-        if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
+        latestValue = result;
+        cleanUpScreen();
+        latestInput = operation;
 
     }
 
@@ -117,6 +180,9 @@ public class Calculator {
      * Operation (ggf. inklusive letztem Operand) erneut auf den aktuellen Bildschirminhalt angewandt
      * und das Ergebnis direkt angezeigt.
      */
+
+     //FIXME does not work as inteded
+     //reworked binaryKey messes with this
     public void pressEqualsKey() {
         if(latestOperation != "") {
             var result = switch(latestOperation) {
@@ -127,9 +193,8 @@ public class Calculator {
                 default -> throw new IllegalArgumentException();
             };
             screen = Double.toString(result);
-            if(screen.equals("Infinity")) screen = "Error";
-            if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2);
-            if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
+            cleanUpScreen();
         };
+
     }
 }
