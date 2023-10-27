@@ -9,22 +9,13 @@ package htw.berlin.prog2.ha1;
 public class Calculator {
 
     private String screen = "0";
-
     private double latestValue;
-
     private double previousValue;
-
     private String latestOperation = "";
-
     private String previousOperation ="";
-
     private String latestInput = "";
-
     private String previousInput ="";
-
     private final String binaryOperations = "+-x/";
-
-
 
     /**
      * @return den aktuellen Bildschirminhalt als String
@@ -52,7 +43,7 @@ public class Calculator {
      * @param digit Die Ziffer, deren Taste gedrückt wurde
      */
     public void pressDigitKey(int digit) {
-		
+
         previousInput = latestInput;
         latestInput = "digit";
 
@@ -60,9 +51,7 @@ public class Calculator {
         if(screen.equals("0") || Double.parseDouble(screen) == latestValue) screen = "";
 
 		screen += digit;
-		
 		cleanUpScreen();
-
     }
 
     /**
@@ -97,17 +86,11 @@ public class Calculator {
      * https://stackoverflow.com/a/506107 Source for indexOf check.
      */
     public void pressBinaryOperationKey(String operation)  {
-
-        previousValue = latestValue;
-        
-        latestValue = Double.parseDouble(screen);
-        
+        previousValue = latestValue;        
+        latestValue = Double.parseDouble(screen);        
         previousOperation = latestOperation;
-
-        latestOperation = operation;
-        
-        previousInput = latestInput;
-        
+        latestOperation = operation;        
+        previousInput = latestInput;        
         latestInput = operation;
 
         if(previousInput.equals("digit") && !latestOperation.isEmpty() && !previousOperation.isEmpty() && binaryOperations.indexOf(latestOperation) !=-1 && binaryOperations.indexOf(previousOperation) !=-1){
@@ -120,10 +103,8 @@ public class Calculator {
             };
             latestValue = result;
             screen = Double.toString(latestValue);
-
         }
         cleanUpScreen();
-
     }
 
     /**
@@ -146,7 +127,6 @@ public class Calculator {
         latestValue = result;
         cleanUpScreen();
         latestInput = operation;
-
     }
 
     /**
@@ -192,6 +172,5 @@ public class Calculator {
             screen = Double.toString(result);
             cleanUpScreen();
         };
-
     }
 }
