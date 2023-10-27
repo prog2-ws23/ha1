@@ -88,7 +88,48 @@ class CalculatorTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    @DisplayName("should save display numbers of 0s")
+    void testCutZeros() {
+        Calculator calc = new Calculator();
 
+        calc.pressDigitKey(3);
+        calc.pressDotKey();
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(9);
+        calc.pressDigitKey(0);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(1);
+        calc.pressDotKey();
+        calc.pressDigitKey(0);
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(0);
+        calc.pressEqualsKey();
+
+        String expected = ("4.2");
+        String actual = calc.readScreen();
+
+        assertEquals (expected, actual);
+    }
+    /*@Test
+    @DisplayName("should calculate correctly after one-tab-clear")
+    void testOneTabClear() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(1);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(3);
+        calc.pressBinaryOperationKey("-");
+        calc.pressDigitKey(2);
+        calc.pressClearKey();
+        calc.pressDigitKey(3);
+        calc.pressEqualsKey();
+
+        String expected = "1";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }*/
     //TODO hier weitere Tests erstellen
 }
 
