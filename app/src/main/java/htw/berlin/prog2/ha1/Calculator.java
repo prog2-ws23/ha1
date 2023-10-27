@@ -8,6 +8,7 @@ package htw.berlin.prog2.ha1;
  */
 public class Calculator {
 
+    private int operatorCount = 0;
     private String screen = "0";
 
     private double latestValue;
@@ -60,8 +61,13 @@ public class Calculator {
      * @param operation "+" für Addition, "-" für Substraktion, "x" für Multiplikation, "/" für Division
      */
     public void pressBinaryOperationKey(String operation)  {
+       if (operatorCount >=1){
+           pressEqualsKey();
+        }
         latestValue = Double.parseDouble(screen);
         latestOperation = operation;
+        operatorCount++;
+
     }
 
     /**
