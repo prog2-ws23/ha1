@@ -119,10 +119,12 @@ public class Calculator {
      */
     public void pressEqualsKey() {
         var result = switch(latestOperation) {
+            case "" ->latestValue = Double.parseDouble(screen);
             case "+" -> latestValue + Double.parseDouble(screen);
             case "-" -> latestValue - Double.parseDouble(screen);
             case "x" -> latestValue * Double.parseDouble(screen);
             case "/" -> latestValue / Double.parseDouble(screen);
+            case "%"->latestValue/100;
             default -> throw new IllegalArgumentException();
         };
         screen = Double.toString(result);
