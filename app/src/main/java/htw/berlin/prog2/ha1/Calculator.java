@@ -68,19 +68,33 @@ public class Calculator {
      * Empfängt den Wert einer gedrückten unären Operationstaste, also eine der drei Operationen
      * Quadratwurzel, Prozent, Inversion, welche nur einen Operanden benötigen.
      * Beim Drücken der Taste wird direkt die Operation auf den aktuellen Zahlenwert angewendet und
-     * der Bildschirminhalt mit dem Ergebnis aktualisiert.
+     * der Bildschirminhalt mit dem Ergebnis aktualisiert, aber beim versuch 0 zu inversieren wird
+     * die Meldung "Error" angezeigt.
      * @param operation "√" für Quadratwurzel, "%" für Prozent, "1/x" für Inversion
      */
     public void pressUnaryOperationKey(String operation) {
         latestValue = Double.parseDouble(screen);
         latestOperation = operation;
-        var result = switch(operation) {
-            case "√" -> Math.sqrt(Double.parseDouble(screen));
-            case "%" -> Double.parseDouble(screen) / 100;
-            case "1/x" -> 1 / Double.parseDouble(screen);
+        switch(operation) {
+            case "√" -> {
+                var result = Math.sqrt(Double.parseDouble(screen));
+                screen = Double.toString(result);
+            }
+            case "%" -> {
+                var result = Double.parseDouble(screen) / 100;
+                screen = Double.toString(result);
+            }
+            case "1/x" -> {
+                if (screen.equals("0")) {
+                    screen = "Error";
+                } else {
+                    var result = 1 / Double.parseDouble(screen);
+                    screen = Double.toString(result);
+                }
+            }
             default -> throw new IllegalArgumentException();
-        };
-        screen = Double.toString(result);
+        }
+
         if(screen.equals("NaN")) screen = "Error";
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
 
@@ -118,6 +132,10 @@ public class Calculator {
      * und das Ergebnis direkt angezeigt.
      */
     public void pressEqualsKey() {
+        if (latestOperation.isEmpty()){
+            return;
+        }
+
         var result = switch(latestOperation) {
             case "+" -> latestValue + Double.parseDouble(screen);
             case "-" -> latestValue - Double.parseDouble(screen);
