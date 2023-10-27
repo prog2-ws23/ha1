@@ -126,6 +126,44 @@ class CalculatorTest {
         assertEquals(expected,actual);
 
     }
+    @Test
+    @DisplayName("should display positive result after multiplying two negative numbers")
+    void testMultiplyTwoNegative(){
+        Calculator calc = new Calculator();
+
+        calc.pressNegativeKey();
+        calc.pressDigitKey(4);
+        calc.pressBinaryOperationKey("x");
+        calc.pressDigitKey(4);
+        calc.pressNegativeKey();
+        calc.pressEqualsKey();
+
+        String expected = "16";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("tests the binary method by doing multiple additions")
+    void testBinaryMethodDoingMultipleAdditions(){
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(2);
+        calc.pressDigitKey(5);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(2);
+        calc.pressDigitKey(5);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(5);
+        calc.pressEqualsKey();
+
+        String expected = "55";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+
+    }
 
 
 
