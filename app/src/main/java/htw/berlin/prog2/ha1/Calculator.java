@@ -33,13 +33,15 @@ public class Calculator {
         return screen;
     }
 
-    // Removes superfluous decimals, shortens displayed value to 10 digits, handles "infinite" results.
+    /* Removes superfluous decimals, shortens displayed value to 10 digits,
+     * handles infinite and other erroneous results.
+     */    
     private void cleanUpScreen(){
 
         if(screen.equals("Infinity")) screen = "Error";
         if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2);
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
-
+        if(screen.equals("NaN")) screen = "Error";
     }
 
     /**
@@ -76,7 +78,6 @@ public class Calculator {
         if(latestInput.equals("c")){
             latestOperation = "";
             latestValue = 0.0;
-            latestInput = "";
 
             previousInput = "";
             previousOperation = "";
@@ -93,6 +94,7 @@ public class Calculator {
      * Beim zweiten Drücken nach Eingabe einer weiteren Zahl wird direkt des aktuelle Zwischenergebnis
      * auf dem Bildschirm angezeigt. Falls hierbei eine Division durch Null auftritt, wird "Error" angezeigt.
      * @param operation "+" für Addition, "-" für Substraktion, "x" für Multiplikation, "/" für Division
+     * https://stackoverflow.com/a/506107 Source for indexOf check.
      */
     public void pressBinaryOperationKey(String operation)  {
 
@@ -142,8 +144,7 @@ public class Calculator {
         };
         screen = Double.toString(result);
         latestValue = result;
-        if(screen.equals("NaN")) screen = "Error";
-        if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
+        cleanUpScreen();
         latestInput = operation;
 
     }
@@ -192,9 +193,8 @@ public class Calculator {
                 default -> throw new IllegalArgumentException();
             };
             screen = Double.toString(result);
-            if(screen.equals("Infinity")) screen = "Error";
-            if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2);
-            if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
+            cleanUpScreen();
         };
+
     }
 }
