@@ -8,7 +8,7 @@ package htw.berlin.prog2.ha1;
  */
 public class Calculator {
 
-    private String screen = "0";
+    private String screen    = "0";
 
     private double latestValue;
 
@@ -28,14 +28,22 @@ public class Calculator {
      * oder rechts an die zuvor gedrückte Ziffer angehängt angezeigt wird.
      * @param digit Die Ziffer, deren Taste gedrückt wurde
      */
+
+
+    // Diese Methode ist ebenfalls mithilfe von Chatgpt entstanden, ich habe
+    // schwierigkeiten zu arbeiten da meine IDE keine test laufen kann und daher nicht
+    // weiß ob mein code funktioniert oder nicht, abgesehen von den roten markierung
     public void pressDigitKey(int digit) {
-        if(digit > 9 || digit < 0) throw new IllegalArgumentException();
+        if (digit > 9 || digit < 0) throw new IllegalArgumentException();
 
-        if(screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = "";
+        if (screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = "";
 
-        screen = screen + digit;
+        if (screen.length() < 10) {
+            screen = screen + digit;
+        } else {
+            screen = "Error";
+        }
     }
-
     /**
      * Empfängt den Befehl der C- bzw. CE-Taste (Clear bzw. Clear Entry).
      * Einmaliges Drücken der Taste löscht die zuvor eingegebenen Ziffern auf dem Bildschirm
@@ -83,8 +91,8 @@ public class Calculator {
         screen = Double.toString(result);
         if(screen.equals("NaN")) screen = "Error";
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
+}
 
-    }
 
     /**
      * Empfängt den Befehl der gedrückten Dezimaltrennzeichentaste, im Englischen üblicherweise "."
@@ -125,9 +133,45 @@ public class Calculator {
             case "/" -> latestValue / Double.parseDouble(screen);
             default -> throw new IllegalArgumentException();
         };
+
+
+
         screen = Double.toString(result);
         if(screen.equals("Infinity")) screen = "Error";
         if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2);
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
     }
+
+    // dieser ersatz code ist MITHILFE! von ChatGPT erzeugt- ansatz war mit if else war
+    // da aber die letzten zeilen sind nicht von mir.
+    // : public void pressEqualsKey() {
+    //    double result = 0.0;
+    //    if (latestOperation.equals("+")) {
+    //        result = latestValue + Double.parseDouble(screen);
+    //    } else if (latestOperation.equals("-")) {
+    //        result = latestValue - Double.parseDouble(screen);
+    //    } else if (latestOperation.equals("x")) {
+    //        result = latestValue * Double.parseDouble(screen);
+    //    } else if (latestOperation.equals("/")) {
+    //        double divisor = Double.parseDouble(screen);
+    //        if (divisor == 0) {
+    //            screen = "Error";
+    //            return;
+    //        }
+    //        result = latestValue / divisor;
+    //    } else {
+    //        throw new IllegalArgumentException();
+    //    }
+    //
+    //    screen = Double.toString(result);
+    //    if (screen.equals("Infinity")) {
+    //        screen = "Error";
+    //    }
+    //    if (screen.endsWith(".0")) {
+    //        screen = screen.substring(0, screen.length() - 2);
+    //    }
+    //    if (screen.contains(".") && screen.length() > 11) {
+    //        screen = screen.substring(0, 10);
+    //    }
+    //}
 }

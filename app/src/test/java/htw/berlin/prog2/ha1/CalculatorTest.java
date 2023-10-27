@@ -1,5 +1,6 @@
 package htw.berlin.prog2.ha1;
 
+import org.checkerframework.checker.units.qual.C;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -90,5 +91,79 @@ class CalculatorTest {
 
 
     //TODO hier weitere Tests erstellen
+
+    // Teilaufgabe1
+    @Test
+    @DisplayName("should show result after multiplying two numbers")
+    void testMultiplying(){
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(5);
+        calc.pressBinaryOperationKey("x");
+        calc.pressDigitKey(9);
+        calc.pressEqualsKey();
+
+        String expected = "45";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+    // Teilaufgabe2
+
+    @Test
+    @DisplayName("should display error when multiplying very high numbers")
+    void testOverflow(){
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(9);
+        calc.pressDigitKey(9);
+        calc.pressDigitKey(9);
+        calc.pressDigitKey(9);
+        calc.pressDigitKey(9);
+        calc.pressDigitKey(9);
+        calc.pressDigitKey(9);
+        calc.pressDigitKey(9);
+        calc.pressDigitKey(9);
+        calc.pressBinaryOperationKey("x");
+        calc.pressDigitKey(9);
+        calc.pressDigitKey(9);
+        calc.pressDigitKey(9);
+        calc.pressDigitKey(9);
+        calc.pressDigitKey(9);
+        calc.pressDigitKey(9);
+        calc.pressDigitKey(9);
+        calc.pressDigitKey(9);
+        calc.pressDigitKey(9);
+        calc.pressEqualsKey();
+
+        String expected = "Error";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+
+    }
+
+
+    @Test
+     @DisplayName("should show display 10 after adding two numbers")
+     void testEquals(){
+     Calculator calc = new Calculator();
+
+     calc.pressDigitKey(5);
+     calc.pressBinaryOperationKey("-");
+     calc.pressBinaryOperationKey("-");
+     calc.pressDigitKey(5);
+     calc.pressEqualsKey();
+
+     String expected = "10";
+     String actual = calc.readScreen();
+
+     assertEquals(expected, actual);
+     }
+
+    // Meine IDE kann keine test mehr durchführen da etwas mit GRADLE passiert ist,
+    // ich kriege es momentan nicht gefixt, siehe anhang.
+
 }
 
