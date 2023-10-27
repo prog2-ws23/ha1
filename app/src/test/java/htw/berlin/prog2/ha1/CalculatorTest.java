@@ -92,8 +92,6 @@ class CalculatorTest {
     @Test
     @DisplayName("should display zero when pressing the C/clearkey")
 
-    //die davor eingetippte Nummer wird "gelöscht" (nicht die ganze Rechnung)
-
     void testTheCButton(){
         Calculator calc = new Calculator();
 
@@ -109,6 +107,47 @@ class CalculatorTest {
 
     }
 
+
+    @Test
+    @DisplayName("should display the number that is typed after clearing the calculation by pressing the clearKey twice")
+        //löscht ganze Rechnung
+
+    void testCKeyPressingTwoTimes(){
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(5);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(2);
+        calc.pressClearKey();
+        calc.pressClearKey();
+        calc.pressDigitKey(3);
+        calc.pressEqualsKey();
+
+
+        String expected = "8";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+
+    @Test
+    @DisplayName("hould display the result of the calculation while the second operation works as equalkey")
+
+    void muli() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(6);
+        calc.pressBinaryOperationKey("/");
+        calc.pressDigitKey(3);
+        calc.pressBinaryOperationKey("/");
+
+
+        String expected = "2";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
 
 }
 
