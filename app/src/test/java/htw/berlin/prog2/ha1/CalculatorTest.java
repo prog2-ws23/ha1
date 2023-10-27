@@ -113,8 +113,8 @@ class CalculatorTest {
     void testAdditionWithNegativeNumber() {
         Calculator calc = new Calculator();
 
-        calc.pressDigitKey(7);
         calc.pressNegativeKey();
+        calc.pressDigitKey(7);
         calc.pressBinaryOperationKey("+");
         calc.pressDigitKey(4);
         calc.pressEqualsKey();
@@ -128,21 +128,22 @@ class CalculatorTest {
 
     @Test
     @DisplayName("should display result after adding three positive multi-digit numbers")
-    void testMultiplePositiveAddition() {
+    void testMultiplyNegativeNumber() {
         Calculator calc = new Calculator();
 
         calc.pressDigitKey(3);
         calc.pressBinaryOperationKey("+");
         calc.pressDigitKey(3);
+        calc.zS();
         calc.pressBinaryOperationKey("+");
-        calc.pressDigitKey(3);
+        calc.pressDigitKey(4);
+
         calc.pressEqualsKey();
 
-        String expected = "9";
+        String expected = "10";
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
     }
-
 }
 
