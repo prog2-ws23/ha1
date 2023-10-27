@@ -64,7 +64,8 @@ public class Calculator {
      * Rechner in den passenden Operationsmodus versetzt.
      * Beim zweiten Drücken nach Eingabe einer weiteren Zahl wird direkt des aktuelle Zwischenergebnis
      * auf dem Bildschirm angezeigt. Falls hierbei eine Division durch Null auftritt, wird "Error" angezeigt.
-     * Für den Fall der Multiplikation wurde ein switch case angelegt, um 3 Zahlen miteinander multiplizieren zu können
+     * currentValue speichert einen Zwischenwert, der dann als latestValue gespeichert wird und in der
+     * pressEqualsKey Methode übergeben wird, um mit einem dritten Wert weiterzurechnen
      *
      * @param operation "+" für Addition, "-" für Substraktion, "x" für Multiplikation, "/" für Division
      */
@@ -152,8 +153,7 @@ public class Calculator {
         var result = switch (latestOperation) {
             case "+" -> latestValue + Double.parseDouble(screen);
             case "-" -> latestValue - Double.parseDouble(screen);
-            case "x" ->
-                    latestValue * Double.parseDouble(screen); //hier ist latestValue 10 (aus anderer Methode oben) und screen 6, weil
+            case "x" -> latestValue * Double.parseDouble(screen); //hier ist latestValue 10 (aus anderer Methode oben) und screen 6, weil
             //im screen wieder neu 6 eingegeben wurde, also wurde dann 6*10 multipliziert
             case "/" -> latestValue / Double.parseDouble(screen);
             default -> throw new IllegalArgumentException();
