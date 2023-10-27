@@ -111,7 +111,7 @@ class CalculatorTest {
 
         assertEquals (expected, actual);
     }
-    /*@Test
+    @Test
     @DisplayName("should calculate correctly after one-tab-clear")
     void testOneTabClear() {
         Calculator calc = new Calculator();
@@ -119,17 +119,17 @@ class CalculatorTest {
         calc.pressDigitKey(1);
         calc.pressBinaryOperationKey("+");
         calc.pressDigitKey(3);
-        calc.pressBinaryOperationKey("-");
-        calc.pressDigitKey(2);
+        //calc.pressBinaryOperationKey("-");
+        //calc.pressDigitKey(2);
         calc.pressClearKey();
-        calc.pressDigitKey(3);
+        calc.pressDigitKey(2);
         calc.pressEqualsKey();
 
-        String expected = "1";
+        String expected = "3";
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
-    }*/
+    }
     //TODO hier weitere Tests erstellen
 }
 
