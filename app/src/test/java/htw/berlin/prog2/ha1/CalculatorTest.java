@@ -184,7 +184,7 @@ class CalculatorTest {
     // Redtest 2
     @Test
     @DisplayName("should display error when deviding zero and then pressing fraction button ")
-    void abc(){
+    void DivisionAndFractioning(){
         Calculator calc = new Calculator();
 
         calc.pressDigitKey(0);
