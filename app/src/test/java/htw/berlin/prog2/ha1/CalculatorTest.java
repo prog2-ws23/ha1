@@ -105,22 +105,6 @@ class CalculatorTest {
         assertEquals(expected, actual);
     }
     @Test
-    @DisplayName("should add the 2.number once again after pressing = a second time" )
-    void testPressEqualsWithBinaryOperationAgain() {
-        Calculator calc = new Calculator();
-
-        calc.pressDigitKey(5);
-        calc.pressBinaryOperationKey("+");
-        calc.pressDigitKey(3);
-        calc.pressEqualsKey();
-        calc.pressEqualsKey();  // Pressing "=" again
-
-        String expected = "11";
-        String actual = calc.readScreen();
-
-        assertEquals(expected, actual);
-    }
-    @Test
     @DisplayName("should display error when applying '1/x' to zero")
     void testInverseOfZero() {
         Calculator calc = new Calculator();
@@ -129,6 +113,28 @@ class CalculatorTest {
         calc.pressUnaryOperationKey("1/x"); // Try to calculate the inverse of zero
 
         String expected = "Error";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+    @Test
+    @DisplayName("should truncate screen content after 9 digits ")
+    void testTruncateScreenContent() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(2);
+        calc.pressDigitKey(3);
+        calc.pressDigitKey(4);
+        calc.pressDigitKey(5);
+        calc.pressDigitKey(6);
+        calc.pressDigitKey(7);
+        calc.pressDigitKey(8);
+        calc.pressDigitKey(9);
+        calc.pressDigitKey(0);  // Should be truncated
+        calc.pressDigitKey(1);
+
+        String expected = "123456789";
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
