@@ -109,7 +109,7 @@ class CalculatorTest {
 
     @Test
     @DisplayName("should display result after subtracting a negative number from a positive")
-    void testSubbtractWithNegativeNumberFirst(){
+    void testSubtractWithNegativeNumberFirst(){
         Calculator calc = new Calculator();
         calc.pressNegativeKey();
         calc.pressDigitKey(5);
