@@ -47,15 +47,15 @@ public class Calculator {
      * im Ursprungszustand ist.
      */
     public void pressClearKey() {
-        //if (pressedClearButton) { // nochmaliges Drücken
+        if (pressedClearButton) { // nochmaliges Drücken
             screen = "0";
             latestOperation = "";
             latestValue = 0.0;
-            //pressedClearButton = false;
-        //} else { // erstmaliges Drücken
-            //screen = "0";
-            //pressedClearButton = true;
-        //}
+            pressedClearButton = false;
+        } else { // erstmaliges Drücken
+            screen = "0";
+            pressedClearButton = true;
+        }
     }
 
     /**
