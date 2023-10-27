@@ -107,16 +107,23 @@ class CalculatorTest {
         assertEquals(expected, actual);
     }
 
-    //fehlerhafte Tests
+
+    //gefixte Tests
     @Test
     @DisplayName("should display -3 after addition")
     void testAdditionWithNegativeNumber() {
         Calculator calc = new Calculator();
+        calc.pressClearKey();
 
         calc.pressNegativeKey();
+        System.out.println(calc.readScreen());
         calc.pressDigitKey(7);
+        System.out.println(calc.readScreen());
+
         calc.pressBinaryOperationKey("+");
         calc.pressDigitKey(4);
+        System.out.println(calc.readScreen());
+
         calc.pressEqualsKey();
 
         String expected = "-3";
@@ -128,7 +135,7 @@ class CalculatorTest {
 
     @Test
     @DisplayName("should display result after adding three positive multi-digit numbers")
-    void testMultiplyNegativeNumber() {
+    void testMultiplyAddition() {
         Calculator calc = new Calculator();
 
         calc.pressDigitKey(3);
@@ -146,4 +153,3 @@ class CalculatorTest {
         assertEquals(expected, actual);
     }
 }
-

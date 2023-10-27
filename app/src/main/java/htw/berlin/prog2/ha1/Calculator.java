@@ -28,13 +28,21 @@ public class Calculator {
      * oder rechts an die zuvor gedrückte Ziffer angehängt angezeigt wird.
      * @param digit Die Ziffer, deren Taste gedrückt wurde
      */
+
+
     public void pressDigitKey(int digit) {
-        if(digit > 9 || digit < 0) throw new IllegalArgumentException();
+        if(!screen.equals("-0")){
 
-        if(screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = "";
+        if (digit > 9 || digit < 0) throw new IllegalArgumentException();
+        if (screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = "";
 
-        screen = screen + digit;
+
+
+        screen = screen + digit;}
+        else if (screen.equals("-0")) screen="-"+digit;
     }
+
+
 
     /**
      * Empfängt den Befehl der C- bzw. CE-Taste (Clear bzw. Clear Entry).
@@ -60,10 +68,12 @@ public class Calculator {
      * @param operation "+" für Addition, "-" für Substraktion, "x" für Multiplikation, "/" für Division
      */
 
+
     public void pressBinaryOperationKey(String operation)  {
         latestValue = Double.parseDouble(screen);
         latestOperation = operation;
     }
+
 
     //neu für Test mit Addition 3er Zahlen
     public void zS() {
@@ -114,8 +124,13 @@ public class Calculator {
      * Zeigt der Bildschirm bereits einen negativen Wert mit führendem Minus an, dann wird dieses
      * entfernt und der Inhalt fortan als positiv interpretiert.
      */
+
     public void pressNegativeKey() {
-        screen = screen.startsWith("-") ? screen.substring(1) : "-" + screen;
+        if (screen.startsWith("-")) {
+            screen = screen.substring(1);
+        } else if(screen.startsWith("0")){
+            screen = "-0";
+        } else screen = "-" + screen;
     }
 
 
@@ -128,6 +143,8 @@ public class Calculator {
      * Operation (ggf. inklusive letztem Operand) erneut auf den aktuellen Bildschirminhalt angewandt
      * und das Ergebnis direkt angezeigt.
      */
+
+
     public void pressEqualsKey() {
         var result = switch(latestOperation) {
             case "+" -> latestValue + Double.parseDouble(screen);
