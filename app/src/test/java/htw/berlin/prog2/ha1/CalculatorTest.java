@@ -130,7 +130,7 @@ class CalculatorTest {
         calc.pressDigitKey(6);
         calc.pressEqualsKey();
 
-        String expected = "0,26666667"; // Expected result of 1.6 / 6
+        String expected = "0.26666667";
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
