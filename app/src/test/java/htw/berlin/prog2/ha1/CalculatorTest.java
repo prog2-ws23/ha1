@@ -94,7 +94,7 @@ class CalculatorTest {
 
     @Test
     @DisplayName("Test der Prozent Taste ")
-    void testPercentButton(){
+    void testPercentButton() {
         Calculator calc = new Calculator();
 
         calc.pressDigitKey(4);
@@ -108,5 +108,37 @@ class CalculatorTest {
         assertEquals(expected, actual);
 
     }
-}
 
+    @Test
+    @DisplayName("addiert mehrere Zahlen zusammen")
+    void additionOfMultipleNumbers() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(1);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(9);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(4);
+        calc.pressEqualsKey();
+
+        String expected = "14";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("Soll nach drücken der = Taste die gleiche Zahl ausspucken")
+    void numberEquals() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(6);
+        calc.pressDigitKey(9);
+        calc.pressEqualsKey();
+
+        String expected = "69";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+}
