@@ -63,7 +63,7 @@ public class Calculator {
         latestValue = Double.parseDouble(screen);
         latestOperation = operation;
         /*Für die Test testDivideByZero und testDivideByBigNumbers
-        @testDivideByZero Screen soll Error anzeigen wenn eine Positive zahl durch null dividiert wird
+        @testDivideByZero Screen soll Error anzeigen wenn eine Positive zahl durch null dividiert wird.
         @testDivideByBigNumbers Screen soll Error anzeigen wenn eine kleinere Positive Zahl durch eine viel gräßere Zahl dividiert wird und das Ergebnis somit ein Dezimalzahl ist.
         */
 
