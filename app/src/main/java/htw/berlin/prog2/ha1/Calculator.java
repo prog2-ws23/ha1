@@ -36,7 +36,11 @@ public class Calculator {
 
         if(screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = "";
 
-        screen = screen + digit;
+        if (screen == "-"){
+            screen = "-" + screen + digit;
+        }else {
+            screen = screen + digit;
+        }
     }
 
     /**
@@ -63,10 +67,33 @@ public class Calculator {
      * @param operation "+" für Addition, "-" für Substraktion, "x" für Multiplikation, "/" für Division
      */
     public void pressBinaryOperationKey(String operation)  {
-
-        latestValue = Double.parseDouble(screen);
+        if (latestOperation.isEmpty()){
+            latestValue = Double.parseDouble(screen);
+            latestOperation = operation;
+        }else {
+            double currentResult = Double.parseDouble(screen);
+            switch (latestOperation){
+                case "+":
+                    latestValue += currentResult;
+                    break;
+                case "-":
+                    latestValue -= currentResult;
+                    break;
+                case "x":
+                    latestValue *= currentResult;
+                    break;
+                case  "/":
+                    if (currentResult == 0){
+                        screen = "False can't divid by 0";
+                    }
+                    latestValue /= currentResult;
+                    break;
+                default:
+                    throw new IllegalArgumentException("Not an operator");
+            }
+            screen = Double.toString(latestValue);
+        }
         latestOperation = operation;
-
     }
 
 
@@ -126,6 +153,7 @@ public class Calculator {
      * und das Ergebnis direkt angezeigt.
      */
     public void pressEqualsKey() {
+
         var result = switch(latestOperation) {
             case "+" -> latestValue + Double.parseDouble(screen);
             case "-" -> latestValue - Double.parseDouble(screen);

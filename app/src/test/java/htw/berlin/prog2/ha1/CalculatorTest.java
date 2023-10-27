@@ -149,23 +149,21 @@ class CalculatorTest {
     void testBinaryMethodDoingMultipleAdditions(){
         Calculator calc = new Calculator();
 
-        calc.pressDigitKey(2);
+        calc.pressDigitKey(1);
         calc.pressDigitKey(5);
         calc.pressBinaryOperationKey("+");
         calc.pressDigitKey(2);
-        calc.pressDigitKey(5);
+        calc.pressDigitKey(0);
         calc.pressBinaryOperationKey("+");
         calc.pressDigitKey(5);
         calc.pressEqualsKey();
 
-        String expected = "55";
+        String expected = "40";
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
 
     }
-
-
 
 
 }
