@@ -116,6 +116,24 @@ class CalculatorTest {
 
 
     }
+    @Test
+    @DisplayName("double equals ")
+    void testdeletenumber() {
+        Calculator calc = new Calculator();
+        calc.pressDigitKey(2);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(2);
+        calc.pressEqualsKey();
+        calc.pressEqualsKey();
+
+
+        String expected = "6";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+
+
+    }
 
 
 
