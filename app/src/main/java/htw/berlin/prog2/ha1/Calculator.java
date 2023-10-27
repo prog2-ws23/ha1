@@ -31,10 +31,20 @@ public class Calculator {
     public void pressDigitKey(int digit) {
         if(digit > 9 || digit < 0) throw new IllegalArgumentException();
 
-        if(screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = "";
+        //(screen.contains(".")) screen = screen + digit;
+        //if(screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = "";
+
+        if(screen.contains(".")){
+            screen = screen + digit;
+            return;
+        }
+        else{
+            if(screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = "";
+        }
 
         screen = screen + digit;
     }
+
 
     /**
      * Empfängt den Befehl der C- bzw. CE-Taste (Clear bzw. Clear Entry).
@@ -60,6 +70,14 @@ public class Calculator {
      * @param operation "+" für Addition, "-" für Substraktion, "x" für Multiplikation, "/" für Division
      */
     public void pressBinaryOperationKey(String operation)  {
+
+        /* Diren: Es wird im Vorfeld untersucht, ob latestOperation eine binäre Operation ist. Ist die Variable eine der definierten binären Operationen, dann wird die pressEquals-Methode angewendet.
+           Dadurch wird JEDES MAL, wenn pressBinaryOperationKey genutzt wird, auch pressEquals angewendet und die eingegebenen Values vor dem latestValue werden nicht überschrieben, da sie bereits verrechnet wurden.*/
+        if (latestOperation.equals("+")) pressEqualsKey();
+        if (latestOperation.equals("-")) pressEqualsKey();
+        if (latestOperation.equals("x")) pressEqualsKey();
+        if (latestOperation.equals("/")) pressEqualsKey();
+
         latestValue = Double.parseDouble(screen);
         latestOperation = operation;
     }
