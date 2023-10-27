@@ -127,6 +127,28 @@ class CalculatorTest {
     }
 
     @Test
+    @DisplayName("Should delete only the last Entry.")
+    void testClearing2() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(9);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(9);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(5);
+        calc.pressDigitKey(5);
+        calc.pressClearKey();
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(9);
+        calc.pressEqualsKey();
+
+        String expected = "27";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
     @DisplayName("Soll eine 0 vor dem Punkte platzieren, sollte keine Zahl eingegeben worden sein.")
     void testPressDotKey() {
         Calculator calc = new Calculator();
