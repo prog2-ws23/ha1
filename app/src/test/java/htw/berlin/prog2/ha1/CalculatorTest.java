@@ -90,5 +90,66 @@ class CalculatorTest {
 
 
     //TODO hier weitere Tests erstellen
-}
 
+    //erfolgreicher Test
+    @Test
+    @DisplayName("should display 0 when multiplying with zero")
+    void testMultiplicationByZero() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(3);
+        calc.pressBinaryOperationKey("*");
+        calc.pressDigitKey(0);
+
+        String expected = "0";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+
+    //gefixte Tests
+    @Test
+    @DisplayName("should display -3 after addition")
+    void testAdditionWithNegativeNumber() {
+        Calculator calc = new Calculator();
+        calc.pressClearKey();
+
+        calc.pressNegativeKey();
+        System.out.println(calc.readScreen());
+        calc.pressDigitKey(7);
+        System.out.println(calc.readScreen());
+
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(4);
+        System.out.println(calc.readScreen());
+
+        calc.pressEqualsKey();
+
+        String expected = "-3";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+
+    @Test
+    @DisplayName("should display result after adding three positive multi-digit numbers")
+    void testMultiplyAddition() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(3);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(3);
+        calc.zS();
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(4);
+
+        calc.pressEqualsKey();
+
+        String expected = "10";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+}
