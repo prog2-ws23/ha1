@@ -26,10 +26,16 @@ public class Calculator {
      * drücken kann muss der Wert positiv und einstellig sein und zwischen 0 und 9 liegen.
      * Führt in jedem Fall dazu, dass die gerade gedrückte Ziffer auf dem Bildschirm angezeigt
      * oder rechts an die zuvor gedrückte Ziffer angehängt angezeigt wird.
+     * * ...
+     *  * Der Bildschirm sollte nicht mehr als 16 Ziffern anzeigen. Wenn mehr Ziffern eingegeben werden,
+     *  * sollten sie ignoriert werden.
+     *  * ...
      * @param digit Die Ziffer, deren Taste gedrückt wurde
      */
     public void pressDigitKey(int digit) {
         if(digit > 9 || digit < 0) throw new IllegalArgumentException();
+
+        if (screen.length() >= 16) return;  // Do not add more digits if screen already has 16 digits
 
         if(screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = "";
 
@@ -48,6 +54,7 @@ public class Calculator {
         screen = "0";
         latestOperation = "";
         latestValue = 0.0;
+
     }
 
     /**
@@ -94,7 +101,9 @@ public class Calculator {
      * Beim zweimaligem Drücken, oder wenn bereits ein Trennzeichen angezeigt wird, passiert nichts.
      */
     public void pressDotKey() {
-        if(!screen.contains(".")) screen = screen + ".";
+
+        if(!screen.contains("."))
+            screen = screen + ".";
     }
 
     /**
@@ -105,7 +114,10 @@ public class Calculator {
      * entfernt und der Inhalt fortan als positiv interpretiert.
      */
     public void pressNegativeKey() {
-        screen = screen.startsWith("-") ? screen.substring(1) : "-" + screen;
+        if (!screen.equals("0")) {
+            screen = screen.startsWith("-") ? screen.substring(1) : "-" + screen;
+        }
+
     }
 
     /**
