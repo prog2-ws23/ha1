@@ -28,14 +28,22 @@ public class Calculator {
      * oder rechts an die zuvor gedrückte Ziffer angehängt angezeigt wird.
      * @param digit Die Ziffer, deren Taste gedrückt wurde
      */
+
+
+    // Diese Methode ist ebenfalls mithilfe von Chatgpt entstanden, ich habe
+    // schwierigkeiten zu arbeiten da meine IDE keine test laufen kann und daher nicht
+    // weiß ob mein code funktioniert oder nicht, abgesehen von den roten markierung
     public void pressDigitKey(int digit) {
-        if(digit > 9 || digit < 0) throw new IllegalArgumentException();
+        if (digit > 9 || digit < 0) throw new IllegalArgumentException();
 
-        if(screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = "";
+        if (screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = "";
 
-        screen = screen + digit;
+        if (screen.length() < 10) {
+            screen = screen + digit;
+        } else {
+            screen = "Error";
+        }
     }
-
     /**
      * Empfängt den Befehl der C- bzw. CE-Taste (Clear bzw. Clear Entry).
      * Einmaliges Drücken der Taste löscht die zuvor eingegebenen Ziffern auf dem Bildschirm
