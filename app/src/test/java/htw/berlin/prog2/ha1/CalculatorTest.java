@@ -88,7 +88,62 @@ class CalculatorTest {
         assertEquals(expected, actual);
     }
 
+    /*
+    TODO hier weitere Tests erstellen
+    */
 
-    //TODO hier weitere Tests erstellen
+    @Test
+    @DisplayName("should display result after subtract two positive multi-digit numbers")
+    void testPositiveSubtraction() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(4);
+        calc.pressDigitKey(0);
+        calc.pressBinaryOperationKey("-");
+        calc.pressDigitKey(2);
+        calc.pressDigitKey(0);
+        calc.pressEqualsKey();
+
+        String expected = "20";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+    //@testDivideByZero Screen soll Error anzeigen wenn eine Positive zahl durch null dividiert wird
+    @Test
+    @DisplayName("should display result after divide positive number by zero")
+    void testDivideByZero() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(4);
+        calc.pressBinaryOperationKey("/");
+        calc.pressDigitKey(0);
+        calc.pressEqualsKey();
+
+        String expected = "Error";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+    //@testDivideByBigNumbers Screen soll Error anzeigen wenn eine kleinere Positive Zahl durch eine viel größere Zahl dividiert wird und das Ergebnis somit ein Dezimalzahl ist.
+    @Test
+    @DisplayName("should display result after divide positive number by Multi-digit number result is a decimal number")
+    void testDivideByBigNumbers() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(5);
+        calc.pressBinaryOperationKey("/");
+        calc.pressDigitKey(5);
+        calc.pressDigitKey(0);
+        calc.pressDigitKey(0);
+        calc.pressEqualsKey();
+
+        //Lösung wäre "0.01"
+        String expected = "Error";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
 }
 
