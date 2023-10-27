@@ -56,7 +56,10 @@ public class Calculator {
      * Beim ersten Drücken der Taste wird der Bildschirminhalt nicht verändert, sondern nur der
      * Rechner in den passenden Operationsmodus versetzt.
      * Beim zweiten Drücken nach Eingabe einer weiteren Zahl wird direkt des aktuelle Zwischenergebnis
-     * auf dem Bildschirm angezeigt. Falls hierbei eine Division durch Null auftritt, wird "Error" angezeigt.
+     * auf dem Bildschirm angezeigt.
+     * Wenn ein Operand bereits ausgewählt wurde, wird die Berechnung mit dem aktuellen
+     * Bildschirminhalt ausgeführt z.B. bei mehrehren Rechnungen (2x2x2, 3+5+2,...)
+     * Falls hierbei eine Division durch Null auftritt, wird "Error" angezeigt.
      * @param operation "+" für Addition, "-" für Substraktion, "x" für Multiplikation, "/" für Division
      */
     public void pressBinaryOperationKey(String operation)  {
@@ -120,6 +123,7 @@ public class Calculator {
      * Wird die Taste weitere Male gedrückt (ohne andere Tasten dazwischen), so wird die letzte
      * Operation (ggf. inklusive letztem Operand) erneut auf den aktuellen Bildschirminhalt angewandt
      * und das Ergebnis direkt angezeigt.
+     * Das Ergebnis wird auf drei Nachkommastellen gerundet.
      */
     public void pressEqualsKey() {
         var result = switch(latestOperation) {
