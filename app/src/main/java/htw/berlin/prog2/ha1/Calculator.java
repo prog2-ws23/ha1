@@ -16,17 +16,30 @@ public class Calculator {
 
     private String latestOperation = "";
 
-    private String latestInput = "";
-
     private String previousOperation ="";
 
+    private String latestInput = "";
+
     private String previousInput ="";
+
+    private final String binaryOperations = "+-x/";
+
+
 
     /**
      * @return den aktuellen Bildschirminhalt als String
      */
     public String readScreen() {
         return screen;
+    }
+
+    // Removes superfluous decimals, shortens displayed value to 10 digits, handles "infinite" results.
+    private void cleanUpScreen(){
+
+        if(screen.equals("Infinity")) screen = "Error";
+        if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2);
+        if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
+
     }
 
     /**
@@ -37,19 +50,16 @@ public class Calculator {
      * @param digit Die Ziffer, deren Taste gedrückt wurde
      */
     public void pressDigitKey(int digit) {
+		
         previousInput = latestInput;
         latestInput = "digit";
-        previousValue = Double.parseDouble(screen);
 
         if(digit > 9 || digit < 0) throw new IllegalArgumentException();
+        if(screen.equals("0") || Double.parseDouble(screen) == latestValue) screen = "";
 
-        if(screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = "";
-
-        latestValue = previousValue + digit;
-        screen = Double.toString(latestValue);
-        if(screen.equals("Infinity")) screen = "Error";
-        if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2);
-        if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
+		screen += digit;
+		
+		cleanUpScreen();
 
     }
 
@@ -85,14 +95,20 @@ public class Calculator {
      * @param operation "+" für Addition, "-" für Substraktion, "x" für Multiplikation, "/" für Division
      */
     public void pressBinaryOperationKey(String operation)  {
-        String binaryOperations = "+,-,x,/";
+
         previousValue = latestValue;
+        
         latestValue = Double.parseDouble(screen);
+        
         previousOperation = latestOperation;
+
         latestOperation = operation;
+        
         previousInput = latestInput;
+        
         latestInput = operation;
-        if(previousInput.equals("digit") && previousOperation.contains(binaryOperations) && latestOperation.contains(binaryOperations)){
+
+        if(previousInput.equals("digit") && !latestOperation.isEmpty() && !previousOperation.isEmpty() && binaryOperations.indexOf(latestOperation) !=-1 && binaryOperations.indexOf(previousOperation) !=-1){
             var result = switch(previousOperation) {
                 case "+" -> previousValue + latestValue;
                 case "-" -> previousValue - latestValue;
@@ -102,11 +118,9 @@ public class Calculator {
             };
             latestValue = result;
             screen = Double.toString(latestValue);
-        }
-        if(screen.equals("Infinity")) screen = "Error";
-        if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2);
-        if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
 
+        }
+        cleanUpScreen();
 
     }
 
