@@ -14,6 +14,17 @@ public class Calculator {
 
     private String latestOperation = "";
 
+    //added latest UnaryOperation
+
+    private double latestUnaryValue;
+
+    private String latestUnaryOperation = "";
+
+    //added 11th digit round
+
+    private String lastDigitToRound = "0";
+
+
     /**
      * @return den aktuellen Bildschirminhalt als String
      */
@@ -72,8 +83,8 @@ public class Calculator {
      * @param operation "√" für Quadratwurzel, "%" für Prozent, "1/x" für Inversion
      */
     public void pressUnaryOperationKey(String operation) {
-        latestValue = Double.parseDouble(screen);
-        latestOperation = operation;
+        latestUnaryValue = Double.parseDouble(screen);
+        latestUnaryOperation = operation;
         var result = switch(operation) {
             case "√" -> Math.sqrt(Double.parseDouble(screen));
             case "%" -> Double.parseDouble(screen) / 100;
@@ -82,7 +93,18 @@ public class Calculator {
         };
         screen = Double.toString(result);
         if(screen.equals("NaN")) screen = "Error";
-        if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
+        latestUnaryValue = latestValue;
+
+
+
+
+        //added rounding
+        if(screen.contains(".") && screen.length() > 11 && Character.getNumericValue( screen.charAt(10)) > 4) {
+            int lastDigit = Character.getNumericValue( screen.charAt(9)) + 1;
+            screen = screen.substring(0, 9) + lastDigit;
+        }
+
+        if(screen.contains(".") && screen.length() > 11 &&  Character.getNumericValue( screen.charAt(10)) < 5) screen = screen.substring(0, 10);
 
     }
 
@@ -128,6 +150,16 @@ public class Calculator {
         screen = Double.toString(result);
         if(screen.equals("Infinity")) screen = "Error";
         if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2);
-        if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
+
+
+        //added rounding
+        if(screen.contains(".") && screen.length() > 11 && Character.getNumericValue( screen.charAt(10)) >= 5) {
+            int lastDigit = Character.getNumericValue( screen.charAt(9)) + 1;
+            screen = screen.substring(0, 9) + lastDigit;
+        }
+
+        else if(screen.contains(".") && screen.length() > 11 &&  Character.getNumericValue( screen.charAt(10)) <= 4) screen = screen.substring(0, 10);
+
     }
+
 }
