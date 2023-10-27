@@ -118,6 +118,16 @@ class CalculatorTest {
             assertEquals(expected, actual);
 
     }
+    @Test
+    @DisplayName("should display error for an inadequate digit ('NaN') after unary operation")
+    void InadequateDigitUnaryOperation() {
+        Calculator calculator = new Calculator();
+        calculator.pressDigitKey(0);
+        calculator.pressUnaryOperationKey("1/x");
+        String expected = "Error";
+        String actual = calculator.readScreen();
+        assertEquals(expected, actual);
+    }
 
 
 
