@@ -129,6 +129,26 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
     }
+    /**
+     * Test war rot
+     */
+    @Test //2
+    @DisplayName("should display result after adding three positive multi-digit numbers")
+    void testPositiveAddition2() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(2);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(2);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(2);
+        calc.pressEqualsKey();
+
+        String expected = "6";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
 
 }
 
