@@ -108,18 +108,33 @@ class CalculatorTest {
 
     @Test
     @DisplayName("Should display the result after multiplication and addition 3 numbers")
-    void testTESTTTTTTTT() {
+    void testMultiplicationAndAddition() {
         Calculator calc = new Calculator();
 
         calc.pressDigitKey(2);
         calc.pressNegativeKey();
-        calc.pressBinaryOperationKey("*");
+        calc.pressBinaryOperationKey("x");
         calc.pressDigitKey(6);
         calc.pressBinaryOperationKey("+");
         calc.pressDigitKey(8);
         calc.pressEqualsKey();
 
         String expected = "-4";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+
+    @Test
+    @DisplayName("should display error when we take the inversion of 0")
+    void testInversionOfZero() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(0);
+        calc.pressUnaryOperationKey("1/x");
+
+        String expected = "Error";
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
