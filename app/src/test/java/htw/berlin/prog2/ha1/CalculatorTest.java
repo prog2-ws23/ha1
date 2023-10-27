@@ -89,6 +89,83 @@ class CalculatorTest {
     }
 
 
-    //TODO hier weitere Tests erstellen
+    @Test
+    @DisplayName("should display the pressed digits correctly")
+    void testPressDigit() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(2);
+        calc.pressDigitKey(3);
+
+        String expected ="123";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("clear key should only clear current entry")
+    void testClearKey() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(5);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(5);
+        calc.pressEqualsKey();
+        calc.pressClearKey();
+        calc.pressClearKey();
+        calc.pressDigitKey(5);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(5);
+        calc.pressEqualsKey();
+
+        String expected ="10";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+
+
+    }
+
+    @Test
+    @DisplayName("Binary operand should show intermediate")
+    void testIntermediateResult() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(3);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(3);
+        calc.pressBinaryOperationKey("+");
+        calc.pressBinaryOperationKey("-");
+        calc.pressBinaryOperationKey("/");
+        calc.pressBinaryOperationKey("x");
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(3);
+        calc.pressBinaryOperationKey("+");
+        calc.pressEqualsKey();
+        String expected ="18";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+
+
+    }
+    @Test
+    @DisplayName("EqualsKey works as documented")
+    void testEqualsKey() {
+        Calculator calc = new Calculator();
+
+        calc.pressEqualsKey();
+        calc.pressDigitKey(3);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(3);
+        calc.pressEqualsKey();
+
+        String expected ="6";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
 }
 
