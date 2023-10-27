@@ -1,5 +1,6 @@
 package htw.berlin.prog2.ha1;
 
+import org.checkerframework.checker.units.qual.C;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -7,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DisplayName("Retro calculator")
 class CalculatorTest {
-
     @Test
     @DisplayName("should display result after adding two positive multi-digit numbers")
     void testPositiveAddition() {
@@ -90,5 +90,90 @@ class CalculatorTest {
 
 
     //TODO hier weitere Tests erstellen
+
+    // Teilaufgabe 1
+    @Test
+    @DisplayName("Should divide two positive digits")
+
+    void testDivision(){
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(8);
+        calc.pressBinaryOperationKey("/");
+        calc.pressDigitKey(2);
+        calc.pressEqualsKey();
+
+        String expected = "4";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+    //Teilaufgabe 2
+
+    @Test
+    @DisplayName("Should display result after multiple multiplication")
+
+    void testMultipleMultiplication(){
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(2);
+
+        calc.pressBinaryOperationKey("x");
+
+        calc.pressDigitKey(2);
+
+        calc.pressBinaryOperationKey("x");
+
+        calc.pressDigitKey(2);
+
+        calc.pressEqualsKey();
+
+        String expected = "8";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("Should perform additions with decimal numbers with 3 decimal places")
+
+    void testDecimalAddition(){
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(2);
+        calc.pressDotKey();
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(2);
+        calc.pressDigitKey(1);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(2);
+        calc.pressDotKey();
+        calc.pressDigitKey(5);
+        calc.pressDigitKey(2);
+        calc.pressDigitKey(1);
+        calc.pressEqualsKey();
+
+        String expected = "4.642";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+
+    }
+
+    @Test
+    @DisplayName("Should depict the result of a root")
+    void testRoot(){
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(4);
+        calc.pressUnaryOperationKey("√");
+
+        String expected = "2";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
 }
 

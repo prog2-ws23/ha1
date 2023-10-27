@@ -56,10 +56,17 @@ public class Calculator {
      * Beim ersten Drücken der Taste wird der Bildschirminhalt nicht verändert, sondern nur der
      * Rechner in den passenden Operationsmodus versetzt.
      * Beim zweiten Drücken nach Eingabe einer weiteren Zahl wird direkt des aktuelle Zwischenergebnis
-     * auf dem Bildschirm angezeigt. Falls hierbei eine Division durch Null auftritt, wird "Error" angezeigt.
+     * auf dem Bildschirm angezeigt.
+     * Wenn ein Operand bereits ausgewählt wurde, wird die Berechnung mit dem aktuellen
+     * Bildschirminhalt ausgeführt z.B. bei mehrehren Rechnungen (2x2x2, 3+5+2,...)
+     * Falls hierbei eine Division durch Null auftritt, wird "Error" angezeigt.
      * @param operation "+" für Addition, "-" für Substraktion, "x" für Multiplikation, "/" für Division
      */
     public void pressBinaryOperationKey(String operation)  {
+        if (!latestOperation.isEmpty()) { // Lösung für erstes Problem
+            pressEqualsKey();
+        }
+
         latestValue = Double.parseDouble(screen);
         latestOperation = operation;
     }
@@ -74,17 +81,33 @@ public class Calculator {
     public void pressUnaryOperationKey(String operation) {
         latestValue = Double.parseDouble(screen);
         latestOperation = operation;
-        var result = switch(operation) {
-            case "√" -> Math.sqrt(Double.parseDouble(screen));
-            case "%" -> Double.parseDouble(screen) / 100;
-            case "1/x" -> 1 / Double.parseDouble(screen);
-            default -> throw new IllegalArgumentException();
-        };
+        double result = 0.0;
+
+        if (operation.equals("√")) { //Lösung drittes Problem
+            double sqrtResult=Math.sqrt(Double.parseDouble(screen));
+            if (sqrtResult==Math.floor(sqrtResult)) {
+                result = (int) sqrtResult;
+            } else {
+                result  =   sqrtResult;
+            }
+        } else {
+            switch (operation) {
+                case "%" -> result = Double.parseDouble(screen) / 100;
+                case "1/x" -> result = 1 / Double.parseDouble(screen);
+                default -> throw new IllegalArgumentException();
+            }
+        }
+
+
+        result = Math.round(result * 1000.0) / 1000.0;  // Lösung zweites Problem
+
         screen = Double.toString(result);
         if(screen.equals("NaN")) screen = "Error";
+        if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2);
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
-
     }
+
+
 
     /**
      * Empfängt den Befehl der gedrückten Dezimaltrennzeichentaste, im Englischen üblicherweise "."
@@ -116,6 +139,7 @@ public class Calculator {
      * Wird die Taste weitere Male gedrückt (ohne andere Tasten dazwischen), so wird die letzte
      * Operation (ggf. inklusive letztem Operand) erneut auf den aktuellen Bildschirminhalt angewandt
      * und das Ergebnis direkt angezeigt.
+     * Das Ergebnis wird auf drei Nachkommastellen gerundet.
      */
     public void pressEqualsKey() {
         var result = switch(latestOperation) {
@@ -125,6 +149,9 @@ public class Calculator {
             case "/" -> latestValue / Double.parseDouble(screen);
             default -> throw new IllegalArgumentException();
         };
+
+        result = Math.round(result * 1000.0) / 1000.0; //Lösung für zweites Problem
+
         screen = Double.toString(result);
         if(screen.equals("Infinity")) screen = "Error";
         if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2);
