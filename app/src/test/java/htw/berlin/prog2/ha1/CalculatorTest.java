@@ -87,8 +87,50 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
     }
+    void testDecimalAddition() {
+        Calculator calc = new Calculator();
 
+        calc.pressDigitKey(3);
+        calc.pressDotKey(); // Einfügen des Dezimaltrennzeichens
+        calc.pressDigitKey(1);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(2);
+        calc.pressDotKey(); // Einfügen des Dezimaltrennzeichens
+        calc.pressDigitKey(4);
+        calc.pressEqualsKey();
 
-    //TODO hier weitere Tests erstellen
+        String expected = "5.5";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+    void testDivisionByZeroError() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(5);
+        calc.pressBinaryOperationKey("/");
+        calc.pressDigitKey(0);
+        calc.pressEqualsKey();
+
+        String expected = "Error";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("should display error when getting square root of a negative number")
+    void testSquareRootOfNegativeError() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(2);
+        calc.pressNegativeKey();
+        calc.pressUnaryOperationKey("√");
+
+        String expected = "Error";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
 }
 
