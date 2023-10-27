@@ -114,14 +114,14 @@ class CalculatorTest {
     void additionOfMultipleNumbers() {
         Calculator calc = new Calculator();
 
-        calc.pressDigitKey(1);
+        calc.pressDigitKey(5);
         calc.pressBinaryOperationKey("+");
-        calc.pressDigitKey(9);
+        calc.pressDigitKey(5);
         calc.pressBinaryOperationKey("+");
-        calc.pressDigitKey(4);
+        calc.pressDigitKey(5);
         calc.pressEqualsKey();
 
-        String expected = "14";
+        String expected = "15";
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
