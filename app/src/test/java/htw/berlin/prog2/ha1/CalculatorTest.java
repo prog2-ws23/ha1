@@ -90,16 +90,16 @@ class CalculatorTest {
     void testDecimalAddition() {
         Calculator calc = new Calculator();
 
-        calc.pressDigitKey(2);
+        calc.pressDigitKey(3);
         calc.pressDotKey(); // Einfügen des Dezimaltrennzeichens
-        calc.pressDigitKey(5);
-        calc.pressBinaryOperationKey("+");
         calc.pressDigitKey(1);
-        calc.pressDotKey(); // Einfügen des Dezimaltrennzeichens
+        calc.pressBinaryOperationKey("+");
         calc.pressDigitKey(2);
+        calc.pressDotKey(); // Einfügen des Dezimaltrennzeichens
+        calc.pressDigitKey(4);
         calc.pressEqualsKey();
 
-        String expected = "3.7";
+        String expected = "5.5";
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
