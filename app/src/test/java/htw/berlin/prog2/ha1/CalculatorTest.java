@@ -106,7 +106,36 @@ class CalculatorTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    @DisplayName("should be able to calculate the result of substracting more than two positive numbers")
+    void testMultiplePositiveSubstractions () {
+        Calculator calc = new Calculator();
+        calc.pressDigitKey(7);
+        calc.pressBinaryOperationKey("-");
+        calc.pressDigitKey(3);
+        calc.pressBinaryOperationKey("-");
+        calc.pressDigitKey(4);
+        calc.pressEqualsKey();
+        String expected = "0";
+        String actual = calc.readScreen();
 
+        assertEquals(expected, actual);
+    }
+
+
+    @Test
+    @DisplayName("if the result of the square root is an integer, the number shouldn't contain a zero")
+    void testSquareRootOfInteger () {
+        Calculator calc = new Calculator();
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(4);
+        calc.pressDigitKey(4);
+        calc.pressUnaryOperationKey("√");
+        String expected = "12";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
 
 }
 
