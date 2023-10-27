@@ -109,8 +109,8 @@ class CalculatorTest {
 
 
     @Test
-    @DisplayName("should display the number that is typed after clearing the calculation by pressing the clearKey twice")
-        //löscht ganze Rechnung
+    @DisplayName("should display result after deleting last number and typing another one")
+        //davor bei einmal drücken alles gelöscht, wenn Exception gelöst wurde
 
     void testCKeyPressingTwoTimes(){
         Calculator calc = new Calculator();
@@ -118,7 +118,6 @@ class CalculatorTest {
         calc.pressDigitKey(5);
         calc.pressBinaryOperationKey("+");
         calc.pressDigitKey(2);
-        calc.pressClearKey();
         calc.pressClearKey();
         calc.pressDigitKey(3);
         calc.pressEqualsKey();
@@ -132,9 +131,9 @@ class CalculatorTest {
 
 
     @Test
-    @DisplayName("hould display the result of the calculation while the second operation works as equalkey")
+    @DisplayName("should display the result of the calculation while the second operation works as equalkey")
 
-    void muli() {
+    void testSecondTimeOperation() {
         Calculator calc = new Calculator();
 
         calc.pressDigitKey(6);
