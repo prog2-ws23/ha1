@@ -88,7 +88,92 @@ class CalculatorTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    @DisplayName("should save display numbers of 0s")
+    void testCutZeros() {
+        Calculator calc = new Calculator();
 
+        calc.pressDigitKey(3);
+        calc.pressDotKey();
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(9);
+        calc.pressDigitKey(0);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(1);
+        calc.pressDotKey();
+        calc.pressDigitKey(0);
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(0);
+        calc.pressEqualsKey();
+
+        String expected = ("4.2");
+        String actual = calc.readScreen();
+
+        assertEquals (expected, actual);
+    }
+    @Test
+    @DisplayName("should calculate correctly after one-tab-clear")
+    void testOneTabClear() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(1);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(3);
+        //calc.pressBinaryOperationKey("-");
+        //calc.pressDigitKey(2);
+        calc.pressClearKey();
+        calc.pressDigitKey(2);
+        calc.pressEqualsKey();
+
+        String expected = "3";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("should operate with last value and operant")
+    void testMultipleEqualsOperations() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(2);
+        calc.pressBinaryOperationKey("x");
+        calc.pressEqualsKey();
+        calc.pressEqualsKey();
+
+        String expected = "8";
+        String actual = calc.readScreen();
+
+        assertEquals (expected, actual);
+    }
+
+    @Test
+    @DisplayName("should show error after invalid input")
+    void testUnaryException1() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(0);
+        calc.pressUnaryOperationKey("1/x");
+
+        String expected = "Error";
+        String actual = calc.readScreen();
+
+        assertEquals (expected, actual);
+    }
+    @Test
+    @DisplayName("should show error after invalid input2")
+    void testUnaryException2() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(1);
+        calc.pressNegativeKey();
+        calc.pressUnaryOperationKey("√");
+
+        String expected = "Error";
+        String actual = calc.readScreen();
+
+        assertEquals (expected, actual);
+    }
     //TODO hier weitere Tests erstellen
 }
 
