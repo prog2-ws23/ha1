@@ -103,6 +103,65 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
     }
+    @Test
+    @DisplayName("should correctly handle multiple additions in sequence")
+    void testMultiplyAdditions() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(2);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(6);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(6);
+        calc.pressEqualsKey();
+
+        String expected = "14";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+
+
+    }
+
+
+
+    @Test
+    @DisplayName("should limit the result to a certain number of decimal places")
+    void testLimitDecimalPlaces() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(3);
+        calc.pressDotKey();
+        calc.pressDigitKey(1);
+        calc.pressBinaryOperationKey("x");
+        calc.pressDigitKey(2);
+        calc.pressDotKey();
+        calc.pressDigitKey(7);
+        calc.pressEqualsKey();
+
+        String expected = "8.37";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+
+    }
+
+//@Test
+//@DisplayName("Test for subtraction of positive and negative numbers")
+//void testSubtractionOfTwoNumbers() {
+//Calculator calc = new Calculator();
+
+//calc.pressDigitKey(6);
+//calc.pressBinaryOperationKey("-");
+//calc.pressNegativeKey();
+//calc.pressDigitKey(6);
+//calc.pressEqualsKey();
+
+//String expected = "-12";
+//String actual = calc.readScreen();
+
+//assertEquals(expected, actual);
+
 
 }
 
