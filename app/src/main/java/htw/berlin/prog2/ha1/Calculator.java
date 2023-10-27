@@ -26,12 +26,19 @@ public class Calculator {
      * drücken kann muss der Wert positiv und einstellig sein und zwischen 0 und 9 liegen.
      * Führt in jedem Fall dazu, dass die gerade gedrückte Ziffer auf dem Bildschirm angezeigt
      * oder rechts an die zuvor gedrückte Ziffer angehängt angezeigt wird.
+     *
      * @param digit Die Ziffer, deren Taste gedrückt wurde
      */
     public void pressDigitKey(int digit) {
-        if(digit > 9 || digit < 0) throw new IllegalArgumentException();
+        if (digit > 9 || digit < 0) throw new IllegalArgumentException();
 
-        if(screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = "";
+        if (screen.equals("0")) screen = "";
+
+        // if (screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = "";
+        // Bedingung rausgenommen, weil die 0 sonst immer vor einer Zahl gestanden hätte, wenn man eine
+        // Dezimalzahl hätte schreiben wollen, die 0 wurde nicht gespeichert
+        // so ist die Bedingung, wenn der Screen 0 zeigt, kann eine beliebe Zahl im Screen gespeichert werden
+        // Test hätte auch funktioniert ohne eine Null vorher eingezugeben
 
         screen = screen + digit;
     }
@@ -57,33 +64,55 @@ public class Calculator {
      * Rechner in den passenden Operationsmodus versetzt.
      * Beim zweiten Drücken nach Eingabe einer weiteren Zahl wird direkt des aktuelle Zwischenergebnis
      * auf dem Bildschirm angezeigt. Falls hierbei eine Division durch Null auftritt, wird "Error" angezeigt.
+     * currentValue speichert einen Zwischenwert, der dann als latestValue gespeichert wird und in der
+     * pressEqualsKey Methode übergeben wird, um mit einem dritten Wert weiterzurechnen
+     *
      * @param operation "+" für Addition, "-" für Substraktion, "x" für Multiplikation, "/" für Division
      */
-    public void pressBinaryOperationKey(String operation)  {
-        latestValue = Double.parseDouble(screen);
+    public void pressBinaryOperationKey(String operation) {
+        if (latestOperation.equals("x")) { //so lange die letzte Operation * ist
+            double currentValue = Double.parseDouble(screen); //wird hier der erste Wert eingegeben (2),
+            //dann wird der in currentValue (neu angelegt) gespeichert
+            latestValue = latestValue * currentValue;// dann wird latestValue(2) multipliziert mit
+            //currentValue(5) = latestVaLue ist dann 10
+        } else {
+            latestValue = Double.parseDouble(screen); //ansonsten fahre so fort, wie am Anfang (Operation zweier Zahlen)
+        }
         latestOperation = operation;
+        screen = "";
+        //nach hier hier ausgelagert, um bei BinaryKeyOperations eine Speicherung im Screen möglich zu machen
+
+        //Ausgang:
+        //latestValue = Double.parseDouble(screen);
+        //latestOperation = operation;
+        //screen = "";
+
+        //vorher ging es nicht, weil ohne die Bedingung, dass nochmal ein x gewählt wird, der Vorgang mit zwei Zahlen geklappt hätte
+        //die erste Zahl würde dabei immer übersprungen werden, weil die letzte Zahl, die im Screen eingegeben wurde in dieser Methode eine 2 gewesen wäre
+        //aber in der pressEqualsKey die 5 als latestValue gegriffen hätte
     }
+
 
     /**
      * Empfängt den Wert einer gedrückten unären Operationstaste, also eine der drei Operationen
      * Quadratwurzel, Prozent, Inversion, welche nur einen Operanden benötigen.
      * Beim Drücken der Taste wird direkt die Operation auf den aktuellen Zahlenwert angewendet und
      * der Bildschirminhalt mit dem Ergebnis aktualisiert.
+     *
      * @param operation "√" für Quadratwurzel, "%" für Prozent, "1/x" für Inversion
      */
     public void pressUnaryOperationKey(String operation) {
         latestValue = Double.parseDouble(screen);
         latestOperation = operation;
-        var result = switch(operation) {
+        var result = switch (operation) {
             case "√" -> Math.sqrt(Double.parseDouble(screen));
             case "%" -> Double.parseDouble(screen) / 100;
             case "1/x" -> 1 / Double.parseDouble(screen);
             default -> throw new IllegalArgumentException();
         };
         screen = Double.toString(result);
-        if(screen.equals("NaN")) screen = "Error";
-        if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
-
+        if (screen.equals("NaN")) screen = "Error";
+        if (screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
     }
 
     /**
@@ -94,8 +123,11 @@ public class Calculator {
      * Beim zweimaligem Drücken, oder wenn bereits ein Trennzeichen angezeigt wird, passiert nichts.
      */
     public void pressDotKey() {
-        if(!screen.contains(".")) screen = screen + ".";
+        if (!screen.contains(".")) {
+            screen += ".";
+        }
     }
+
 
     /**
      * Empfängt den Befehl der gedrückten Vorzeichenumkehrstaste ("+/-").
@@ -118,16 +150,18 @@ public class Calculator {
      * und das Ergebnis direkt angezeigt.
      */
     public void pressEqualsKey() {
-        var result = switch(latestOperation) {
+        var result = switch (latestOperation) {
             case "+" -> latestValue + Double.parseDouble(screen);
             case "-" -> latestValue - Double.parseDouble(screen);
-            case "x" -> latestValue * Double.parseDouble(screen);
+            case "x" -> latestValue * Double.parseDouble(screen); //hier ist latestValue 10 (aus anderer Methode oben) und screen 6, weil
+            //im screen wieder neu 6 eingegeben wurde, also wurde dann 6*10 multipliziert
             case "/" -> latestValue / Double.parseDouble(screen);
             default -> throw new IllegalArgumentException();
         };
         screen = Double.toString(result);
-        if(screen.equals("Infinity")) screen = "Error";
-        if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2);
-        if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
+        if (screen.equals("Infinity")) screen = "Error";
+        if (screen.endsWith(".0")) screen = screen.substring(0, screen.length() - 2);
+        if (screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
     }
 }
+

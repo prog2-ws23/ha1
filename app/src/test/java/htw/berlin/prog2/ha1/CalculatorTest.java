@@ -90,5 +90,64 @@ class CalculatorTest {
 
 
     //TODO hier weitere Tests erstellen
+
+    @Test
+    @DisplayName("should subtract positive numbers")
+
+
+        //neues Objekt wird erstellt = calc (instanziiert)
+        //mit calc.press ... werden die jeweiligen Methoden aufgerugen und es werden die jeweiligen Werte (Argumente) eingesetzt
+        //eine neue Variable String expected mit korrektem, erwartetem Ergebnis wurde erstellt
+        //Variable actual, die das Ergebnis prüft, wurde erstellt
+        //expected und actual argument werden verglichen
+    void testPositiveSubtraction() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(4);
+        calc.pressBinaryOperationKey("-");
+        calc.pressDigitKey(6);
+        calc.pressEqualsKey();
+
+        String expected = "-2";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    } //funktioniert = passed
+
+
+    @Test
+    @DisplayName("should multiply three numbers")
+    void testThreeNumbersMultiplied() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(2);
+        calc.pressBinaryOperationKey("x");
+        calc.pressDigitKey(5);
+        calc.pressBinaryOperationKey("x");
+        calc.pressDigitKey(6);
+        calc.pressEqualsKey();
+
+        String expected = "60";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+  @Test
+  @DisplayName("should allow a zero before a decimal dot")
+    void testShouldAllowDecimalDot() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(0);
+        calc.pressDotKey();
+        calc.pressDigitKey(3);
+
+        String expected = "0.3";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+
+    }
 }
 
+//Hilfe von Nils + ChatGPT + StackOverflow + Youtube (Calculator)
