@@ -162,6 +162,8 @@ class CalculatorTest {
      assertEquals(expected, actual);
      }
 
+    // Meine IDE kann keine test mehr durchführen da etwas mit GRADLE passiert ist,
+    // ich kriege es momentan nicht gefixt, siehe anhang.
 
 }
 
