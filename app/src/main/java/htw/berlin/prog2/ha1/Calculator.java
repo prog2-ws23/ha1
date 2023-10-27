@@ -133,4 +133,37 @@ public class Calculator {
         if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2);
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
     }
+
+    // dieser ersatz code ist MITHILFE! von ChatGPT erzeugt- ansatz war mit if else war
+    // da aber die letzten zeilen sind nicht von mir.
+    // : public void pressEqualsKey() {
+    //    double result = 0.0;
+    //    if (latestOperation.equals("+")) {
+    //        result = latestValue + Double.parseDouble(screen);
+    //    } else if (latestOperation.equals("-")) {
+    //        result = latestValue - Double.parseDouble(screen);
+    //    } else if (latestOperation.equals("x")) {
+    //        result = latestValue * Double.parseDouble(screen);
+    //    } else if (latestOperation.equals("/")) {
+    //        double divisor = Double.parseDouble(screen);
+    //        if (divisor == 0) {
+    //            screen = "Error";
+    //            return;
+    //        }
+    //        result = latestValue / divisor;
+    //    } else {
+    //        throw new IllegalArgumentException();
+    //    }
+    //
+    //    screen = Double.toString(result);
+    //    if (screen.equals("Infinity")) {
+    //        screen = "Error";
+    //    }
+    //    if (screen.endsWith(".0")) {
+    //        screen = screen.substring(0, screen.length() - 2);
+    //    }
+    //    if (screen.contains(".") && screen.length() > 11) {
+    //        screen = screen.substring(0, 10);
+    //    }
+    //}
 }
