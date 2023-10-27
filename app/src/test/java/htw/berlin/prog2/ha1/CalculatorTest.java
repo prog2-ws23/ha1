@@ -148,26 +148,31 @@ class CalculatorTest {
     }
 
     @Test
-    @DisplayName("test")
-    void testUnaryExceptions() {
+    @DisplayName("should show error after invalid input")
+    void testUnaryException1() {
         Calculator calc = new Calculator();
 
         calc.pressDigitKey(0);
-        calc.pressUnaryOperationKey("%");
+        calc.pressUnaryOperationKey("1/x");
 
         String expected = "Error";
         String actual = calc.readScreen();
 
         assertEquals (expected, actual);
+    }
+    @Test
+    @DisplayName("should show error after invalid input2")
+    void testUnaryException2() {
+        Calculator calc = new Calculator();
 
         calc.pressDigitKey(1);
         calc.pressNegativeKey();
         calc.pressUnaryOperationKey("√");
 
-        String expected2 = "Error";
-        String actual2 = calc.readScreen();
+        String expected = "Error";
+        String actual = calc.readScreen();
 
-        assertEquals (expected2, actual2);
+        assertEquals (expected, actual);
     }
     //TODO hier weitere Tests erstellen
 }
