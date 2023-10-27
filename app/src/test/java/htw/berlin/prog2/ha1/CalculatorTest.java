@@ -111,6 +111,24 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
     }
+    /**
+     * Test war Rot
+     */
+    @Test //1
+    @DisplayName("should display result after getting the square root of a multi-digit number")
+    void testSquareRootOfMultiDigit() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(6);
+        calc.pressDigitKey(9);
+        calc.pressUnaryOperationKey("√");
+
+        String expected = "13"; // aktual war 13.0
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
 
 }
 
