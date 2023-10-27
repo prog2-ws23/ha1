@@ -116,6 +116,7 @@ public class Calculator {
 
     /**
      * Empfängt den Befehl der gedrückten Vorzeichenumkehrstaste ("+/-").
+     * Wenn mindestens ein binärer Operator eingegeben wurde, wird der Bildschirm auf "-0" gesetzt,
      * Zeigt der Bildschirm einen positiven Wert an, so wird ein "-" links angehängt, der Bildschirm
      * aktualisiert und die Inhalt fortan als negativ interpretiert.
      * Zeigt der Bildschirm bereits einen negativen Wert mit führendem Minus an, dann wird dieses
