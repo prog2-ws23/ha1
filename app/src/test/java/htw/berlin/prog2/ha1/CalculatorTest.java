@@ -130,6 +130,45 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
     }
+
+    @Test
+    @DisplayName("should operate with last value and operant")
+    void testMultipleEqualsOperations() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(2);
+        calc.pressBinaryOperationKey("x");
+        calc.pressEqualsKey();
+        calc.pressEqualsKey();
+
+        String expected = "8";
+        String actual = calc.readScreen();
+
+        assertEquals (expected, actual);
+    }
+
+    @Test
+    @DisplayName("test")
+    void testUnaryExceptions() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(0);
+        calc.pressUnaryOperationKey("%");
+
+        String expected = "Error";
+        String actual = calc.readScreen();
+
+        assertEquals (expected, actual);
+
+        calc.pressDigitKey(1);
+        calc.pressNegativeKey();
+        calc.pressUnaryOperationKey("√");
+
+        String expected2 = "Error";
+        String actual2 = calc.readScreen();
+
+        assertEquals (expected2, actual2);
+    }
     //TODO hier weitere Tests erstellen
 }
 
