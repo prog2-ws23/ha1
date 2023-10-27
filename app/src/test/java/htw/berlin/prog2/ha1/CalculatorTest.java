@@ -145,7 +145,22 @@ class CalculatorTest {
     }
 
 
-   
+    @Test
+     @DisplayName("should show display 10 after adding two numbers")
+     void testEquals(){
+     Calculator calc = new Calculator();
+
+     calc.pressDigitKey(5);
+     calc.pressBinaryOperationKey("-");
+     calc.pressBinaryOperationKey("-");
+     calc.pressDigitKey(5);
+     calc.pressEqualsKey();
+
+     String expected = "10";
+     String actual = calc.readScreen();
+
+     assertEquals(expected, actual);
+     }
 
 
 }
