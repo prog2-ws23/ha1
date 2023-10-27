@@ -163,7 +163,7 @@ class CalculatorTest {
     }
 
     @Test
-    @DisplayName("should display result after applying a UnaryOperation on both Nubers of a Binary Operation ")
+    @DisplayName("should display result after applying a UnaryOperation on both Nubers of a Binary Operation")
     void testDobleRoot2() {
         Calculator calc = new Calculator();
 
