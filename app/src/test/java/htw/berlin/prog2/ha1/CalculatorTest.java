@@ -88,9 +88,6 @@ class CalculatorTest {
         assertEquals(expected, actual);
     }
 
-    //TODO hier weitere Tests erstellen
-    // With the help of Zeinab Ballout
-
     /**
      * Dieser Test überprüft, ob der Taschenrechner nach der Subtraktion von zwei positiven mehrstelligen Zahlen
      * das korrekte Ergebnis auf dem Bildschirm anzeigt.
@@ -134,20 +131,19 @@ class CalculatorTest {
     }
 
     /**
-     * Dieser Test überprüft, ob der Taschenrechner die Ziffer auf dem Bildschirm anzeigt,
-     * wenn nach dem Drücken der binären Operationstaste keine zweite Ziffer hinzugefügt wird.
+     *  Dieser Test überprüft, ob der Taschenrechner nach dem Drücken der unären Operationstaste "1/x"
+     *  den Fehler "Error" auf dem Bildschirm anzeigt
      */
 
     @Test
-    @DisplayName("should display the digit before operation key no second digit is added")
-    void testWithoutSecondDigit(){
+    @DisplayName("should display Error after pressing zero and the unary operation key 1/x ")
+    void testZeroInversion(){
         Calculator calc = new Calculator();
 
-        calc.pressDigitKey(3);
-        calc.pressBinaryOperationKey("+");
-        calc.pressEqualsKey(); // Press equals without Second digit after the binary operation key
+        calc.pressDigitKey(0);
+        calc.pressUnaryOperationKey("1/x");
 
-        String expected = "3"; // the result should be 3 because there is no second digit to be added
+        String expected = "Error";
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
@@ -155,20 +151,26 @@ class CalculatorTest {
     }
 
     /**
-     * Dieser Test überprüft, ob der Taschenrechner die Ziffer mit einem Dezimaltrennzeichen auf dem Bildschirm korrekt anzeigt.
+     * Dieser Test überprüft, ob der Taschenrechner nach dem Drücken der Dezimaltrennzeichen-Taste
+     * und anschließender Division korrekt das Ergebnis auf dem Bildschirm anzeigt.
      */
 
     @Test
-    @DisplayName("should display the digit wih a decimal dot ")
-    void testDot() {
+    @DisplayName("should display 1 after pressing dot key and performing division")
+    void testDotDivision()  {
         Calculator calc = new Calculator();
 
-        calc.pressDigitKey(3);
+        calc.pressDigitKey(1);
         calc.pressDotKey();
-        calc.pressDigitKey(0);
+        calc.pressDigitKey(3);
+        calc.pressBinaryOperationKey("/");
+
+        calc.pressDigitKey(1);
+        calc.pressDotKey();
+        calc.pressDigitKey(3);
         calc.pressEqualsKey();
 
-        String expected = "3.0";
+        String expected = "1";
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
