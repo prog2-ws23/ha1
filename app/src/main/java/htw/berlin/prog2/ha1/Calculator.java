@@ -1,6 +1,8 @@
 package htw.berlin.prog2.ha1;
 
-/**
+/**package htw.berlin.prog2.ha1;
+
+ /**
  * Eine Klasse, die das Verhalten des Online Taschenrechners imitiert, welcher auf
  * https://www.online-calculator.com/ aufgerufen werden kann (ohne die Memory-Funktionen)
  * und dessen Bildschirm bis zu zehn Ziffern plus einem Dezimaltrennzeichen darstellen kann.
@@ -8,11 +10,13 @@ package htw.berlin.prog2.ha1;
  */
 public class Calculator {
 
+
     private String screen = "0";
 
     private double latestValue;
 
     private String latestOperation = "";
+
 
     /**
      * @return den aktuellen Bildschirminhalt als String
@@ -34,6 +38,8 @@ public class Calculator {
         if(screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = "";
 
         screen = screen + digit;
+
+
     }
 
     /**
@@ -48,6 +54,7 @@ public class Calculator {
         screen = "0";
         latestOperation = "";
         latestValue = 0.0;
+
     }
 
     /**
@@ -62,6 +69,7 @@ public class Calculator {
     public void pressBinaryOperationKey(String operation)  {
         latestValue = Double.parseDouble(screen);
         latestOperation = operation;
+
     }
 
     /**
@@ -80,7 +88,12 @@ public class Calculator {
             case "1/x" -> 1 / Double.parseDouble(screen);
             default -> throw new IllegalArgumentException();
         };
+
         screen = Double.toString(result);
+        // Änderung 1
+        if (latestOperation.equals("1/x") && latestValue == 0){
+            screen ="Error";
+        }
         if(screen.equals("NaN")) screen = "Error";
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
 
@@ -94,7 +107,9 @@ public class Calculator {
      * Beim zweimaligem Drücken, oder wenn bereits ein Trennzeichen angezeigt wird, passiert nichts.
      */
     public void pressDotKey() {
-        if(!screen.contains(".")) screen = screen + ".";
+       if(!screen.contains(".")) screen = screen + ".";
+
+
     }
 
     /**
@@ -125,6 +140,12 @@ public class Calculator {
             case "/" -> latestValue / Double.parseDouble(screen);
             default -> throw new IllegalArgumentException();
         };
+
+        //Änderung 2
+        if (latestOperation.equals("/") && latestValue == Double.parseDouble(screen)) {
+            screen = "1";
+        }
+
         screen = Double.toString(result);
         if(screen.equals("Infinity")) screen = "Error";
         if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2);
