@@ -13,7 +13,8 @@ public class Calculator {
     private double latestValue;
 
     private double result;
-    private boolean isResultDisplayed;
+    private double resultValue;
+    private boolean isResultDisplayed = false;
 
     private String latestOperation = "";
 
@@ -128,6 +129,7 @@ public class Calculator {
     public void pressEqualsKey() {
         if (!latestOperation.isEmpty()) { //Check if binaryKey was pressed
             if (!isResultDisplayed) { // If no result displayed, performs new operation
+                resultValue = Double.parseDouble(screen);
                 result = switch (latestOperation) {
                     case "+" -> latestValue + Double.parseDouble(screen);
                     case "-" -> latestValue - Double.parseDouble(screen);
@@ -137,17 +139,22 @@ public class Calculator {
                 };
                 isResultDisplayed = true;
             } else { // If result is displayed, apply operation to result
+                // resultValue = Double.parseDouble(screen);
                 result = switch (latestOperation) {
-                    case "+" -> result + Double.parseDouble(screen);
-                    case "-" -> result - Double.parseDouble(screen);
-                    case "x" -> result * Double.parseDouble(screen);
-                    case "/" -> result / Double.parseDouble(screen);
+                    case "+" -> Double.parseDouble(screen) + resultValue;
+                    case "-" -> Double.parseDouble(screen) - resultValue;
+                    case "x" -> Double.parseDouble(screen) * resultValue;
+                    case "/" -> Double.parseDouble(screen) / resultValue;
                     default -> throw new IllegalArgumentException();
                 };
-                screen = Double.toString(result);
-                if (screen.equals("Infinity")) screen = "Error";
-                if (screen.endsWith(".0")) screen = screen.substring(0, screen.length() - 2);
-                if (screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
+
+            }
+            screen = Double.toString(result);
+            if (screen.equals("Infinity")) screen = "Error";
+            if (screen.endsWith(".0")) screen = screen.substring(0, screen.length() - 2);
+            if (screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
+            if (screen.contains(".") && screen.matches(".*\\.0*$")) { // Checks if decimal point is only followed by zeros.
+                screen = screen.replaceAll("\\.0*$", ""); // Removes the decimal point.
             }
         }
     }
