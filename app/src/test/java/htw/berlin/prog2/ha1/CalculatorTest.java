@@ -89,6 +89,79 @@ class CalculatorTest {
     }
 
 
-    //TODO hier weitere Tests erstellen
+    @Test
+    @DisplayName("multipling should work")
+    void testMultipling() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(0);
+        calc.pressBinaryOperationKey("x");
+        calc.pressDigitKey(7);
+        calc.pressEqualsKey();
+
+        String expected = "70";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("Should delete only the last Entry.")
+    void testClearing() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(9);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(5);
+        calc.pressDigitKey(5);
+        calc.pressClearKey();
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(9);
+        calc.pressEqualsKey();
+
+        String expected = "18";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("Should delete only the last Entry.")
+    void testClearing2() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(9);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(9);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(5);
+        calc.pressDigitKey(5);
+        calc.pressClearKey();
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(9);
+        calc.pressEqualsKey();
+
+
+        String expected = "27";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("Soll eine 0 vor dem Punkte platzieren, sollte keine Zahl eingegeben worden sein.")
+    void testPressDotKey() {
+        Calculator calc = new Calculator();
+
+        calc.pressDotKey();
+        calc.pressDigitKey(9);
+
+        String expected = "0.9";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
 }
 
