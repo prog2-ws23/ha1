@@ -121,15 +121,19 @@ class CalculatorTest {
     }
 
     @Test
-    @DisplayName("should correctly calculate percentage of negative number")
-    void testPercentageOfNegativeNumber() {
+    @DisplayName("Display error after dividing by zero multiple times")
+    void testMultipleDivisionByZero() {
         Calculator calc = new Calculator();
 
-        calc.pressDigitKey(9);
-        calc.pressNegativeKey();
-        calc.pressBinaryOperationKey("%");
+        calc.pressDigitKey(2);
+        calc.pressBinaryOperationKey("/");
+        calc.pressDigitKey(0);
+        calc.pressEqualsKey();
+        calc.pressBinaryOperationKey("/");
+        calc.pressDigitKey(0);
+        calc.pressEqualsKey();
 
-        String expected = "-0.09";
+        String expected = "Error";
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);

@@ -61,13 +61,9 @@ public class Calculator {
      * @param operation "+" für Addition, "-" für Substraktion, "x" für Multiplikation, "/" für Division
      */
     public void pressBinaryOperationKey(String operation)  {
+        if (screen.equals("Error")) pressClearKey();
         latestValue = Double.parseDouble(screen);
         latestOperation = operation;
-        
-        if (operation.equals("%")) {
-            var result = Double.parseDouble(screen) / 100;
-            screen = String.format("%.2f", result);
-        }
     }
 
 
@@ -139,6 +135,7 @@ public class Calculator {
         if(screen.equals("Infinity")) screen = "Error";
         if(screen.endsWith(".0")) screen = screen.substring(0, screen.length() - 2);
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
+        if(screen.equals("NaN")) screen = "Error";
     }
 
 }
