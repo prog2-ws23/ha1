@@ -134,6 +134,18 @@ class CalculatorTest {
 
 
     }
+    @Test
+    @DisplayName("0 soll nicht als dezimal zahl angezeigt werden")
+    void testdezimal() {
+        Calculator calc = new Calculator();
+
+        calc.pressDotKey();
+
+        String expected = "0";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
 
 
 
