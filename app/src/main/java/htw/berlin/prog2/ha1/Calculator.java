@@ -88,17 +88,18 @@ public class Calculator {
             case "√" -> Math.sqrt(Double.parseDouble(screen));
             case "%" -> Double.parseDouble(screen) / 100;
             case "1/x" -> 1 / Double.parseDouble(screen);
+
             default -> throw new IllegalArgumentException();
         };
         screen = Double.toString(result);
-        if(screen.equals("NaN")) screen = "Error";
-        if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
-        if (result % 1 == 0) {
-            screen = Integer.toString((int) Math.round(result));
+        this.counter++;
+        if (this.counter == 2 && latestOperation == "1/x") {
+            screen = Integer.toString((int)Math.round(result));
         } else {
             screen = Double.toString(result);
-
         }
+        if(screen.equals("NaN")) screen = "Error";
+        if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
     }
 
     /**

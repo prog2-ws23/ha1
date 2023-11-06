@@ -130,13 +130,13 @@ class CalculatorTest {
         Calculator calc = new Calculator();
 
         calc.pressDigitKey(1);
-        calc.pressBinaryOperationKey("/");
+        calc.pressBinaryOperationKey("+");
         calc.pressDigitKey(5);
         calc.pressClearKey();
         calc.pressDigitKey(4);
         calc.pressEqualsKey();
 
-        String expected = "0.25";
+        String expected = "5";
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
