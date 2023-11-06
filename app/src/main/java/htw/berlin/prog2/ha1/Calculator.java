@@ -1,5 +1,6 @@
 package htw.berlin.prog2.ha1;
 
+
 /**
  * Eine Klasse, die das Verhalten des Online Taschenrechners imitiert, welcher auf
  * https://www.online-calculator.com/ aufgerufen werden kann (ohne die Memory-Funktionen)
@@ -14,6 +15,7 @@ public class Calculator {
 
     private String latestOperation = "";
 
+    private int counter = 0;
     /**
      * @return den aktuellen Bildschirminhalt als String
      */
@@ -45,9 +47,17 @@ public class Calculator {
      * im Ursprungszustand ist.
      */
     public void pressClearKey() {
-        screen = "0";
-        latestOperation = "";
-        latestValue = 0.0;
+        this.counter++;
+
+        if(this.counter == 1){
+            screen = "0";
+        }
+        else{
+            screen = "0";
+            latestOperation = "";
+            latestValue = 0.0;
+            this.counter = 0;
+        }
     }
 
     /**
@@ -78,12 +88,18 @@ public class Calculator {
             case "√" -> Math.sqrt(Double.parseDouble(screen));
             case "%" -> Double.parseDouble(screen) / 100;
             case "1/x" -> 1 / Double.parseDouble(screen);
+
             default -> throw new IllegalArgumentException();
         };
         screen = Double.toString(result);
+        this.counter++;
+        if (this.counter == 2 && latestOperation == "1/x") {
+            screen = Integer.toString((int)Math.round(result));
+        } else {
+            screen = Double.toString(result);
+        }
         if(screen.equals("NaN")) screen = "Error";
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
-
     }
 
     /**
