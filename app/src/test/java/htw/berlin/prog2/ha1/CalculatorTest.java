@@ -139,7 +139,9 @@ class CalculatorTest {
     void testdezimal() {
         Calculator calc = new Calculator();
 
+
         calc.pressDotKey();
+
 
         String expected = "0";
         String actual = calc.readScreen();
