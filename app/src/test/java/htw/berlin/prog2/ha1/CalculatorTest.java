@@ -87,6 +87,69 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
     }
+    @Test
+    @DisplayName("should display result after multiply two positive numbers ")
+    void testmultiplynumbers() {
+        Calculator calc = new Calculator();
+        calc.pressDigitKey(2);
+        calc.pressBinaryOperationKey("x");
+        calc.pressDigitKey(3);
+        calc.pressEqualsKey();
+
+        String expected = "6";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+
+    }
+    @Test
+    @DisplayName("should display result ERROR after unary null ")
+    void testunarynumber() {
+        Calculator calc = new Calculator();
+        calc.pressDigitKey(0);
+        calc.pressUnaryOperationKey("1/x");
+
+        String expected = "ERROR";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+
+
+    }
+    @Test
+    @DisplayName("double equals ")
+    void testdeletenumber() {
+        Calculator calc = new Calculator();
+        calc.pressDigitKey(2);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(2);
+        calc.pressEqualsKey();
+        calc.pressEqualsKey();
+
+
+        String expected = "6";
+        String actual = calc.readScreen( );
+
+        assertEquals(expected, actual);
+
+
+    }
+    @Test
+    @DisplayName("0 soll nicht als dezimal zahl angezeigt werden")
+    void testdezimal() {
+        Calculator calc = new Calculator();
+
+
+        calc.pressDotKey();
+
+
+        String expected = "0";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+
 
 
     //TODO hier weitere Tests erstellen

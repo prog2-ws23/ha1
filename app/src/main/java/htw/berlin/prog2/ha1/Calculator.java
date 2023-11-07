@@ -45,6 +45,8 @@ public class Calculator {
      * im Ursprungszustand ist.
      */
     public void pressClearKey() {
+
+
         screen = "0";
         latestOperation = "";
         latestValue = 0.0;
@@ -82,6 +84,7 @@ public class Calculator {
         };
         screen = Double.toString(result);
         if(screen.equals("NaN")) screen = "Error";
+        if(screen.equals("Infinity"))  screen = "ERROR";
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
 
     }
@@ -94,8 +97,17 @@ public class Calculator {
      * Beim zweimaligem Drücken, oder wenn bereits ein Trennzeichen angezeigt wird, passiert nichts.
      */
     public void pressDotKey() {
-        if(!screen.contains(".")) screen = screen + ".";
+        if (!screen.contains(".")) {
+            if (screen.equals("0")) {
+                screen = "0";
+            } else {
+                screen = screen + ".";
+            }
+        }
     }
+
+
+
 
     /**
      * Empfängt den Befehl der gedrückten Vorzeichenumkehrstaste ("+/-").
@@ -130,4 +142,5 @@ public class Calculator {
         if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2);
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
     }
+
 }
