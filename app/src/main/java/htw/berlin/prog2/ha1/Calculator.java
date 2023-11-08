@@ -29,11 +29,14 @@ public class Calculator {
      * @param digit Die Ziffer, deren Taste gedrückt wurde
      */
     public void pressDigitKey(int digit) {
-        if(digit > 9 || digit < 0) throw new IllegalArgumentException();
-
-        if(screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = "";
-
+        if (digit > 9 || digit < 0) throw new IllegalArgumentException();
+        if (screen.equals("0") || latestValue == Double.parseDouble(screen)) {
+            if (screen.equals("-0")) {
+                screen = "-";
+            } else screen = "";
+        }
         screen = screen + digit;
+
     }
 
     /**
@@ -83,6 +86,7 @@ public class Calculator {
         screen = Double.toString(result);
         if(screen.equals("NaN")) screen = "Error";
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
+        if(screen.equals("Infinity")) screen = "Error";
 
     }
 

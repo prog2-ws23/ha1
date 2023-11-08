@@ -1,5 +1,6 @@
 package htw.berlin.prog2.ha1;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -90,5 +91,62 @@ class CalculatorTest {
 
 
     //TODO hier weitere Tests erstellen
+
+
+    /* Aufgabe 1:Schreiben Sie einen neuen zusätzlichen Test, der eine bisher nicht getestete Funktionalität abdeckt,
+     die bereits funktioniert und der daher direkt grün wird.
+      */
+    @Test
+    @DisplayName("should display result after subtracting two positive multi-digit numbers")
+    void testPositiveSubtraction() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(2);
+        calc.pressDigitKey(0);
+        calc.pressBinaryOperationKey("-");
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(0);
+        calc.pressEqualsKey();
+
+        String expected = "10";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+    /*
+    Aufgabe 2.1:
+     */
+    @Test
+    @DisplayName("should display show a negative number when entering the negative key before the digit key")
+    void testOrderOfNegativeKeyAndDigitKey(){
+        Calculator calc = new Calculator();
+        calc.pressNegativeKey();
+        calc.pressDigitKey(2);
+        String expected = "-2";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+
+
+
+    }
+    /*
+    Aufgabe 2.2:
+     */
+    @Test
+    @DisplayName("pressUnaryOperationKey 1/x")
+    void testPressUnaryOperationKey(){
+        Calculator calc = new Calculator();
+        calc.pressUnaryOperationKey("1/x");
+        String expected = "Error";
+        String actual = calc.readScreen();
+        assertEquals(expected, actual);
+
+
+
+    }
+
+
 }
+
 
