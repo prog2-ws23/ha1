@@ -183,15 +183,14 @@ class CalculatorTest {
         }
     // Redtest 2
     @Test
-    @DisplayName("should display error when deviding zero and then pressing fraction button ")
-    void DivisionAndFractioning(){
+    @DisplayName("should display your input value after pressing equalskey even if you haven't made any operation")
+    void OneInputOp(){
         Calculator calc = new Calculator();
 
-        calc.pressDigitKey(0);
-        calc.pressBinaryOperationKey("/");
-        calc.pressUnaryOperationKey("1/x");
+        calc.pressDigitKey(4);
+        calc.pressEqualsKey();
 
-        String expected = "Error";
+        String expected = "4";
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
