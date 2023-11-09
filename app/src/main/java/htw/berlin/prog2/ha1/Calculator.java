@@ -33,14 +33,9 @@ public class Calculator {
      */
     public void pressDigitKey(int digit) {
         if(digit > 9 || digit < 0) throw new IllegalArgumentException();
-
         if(screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = "";
 
-        if (screen == "-"){
-            screen = "-" + screen + digit;
-        }else {
-            screen = screen + digit;
-        }
+        screen = screen + digit;
     }
 
     /**
@@ -69,7 +64,6 @@ public class Calculator {
     public void pressBinaryOperationKey(String operation)  {
         if (latestOperation.isEmpty()){
             latestValue = Double.parseDouble(screen);
-            latestOperation = operation;
         }else {
             double currentResult = Double.parseDouble(screen);
             switch (latestOperation){
@@ -113,8 +107,12 @@ public class Calculator {
             case "1/x" -> 1 / Double.parseDouble(screen);
             default -> throw new IllegalArgumentException();
         };
+
         screen = Double.toString(result);
+
+
         if(screen.equals("NaN")) screen = "Error";
+
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
 
     }
@@ -141,6 +139,7 @@ public class Calculator {
     public void pressNegativeKey() {
 
         screen = screen.startsWith("-") ? screen.substring(1) : "-" + screen;
+        latestValue = Double.parseDouble(screen);
     }
 
     /**
