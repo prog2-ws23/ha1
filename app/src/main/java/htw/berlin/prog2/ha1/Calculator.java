@@ -1,5 +1,7 @@
 package htw.berlin.prog2.ha1;
 
+import com.google.common.collect.ClassToInstanceMap;
+
 /**
  * Eine Klasse, die das Verhalten des Online Taschenrechners imitiert, welcher auf
  * https://www.online-calculator.com/ aufgerufen werden kann (ohne die Memory-Funktionen)
@@ -18,6 +20,7 @@ public class Calculator {
      * @return den aktuellen Bildschirminhalt als String
      */
     public String readScreen() {
+
         return screen;
     }
 
@@ -30,7 +33,6 @@ public class Calculator {
      */
     public void pressDigitKey(int digit) {
         if(digit > 9 || digit < 0) throw new IllegalArgumentException();
-
         if(screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = "";
 
         screen = screen + digit;
@@ -60,9 +62,34 @@ public class Calculator {
      * @param operation "+" für Addition, "-" für Substraktion, "x" für Multiplikation, "/" für Division
      */
     public void pressBinaryOperationKey(String operation)  {
-        latestValue = Double.parseDouble(screen);
+        if (latestOperation.isEmpty()){
+            latestValue = Double.parseDouble(screen);
+        }else {
+            double currentResult = Double.parseDouble(screen);
+            switch (latestOperation){
+                case "+":
+                    latestValue += currentResult;
+                    break;
+                case "-":
+                    latestValue -= currentResult;
+                    break;
+                case "x":
+                    latestValue *= currentResult;
+                    break;
+                case  "/":
+                    if (currentResult == 0){
+                        screen = "False can't divid by 0";
+                    }
+                    latestValue /= currentResult;
+                    break;
+                default:
+                    throw new IllegalArgumentException("Not an operator");
+            }
+            screen = Double.toString(latestValue);
+        }
         latestOperation = operation;
     }
+
 
     /**
      * Empfängt den Wert einer gedrückten unären Operationstaste, also eine der drei Operationen
@@ -80,8 +107,12 @@ public class Calculator {
             case "1/x" -> 1 / Double.parseDouble(screen);
             default -> throw new IllegalArgumentException();
         };
+
         screen = Double.toString(result);
+
+
         if(screen.equals("NaN")) screen = "Error";
+
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
 
     }
@@ -94,6 +125,7 @@ public class Calculator {
      * Beim zweimaligem Drücken, oder wenn bereits ein Trennzeichen angezeigt wird, passiert nichts.
      */
     public void pressDotKey() {
+
         if(!screen.contains(".")) screen = screen + ".";
     }
 
@@ -105,7 +137,9 @@ public class Calculator {
      * entfernt und der Inhalt fortan als positiv interpretiert.
      */
     public void pressNegativeKey() {
+
         screen = screen.startsWith("-") ? screen.substring(1) : "-" + screen;
+        latestValue = Double.parseDouble(screen);
     }
 
     /**
@@ -118,6 +152,7 @@ public class Calculator {
      * und das Ergebnis direkt angezeigt.
      */
     public void pressEqualsKey() {
+
         var result = switch(latestOperation) {
             case "+" -> latestValue + Double.parseDouble(screen);
             case "-" -> latestValue - Double.parseDouble(screen);
